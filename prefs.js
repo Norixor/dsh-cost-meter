@@ -10,7 +10,7 @@ export const DOCK_FONTS = ['system', 'mono']
 export const DOCK_SIZES = ['sm', 'md', 'lg']
 export const STATS_RANGES = [7, 30, 90]
 export const MSG_STYLES = ['plain', 'soft', 'outline']
-/** How money is shown on the statistics page: converted to one currency, or as billed. */
+/** How money is shown everywhere (dock strip, message labels, sidebar pages): converted to one currency, or as billed. */
 export const STATS_CURRENCIES = ['CNY', 'USD', 'original']
 /** Exchange rate (CNY per 1 USD): rough default, editable; only used for display, never stored on calls. */
 export const USD_CNY_DEFAULT = 6.8
@@ -38,7 +38,7 @@ export const DEFAULT_PREFS = Object.freeze({
   msgLine: true,
   msgStyle: 'plain',
   msgFont: 'system',
-  // Statistics page currency: CNY / USD convert every cost with `usdCny`; 'original' shows costs as billed.
+  // Display currency (named for the statistics page it began on): CNY / USD convert every cost with `usdCny`; 'original' shows costs as billed.
   statsCurrency: 'CNY',
   usdCny: USD_CNY_DEFAULT,
 })

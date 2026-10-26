@@ -46,5 +46,13 @@ export function summarizeCalls(calls) {
   return out
 }
 
+/** A summary with its total and every model row's costs mapped by `convert` (costs → costs); everything else is shared. */
+export function convertSummary(summary, convert) {
+  return Object.assign({}, summary, {
+    costs: convert(summary.costs),
+    models: summary.models.map((m) => Object.assign({}, m, { costs: convert(m.costs) })),
+  })
+}
+
 /** All tokens the turn moved (input incl. cache, plus output). */
 export const turnTokens = (s) => s.input + s.output + s.cacheRead + s.cacheWrite

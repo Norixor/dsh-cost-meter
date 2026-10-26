@@ -66,7 +66,7 @@ To uninstall: **Settings → Plugins →** the plugin **→ Remove**, then resta
 - **Live right-sidebar tab.** For the session on screen: total cost, calls, tokens and cache hit rate, a budget bar, then one row per model (cost, share of the session, input/output, cache hit rate, calls) and the latest 12 calls with time, model, cost, turn, tokens and first-token delay. It refreshes every 3 seconds while it is open.
 - **Cost on every reply.** A small label in the message action bar and a one-line summary above it show what the turn cost (calls · tokens · model time · cost). Hover the label for the per-model breakdown. Calls are attributed to the turn they started in, so tool-triggered calls count towards the right reply.
 - **Statistics page** in the left sidebar, with five tabs: **Overview** (headline, KPI cards, observations, daily cost by model, cost share, token mix), **Latency** (average / P50 / P95, time to first token, tokens per second, distribution, slowest calls), **Models** (side-by-side comparison), **Sessions** (searchable, sortable) and **Time of use** (24-hour distribution and weekday × hour heat map). Filter by range and by model; every chart has a chart/table view and works in light and dark themes.
-- **Display currency.** Show all money as CNY, USD, or as billed. Conversion uses an exchange rate you set (default 1 USD = 6.8 CNY); amounts already in the chosen currency are never converted, and recorded costs are never changed.
+- **Display currency.** Show all money as CNY, USD, or as billed, on every surface: the strip under the input box, the labels under messages, the sidebar page and the statistics page. Conversion uses an exchange rate you set (default 1 USD = 6.8 CNY); amounts already in the chosen currency are never converted, and recorded costs are never changed.
 - **Prices you control.** 66 preset models; per-model editing of input, output, cache read and cache write prices; context-length tiers; peak-hour pricing; a session budget in any currency.
 - **Image and speech metering** (experimental, off by default). See below.
 - **Nine languages**, see [Languages](#languages).
@@ -131,7 +131,7 @@ Other limits:
 - Latency is wall-clock time measured on the stream (network and queueing included); P50 / P95 are estimated from a log-bucket histogram.
 - Time-of-use counts calls and tokens only, not cost.
 - Tiers apply to the whole request, not progressively.
-- Currency conversion is display-only, at a fixed rate you choose; the strip under the input box and the message labels show the billing currency.
+- Currency conversion is display-only, at a fixed rate you choose. The session budget is still counted in the budget's own currency (its traffic light uses the raw amounts); only the printed figures are converted.
 - Only tiers with an official source are preset (Claude Haiku 5.5, gpt-6.1-terra, glm-5.1); add others by hand.
 
 ## Development from source

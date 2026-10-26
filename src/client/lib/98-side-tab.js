@@ -74,13 +74,11 @@ function SideCostTab(props) {
   if (!sid) return h('div', { style: Object.assign({}, wrap, { color: TERTIARY }) }, t('sideNoSession'))
   if (!snap) return h('div', { style: Object.assign({}, wrap, { color: state.error ? LIGHT.red : TERTIARY }) }, state.error ? t('loadFailed', { error: state.error }) : t('statsLoading'))
 
-  // Money is shown in the currency chosen for the statistics page (amounts already in it are kept), as billed otherwise.
-  const mode = prefs.statsCurrency
-  const converted = mode !== 'original'
-  const rate = prefs.usdCny
-  const show = (currency, amount) => (converted ? convertCosts({ [currency]: amount }, mode, rate) : { [currency]: amount })
-  const b = sessionBreakdown(snap, sid, converted ? (costs) => convertCosts(costs, mode, rate) : undefined)
-  const folded = converted ? convertedFrom(b.session ? b.session.costs : {}, mode, rate) : []
+  // Money is shown in the display currency chosen in the settings (amounts already in it are kept), as billed otherwise.
+  const money = moneyView(prefs)
+  const show = (currency, amount) => money.convert({ [currency]: amount })
+  const b = sessionBreakdown(snap, sid, money.convert)
+  const fx = money.note(b.session ? b.session.costs : {})
 
   const budget = snap.budget
   const spent = b.session && b.session.costs && budget ? (b.session.costs[budget.currency] || 0) : 0
@@ -97,11 +95,11 @@ function SideCostTab(props) {
       h('div', { style: { fontSize: 26, lineHeight: '32px', fontWeight: 600, fontVariantNumeric: 'tabular-nums' } }, formatCosts(b.costs) || t('noCost')),
       hasData ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) },
         [t('tipCalls', { n: b.calls }), formatTok(b.tokens), t('hitRate') + ' ' + formatHitRate(b.inTok, b.cacheRead)].join(' · ')) : null,
-      folded.length > 0 ? h('div', { style: sideNote }, t('fxNote', { from: folded.join(' / '), rate: String(Number(rate.toFixed(4))) })) : null,
+      fx ? h('div', { style: sideNote }, fx) : null,
       light.pct !== null ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: 4, marginTop: 4 } },
         h('div', { style: { height: 4, borderRadius: 2, background: FILL, overflow: 'hidden' } },
           h('div', { style: { height: '100%', width: Math.min(100, light.pct) + '%', background: light.color } })),
-        h('div', { style: sideNote }, (light.pct >= 100 ? t('overBudget') : t('budgetUsed', { pct: light.pct.toFixed(0) })) + ' · ' + formatMoney(budget.currency, spent) + ' / ' + formatMoney(budget.currency, budget.amount))) : null),
+        h('div', { style: sideNote }, (light.pct >= 100 ? t('overBudget') : t('budgetUsed', { pct: light.pct.toFixed(0) })) + ' · ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount))) : null),
 
     hasData ? null : h('div', { style: { fontSize: 13, color: TERTIARY } }, t('sideEmpty')),
 

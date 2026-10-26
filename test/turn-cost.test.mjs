@@ -1,7 +1,8 @@
 // Run: node --test test/turn-cost.test.mjs
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { callsOfTurn, summarizeCalls, turnNumberOf, turnOfMessage, turnTokens } from '../src/client/lib/88-turn-cost.js'
+import { callsOfTurn, convertSummary, summarizeCalls, turnNumberOf, turnOfMessage, turnTokens } from '../src/client/lib/88-turn-cost.js'
+import { convertCosts } from '../src/client/lib/85-stats-data.js'
 
 const call = (at, over = {}) => ({ at, end: at + 2000, model: 'm1', ok: true, cost: 0.01, currency: 'USD', input: 100, output: 50, cacheRead: 400, cacheWrite: 0, ttftMs: 300, ...over })
 
@@ -66,4 +67,20 @@ test('summarizeCalls books media calls as cost and units, not as tokens or model
   assert.equal(img.calls, 2)
   assert.equal(s.failed, 1)
   assert.ok(Math.abs(s.costs.CNY - 0.6) < 1e-9)
+})
+
+test('convertSummary maps the total and every model row into the display currency and leaves the counts alone', () => {
+  const s = summarizeCalls([
+    call(1000, { model: 'a', cost: 1, currency: 'USD' }),
+    call(3000, { model: 'b', cost: 2, currency: 'CNY' }),
+    call(5000, { model: 'c', cost: 5, currency: 'EUR' }),
+  ])
+  const shown = convertSummary(s, (costs) => convertCosts(costs, 'CNY', 7))
+  assert.equal(shown.costs.CNY, 9)
+  assert.equal(shown.costs.EUR, 5)
+  assert.equal(shown.models.find((m) => m.model === 'a').costs.CNY, 7)
+  assert.equal(shown.models.find((m) => m.model === 'c').costs.EUR, 5)
+  assert.equal(shown.calls, 3)
+  assert.equal(shown.input, s.input)
+  assert.equal(s.costs.USD, 1, 'the summary it was given is not touched')
 })

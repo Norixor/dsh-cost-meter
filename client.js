@@ -143,12 +143,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: '费用',
         currency: '货币',
         currencyView: '显示币种',
+        currencyViewHint: '输入框下方的统计条、消息下方的费用、右侧栏和统计页都按这里选的币种显示；选「原币」则保留每笔费用的计费币种。',
+        sectionCurrency: '显示币种与汇率',
         curCny: '人民币',
         curUsd: '美元',
         curOriginal: '原币',
         fxNote: '{from} 按 1 USD = {rate} CNY 折算',
         fxTitle: '汇率',
-        fxHint: '统计页把费用折成人民币或美元时使用：1 美元 = 多少人民币，默认 {rate} 只是个约数，请按自己的结算汇率改。只用于显示，不改动已记录的费用；本来就是所选币种的费用不折算。',
+        fxHint: '把费用折成人民币或美元时使用：1 美元 = 多少人民币，默认 {rate} 只是个约数，请按自己的结算汇率改。只用于显示，不改动已记录的费用；本来就是所选币种的费用不折算。',
         fxReset: '恢复默认',
         rIn: '输入',
         rOut: '输出',
@@ -516,12 +518,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: 'Cost',
         currency: 'Currency',
         currencyView: 'Currency',
+        currencyViewHint: 'The strip under the composer, the labels under messages, the sidebar page and the statistics page all show money in this currency. "As billed" keeps each cost in the currency it was charged in.',
+        sectionCurrency: 'Currency and exchange rate',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: 'As billed',
         fxNote: '{from} converted at 1 USD = {rate} CNY',
         fxTitle: 'Exchange rate',
-        fxHint: 'Used when the statistics page shows costs in CNY or USD: how many CNY one USD is. The default {rate} is only a rough figure, set your own settlement rate. Display only: recorded costs are never changed, and amounts already in the chosen currency are not converted.',
+        fxHint: 'Used when costs are shown in CNY or USD: how many CNY one USD is. The default {rate} is only a rough figure, set your own settlement rate. Display only: recorded costs are never changed, and amounts already in the chosen currency are not converted.',
         fxReset: 'Reset',
         rIn: 'Input',
         rOut: 'Output',
@@ -890,12 +894,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: '費用',
         currency: '幣別',
         currencyView: '顯示幣別',
+        currencyViewHint: '輸入框下方的統計列、訊息下方的費用、右側欄與統計頁面都依此幣別顯示；選「原幣別」則保留每筆費用的計費幣別。',
+        sectionCurrency: '顯示幣別與匯率',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: '原幣別',
         fxNote: '{from} 按 1 USD = {rate} CNY 換算',
         fxTitle: '匯率',
-        fxHint: '統計頁面以 CNY 或 USD 顯示費用時使用：1 USD 等於多少 CNY。預設值 {rate} 僅為概略數字，請依自己的結算匯率設定。僅用於顯示，不會更動已記錄的費用；本來就是所選幣別的金額不會換算。',
+        fxHint: '把費用換算成 CNY 或 USD 時使用：1 USD 等於多少 CNY。預設值 {rate} 僅為概略數字，請依自己的結算匯率設定。僅用於顯示，不會更動已記錄的費用；本來就是所選幣別的金額不會換算。',
         fxReset: '重設',
         rIn: '輸入',
         rOut: '輸出',
@@ -1264,12 +1270,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: '費用',
         currency: '通貨',
         currencyView: '通貨',
+        currencyViewHint: '入力欄の下の統計バー、メッセージ下の費用、サイドバーと統計ページは、ここで選んだ通貨で表示されます。「請求通貨」を選ぶと、課金された通貨のまま表示します。',
+        sectionCurrency: '表示通貨と為替レート',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: '請求通貨',
         fxNote: '{from} を 1 USD = {rate} CNY で換算',
         fxTitle: '為替レート',
-        fxHint: '統計ページで費用を CNY または USD で表示するときに使います。1 USD が何 CNY かを指定します。既定値 {rate} はおおよその目安なので、実際の決済レートに合わせて設定してください。表示のみに使用され、記録済みの費用は変更されません。選択した通貨と同じ通貨の金額は換算されません。',
+        fxHint: '費用を CNY または USD に換算して表示するときに使います。1 USD が何 CNY かを指定します。既定値 {rate} はおおよその目安なので、実際の決済レートに合わせて設定してください。表示のみに使用され、記録済みの費用は変更されません。選択した通貨と同じ通貨の金額は換算されません。',
         fxReset: 'リセット',
         rIn: '入力',
         rOut: '出力',
@@ -1638,12 +1646,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: '비용',
         currency: '통화',
         currencyView: '표시 통화',
+        currencyViewHint: '입력창 아래 통계 줄, 메시지 아래 비용, 사이드바와 통계 페이지가 모두 여기서 고른 통화로 표시돼요. 「청구 통화」를 고르면 청구된 통화 그대로 보여 줘요.',
+        sectionCurrency: '표시 통화와 환율',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: '청구 통화',
         fxNote: '{from}을(를) 1 USD = {rate} CNY로 환산했어요',
         fxTitle: '환율',
-        fxHint: '통계 페이지에서 비용을 CNY 또는 USD로 표시할 때 사용해요. 1 USD가 몇 CNY인지 입력하세요. 기본값 {rate}은(는) 대략적인 값이니 실제 정산 환율로 바꿔 주세요. 표시에만 적용되며 기록된 비용은 바뀌지 않고, 이미 선택한 통화인 금액은 환산하지 않아요.',
+        fxHint: '비용을 CNY 또는 USD로 환산해 표시할 때 사용해요. 1 USD가 몇 CNY인지 입력하세요. 기본값 {rate}은(는) 대략적인 값이니 실제 정산 환율로 바꿔 주세요. 표시에만 적용되며 기록된 비용은 바뀌지 않고, 이미 선택한 통화인 금액은 환산하지 않아요.',
         fxReset: '초기화',
         rIn: '입력',
         rOut: '출력',
@@ -2012,12 +2022,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: 'Kosten',
         currency: 'Währung',
         currencyView: 'Währung',
+        currencyViewHint: 'Die Leiste unter dem Eingabefeld, die Kosten unter den Nachrichten, die Seitenleiste und die Statistikseite zeigen Beträge in dieser Währung. „Wie abgerechnet“ belässt jeden Betrag in seiner Abrechnungswährung.',
+        sectionCurrency: 'Anzeigewährung und Wechselkurs',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: 'Wie abgerechnet',
         fxNote: '{from} umgerechnet mit 1 USD = {rate} CNY',
         fxTitle: 'Wechselkurs',
-        fxHint: 'Wird verwendet, wenn die Statistikseite Kosten in CNY oder USD anzeigt: wie viele CNY ein USD entspricht. Der Standardwert {rate} ist nur ein grober Richtwert, tragen Sie Ihren eigenen Abrechnungskurs ein. Nur zur Anzeige: Erfasste Kosten werden nie geändert, und Beträge, die bereits in der gewählten Währung vorliegen, werden nicht umgerechnet.',
+        fxHint: 'Wird verwendet, wenn Kosten in CNY oder USD angezeigt werden: wie viele CNY ein USD entspricht. Der Standardwert {rate} ist nur ein grober Richtwert, tragen Sie Ihren eigenen Abrechnungskurs ein. Nur zur Anzeige: Erfasste Kosten werden nie geändert, und Beträge, die bereits in der gewählten Währung vorliegen, werden nicht umgerechnet.',
         fxReset: 'Zurücksetzen',
         rIn: 'Eingabe',
         rOut: 'Ausgabe',
@@ -2386,12 +2398,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: 'Coût',
         currency: 'Devise',
         currencyView: 'Devise',
+        currencyViewHint: 'La barre sous la zone de saisie, les coûts sous les messages, la barre latérale et la page de statistiques affichent les montants dans cette devise. « Selon facturation » conserve chaque coût dans sa devise de facturation.',
+        sectionCurrency: 'Devise d\'affichage et taux de change',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: 'Selon facturation',
         fxNote: '{from} converti à 1 USD = {rate} CNY',
         fxTitle: 'Taux de change',
-        fxHint: 'Utilisé lorsque la page de statistiques affiche les coûts en CNY ou en USD : nombre de CNY pour 1 USD. La valeur par défaut {rate} n\'est qu\'une approximation ; saisissez votre propre taux de règlement. Affichage uniquement : les coûts enregistrés ne sont jamais modifiés, et les montants déjà dans la devise choisie ne sont pas convertis.',
+        fxHint: 'Utilisé lorsque les coûts sont affichés en CNY ou en USD : nombre de CNY pour 1 USD. La valeur par défaut {rate} n\'est qu\'une approximation ; saisissez votre propre taux de règlement. Affichage uniquement : les coûts enregistrés ne sont jamais modifiés, et les montants déjà dans la devise choisie ne sont pas convertis.',
         fxReset: 'Réinitialiser',
         rIn: 'Entrée',
         rOut: 'Sortie',
@@ -2760,12 +2774,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: 'Costo',
         currency: 'Moneda',
         currencyView: 'Moneda',
+        currencyViewHint: 'La barra bajo el cuadro de entrada, los costos bajo los mensajes, la barra lateral y la página de estadísticas muestran los importes en esta moneda. «Según facturación» mantiene cada costo en su moneda de facturación.',
+        sectionCurrency: 'Moneda de visualización y tipo de cambio',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: 'Según facturación',
         fxNote: '{from} convertido a 1 USD = {rate} CNY',
         fxTitle: 'Tipo de cambio',
-        fxHint: 'Se usa cuando la página de estadísticas muestra los costos en CNY o USD: cuántos CNY equivalen a un USD. El valor predeterminado {rate} es solo una cifra aproximada; indique su propio tipo de cambio de liquidación. Solo afecta a la visualización: los costos registrados nunca se modifican y los importes que ya están en la moneda elegida no se convierten.',
+        fxHint: 'Se usa cuando los costos se muestran en CNY o USD: cuántos CNY equivalen a un USD. El valor predeterminado {rate} es solo una cifra aproximada; indique su propio tipo de cambio de liquidación. Solo afecta a la visualización: los costos registrados nunca se modifican y los importes que ya están en la moneda elegida no se convierten.',
         fxReset: 'Restablecer',
         rIn: 'Entrada',
         rOut: 'Salida',
@@ -3134,12 +3150,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         cost: 'Стоимость',
         currency: 'Валюта',
         currencyView: 'Валюта',
+        currencyViewHint: 'Строка под полем ввода, стоимость под сообщениями, боковая панель и страница статистики показывают суммы в этой валюте. «Как в счёте» оставляет каждую сумму в валюте списания.',
+        sectionCurrency: 'Валюта отображения и курс',
         curCny: 'CNY',
         curUsd: 'USD',
         curOriginal: 'Как в счёте',
         fxNote: '{from} пересчитано по курсу 1 USD = {rate} CNY',
         fxTitle: 'Курс обмена',
-        fxHint: 'Используется, когда страница статистики показывает стоимость в CNY или USD: сколько CNY в одном USD. Значение по умолчанию {rate} — лишь приблизительное, укажите свой расчётный курс. Только для отображения: записанные расходы не меняются, суммы, уже выраженные в выбранной валюте, не пересчитываются.',
+        fxHint: 'Используется, когда стоимость показывается в CNY или USD: сколько CNY в одном USD. Значение по умолчанию {rate} — лишь приблизительное, укажите свой расчётный курс. Только для отображения: записанные расходы не меняются, суммы, уже выраженные в выбранной валюте, не пересчитываются.',
         fxReset: 'Сбросить',
         rIn: 'Ввод',
         rOut: 'Вывод',
@@ -3649,6 +3667,41 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return { wrap, item }
       }
 
+      // The display currency every surface shares (dock strip, message labels, right-sidebar page, statistics page).
+      // Costs are stored per billing currency; this only decides how they are shown. The pref is still named `statsCurrency`
+      // because it began as the statistics page's switch.
+
+      /**
+       * `convert(costs)` maps billed money into the chosen currency (amounts already in it are kept; currencies without a rate
+       * stay as billed), `one(currency, amount)` prints a single amount that way and `note(costs)` is the footnote for the
+       * currencies that were folded, or null when nothing was.
+       */
+      function moneyView(prefs) {
+        const mode = prefs.statsCurrency
+        const rate = prefs.usdCny
+        const converted = mode !== 'original'
+        const convert = converted ? (costs) => convertCosts(costs, mode, rate) : (costs) => costs || {}
+        return {
+          mode,
+          rate,
+          converted,
+          convert,
+          folded: (costs) => (converted ? convertedFrom(costs, mode, rate) : []),
+          one: (currency, amount) => {
+            const shown = convert({ [currency]: amount })
+            const cur = Object.keys(shown)[0]
+            return formatMoney(cur, shown[cur])
+          },
+          note: (costs) => {
+            const from = converted ? convertedFrom(costs, mode, rate) : []
+            return from.length > 0 ? fxNoteText(from, rate) : null
+          },
+        }
+      }
+
+      /** "CNY / USD converted at 1 USD = 6.8 CNY". */
+      const fxNoteText = (from, rate) => t('fxNote', { from: from.join(' / '), rate: String(Number(rate.toFixed(4))) })
+
       // A <button> that renders exactly like the surrounding text.
       const plainButton = { appearance: 'none', background: 'none', border: 0, padding: 0, margin: 0, fontFamily: 'inherit', textAlign: 'left' }
 
@@ -3763,25 +3816,28 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const session = snap && snap.sessions ? snap.sessions[sid] : undefined
         const budget = snap ? snap.budget : undefined
         // 每个模型一行的明细，供浮窗展示：费用、单价、输入/输出/缓存读写 token、调用次数；费用高的排前面。
-        const breakdown = sessionBreakdown(snap, sid)
+        // Money is shown in the display currency chosen in the settings (as billed when set to "original").
+        const money = moneyView(prefs)
+        const breakdown = sessionBreakdown(snap, sid, money.convert)
         const { rows, unpriced, unpricedModels } = breakdown
         const sessionTokens = breakdown.tokens
         const sessionInTok = breakdown.inTok
         const sessionCacheRead = breakdown.cacheRead
 
-        // 预算只按预算货币统计本会话的费用。
+        // 预算只按预算货币统计本会话的费用（红绿灯用原始金额算）；显示时再折成所选币种。
         const spent = session && session.costs && budget ? (session.costs[budget.currency] || 0) : 0
         const light = lightFor(spent, budget)
-        const sessionCosts = formatCosts(session && session.costs) || t('noCost')
+        const sessionCosts = formatCosts(breakdown.costs) || t('noCost')
+        const fx = money.note(session && session.costs)
         let detail
         if (light.pct === null) detail = t('noBudget')
-        else if (light.pct >= 100) detail = t('overBudget') + ' ' + formatMoney(budget.currency, spent) + ' / ' + formatMoney(budget.currency, budget.amount)
-        else detail = t('budgetUsed', { pct: light.pct.toFixed(0) }) + ' ' + formatMoney(budget.currency, spent) + ' / ' + formatMoney(budget.currency, budget.amount)
-        const title = t('session') + ' · ' + detail + '\n' + t('tokens') + ' ' + String(sessionTokens) + ' · ' + t('cost') + ' ' + sessionCosts
+        else if (light.pct >= 100) detail = t('overBudget') + ' ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount)
+        else detail = t('budgetUsed', { pct: light.pct.toFixed(0) }) + ' ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount)
+        const title = t('session') + ' · ' + detail + '\n' + t('tokens') + ' ' + String(sessionTokens) + ' · ' + t('cost') + ' ' + sessionCosts + (fx ? '\n' + fx : '')
 
         // 单模型直接显示模型名与费用；多模型合并成「n 个模型」，点击展开逐个明细。
         const modelsLabel = rows.length === 0 ? null : rows.length === 1
-          ? rows[0].model + ' ' + (formatCosts(rows[0].counter.costs) || t('noCost'))
+          ? rows[0].model + ' ' + (formatCosts(rows[0].costs) || t('noCost'))
           : t('modelsCount', { n: rows.length })
 
         const view = {
@@ -3844,7 +3900,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('th', { style: headCell }, t('tokCacheWrite')),
               h('th', { style: headCell }, t('hitRate')),
               h('th', { style: headCell }, t('cost')))),
-            h('tbody', null, rows.map(({ model, counter, price, inTok, outTok, cacheRead, cacheWrite }) => h('tr', { key: model },
+            h('tbody', null, rows.map(({ model, counter, price, costs, inTok, outTok, cacheRead, cacheWrite }) => h('tr', { key: model },
               h('td', { style: { padding: '5px 6px', whiteSpace: 'nowrap', verticalAlign: 'top' } },
                 h('div', { style: { fontSize: 12, color: PRIMARY } }, model),
                 h('div', { style: subLine }, rateLine(price)),
@@ -3856,11 +3912,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('td', { style: bodyCell }, cacheWrite > 0 ? formatTok(cacheWrite) : '—'),
               h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead) }) }, formatHitRate(inTok, cacheRead)),
               h('td', { style: Object.assign({}, bodyCell, { color: PRIMARY }) },
-                h('div', null, formatCosts(counter.costs) || t('noCost')),
+                h('div', null, formatCosts(costs) || t('noCost')),
                 counter.tierCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('tierCount', { n: counter.tierCalls })) : null,
                 counter.peakCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('peakCount', { n: counter.peakCalls })) : null))))),
           h('div', { style: { fontSize: 11, color: TERTIARY, padding: '6px 6px 0', lineHeight: '16px', maxWidth: 560, whiteSpace: 'normal' } },
-            t('rateLegend') + (unpriced > 0 ? ' · ' + t('unpriced', { n: unpriced }) : ''))) : null
+            t('rateLegend') + (unpriced > 0 ? ' · ' + t('unpriced', { n: unpriced }) : '') + (fx ? ' · ' + fx : ''))) : null
 
         return h(DockStrip, {
           prefs,
@@ -3914,9 +3970,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return { text, chip, line }
       }
 
-      /** Hover card: per-model breakdown, token mix and the caveats of the attribution. */
+      /** Hover card: per-model breakdown, token mix and the caveats of the attribution. `fx` is the currency footnote, if any. */
       function TurnDetail(props) {
-        const { summary: s } = props
+        const { summary: s, fx } = props
         const row = { display: 'flex', alignItems: 'baseline', gap: 12, justifyContent: 'space-between' }
         const dim = { color: TERTIARY }
         const hit = hitOf(s)
@@ -3931,12 +3987,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
           s.unpriced > 0 ? h('div', null, '! ' + t('msgUnpriced', { n: s.unpriced })) : null,
           s.failed > 0 ? h('div', null, '! ' + t('msgFailed', { n: s.failed })) : null,
+          fx ? h('div', { style: Object.assign({}, dim, { fontSize: 11 }) }, fx) : null,
           h('div', { style: Object.assign({}, dim, { fontSize: 11, marginTop: 2 }) }, t('msgNote')))
       }
 
       /** The chip in the message action row. Opens on hover or focus, closes on leave, blur or Esc. */
       function TurnChip(props) {
-        const { summary, prefs } = props
+        const { summary, prefs, fx } = props
         const theme = msgTheme(prefs)
         const [open, setOpen] = React.useState(false)
         const [shift, setShift] = React.useState(0)
@@ -3966,17 +4023,24 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
               boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
             },
-          }, h(TurnDetail, { summary })) : null)
+          }, h(TurnDetail, { summary, fx })) : null)
       }
 
-      /** The summary line above the action row. */
+      /** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */
       function TurnLine(props) {
         const theme = msgTheme(props.prefs)
-        return h('div', { style: { padding: '2px 0' }, title: t('msgNote') },
+        return h('div', { style: { padding: '2px 0' }, title: t('msgNote') + (props.fx ? '\n' + props.fx : '') },
           h('span', { style: Object.assign({ display: 'inline-block', maxWidth: '100%', boxSizing: 'border-box', lineHeight: '18px' }, theme.text, theme.line) }, turnLineText(props.summary)))
       }
 
       const sessionKey = (value) => (value === undefined || value === null || value === '' ? null : String(value))
+
+      /** The calls' totals in the display currency, with the footnote for whatever was folded into it. */
+      function shownSummary(calls, prefs) {
+        const money = moneyView(prefs)
+        const raw = summarizeCalls(calls)
+        return { summary: money.converted ? convertSummary(raw, money.convert) : raw, fx: money.note(raw.costs) }
+      }
 
       /** Slot `conversation.chat.assistant-actions`: the chip for the turn this assistant message belongs to. */
       function CostChip(props) {
@@ -3985,7 +4049,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         if (!prefs.msgChip) return null
         const turn = turnOfMessage(log.msgs, props.messageId)
         const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
-        return calls.length === 0 ? null : h(TurnChip, { summary: summarizeCalls(calls), prefs })
+        return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs }))
       }
 
       /** Slot `conversation.chat.turnTail`: one summary line for the turn (the prop is the turn number or a view object). */
@@ -3995,7 +4059,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         if (!prefs.msgLine) return null
         const turn = turnNumberOf(props.turn)
         const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
-        return calls.length === 0 ? null : h(TurnLine, { summary: summarizeCalls(calls), prefs })
+        return calls.length === 0 ? null : h(TurnLine, Object.assign(shownSummary(calls, prefs), { prefs }))
       }
 
       const blankTier = () => {
@@ -4213,17 +4277,21 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             shown.length === 0 ? h('div', { style: { padding: '10px', fontSize: 12, color: TERTIARY } }, emptyText) : null)) : null)
       }
 
-      // Sample numbers for the style previews: a healthy session with one model.
-      const PREVIEW_VIEW = {
-        title: '',
-        light: { color: LIGHT.green, pct: 32 },
-        tokens: 48200,
-        costText: '¥0.42',
-        overBudget: false,
-        modelsLabel: 'deepseek-chat ¥0.42',
-        multiModel: false,
-        unpricedText: null,
-        unpricedHint: '',
+      // Sample numbers for the style previews: a healthy session with one model, priced in CNY and shown like the real strip
+      // (so it follows the display currency).
+      function previewView(prefs) {
+        const cost = formatCosts(moneyView(prefs).convert({ CNY: 0.42 }))
+        return {
+          title: '',
+          light: { color: LIGHT.green, pct: 32 },
+          tokens: 48200,
+          costText: cost,
+          overBudget: false,
+          modelsLabel: 'deepseek-chat ' + cost,
+          multiModel: false,
+          unpricedText: null,
+          unpricedHint: '',
+        }
       }
 
       const STYLE_LABEL_KEYS = {
@@ -4251,7 +4319,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         },
           // The preview sits on the platform surface like the real composer area does.
           h('div', { style: { padding: '12px 10px', borderRadius: 12, background: PLATFORM, border: BORDER, overflow: 'hidden', pointerEvents: 'none' } },
-            h(DockStrip, { prefs: Object.assign({}, prefs, { dockStyle: style }), view: PREVIEW_VIEW })),
+            h(DockStrip, { prefs: Object.assign({}, prefs, { dockStyle: style }), view: previewView(prefs) })),
           h('div', null,
             h('div', { style: { fontSize: 14, lineHeight: '20px' } }, t(keys[0])),
             h('div', { style: ui.desc }, t(keys[1]))))
@@ -4319,7 +4387,19 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           settingRow({ key: 'sidebar' }, t('sidebarShow'), t('sidebarShowHint'), toggle(prefs.sidebar, (on) => set({ sidebar: on }), t('sidebarShow'))),
           settingRow({ key: 'range' }, t('statsRange'), t('statsRangeHint'), segmented(prefs.statsRange,
             STATS_RANGES.map((n) => ({ value: n, label: t('rangeDays', { n }) })),
-            (value) => set({ statsRange: value }), t('statsRange'))),
+            (value) => set({ statsRange: value }), t('statsRange'))))
+      }
+
+      /** Settings → the currency every surface shows money in, and the USD → CNY rate used to get there. */
+      function CurrencySettings() {
+        const prefs = usePrefs()
+        const set = (change) => store.setPrefs(change)
+        return h('div', null,
+          settingRow({ key: 'currency' }, t('currencyView'), t('currencyViewHint'), segmented(prefs.statsCurrency, [
+            { value: 'CNY', label: t('curCny') },
+            { value: 'USD', label: t('curUsd') },
+            { value: 'original', label: t('curOriginal') },
+          ], (value) => set({ statsCurrency: value }), t('currencyView'))),
           settingRow({ key: 'fx' }, t('fxTitle'), t('fxHint', { rate: DEFAULT_PREFS.usdCny }),
             h(FxRateInput, { value: prefs.usdCny, onCommit: (n) => set({ usdCny: n }) }),
             prefs.usdCny !== DEFAULT_PREFS.usdCny ? btn(t('fxReset'), () => set({ usdCny: DEFAULT_PREFS.usdCny })) : null))
@@ -4341,6 +4421,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const on = prefs.msgStyle === style
         const keys = MSG_STYLE_KEYS[style]
         const shown = Object.assign({}, prefs, { msgStyle: style })
+        const summary = convertSummary(PREVIEW_TURN, moneyView(prefs).convert)
         return h('button', {
           key: style,
           type: 'button',
@@ -4354,10 +4435,10 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           },
         },
           h('div', { style: { padding: '12px 10px', borderRadius: 12, background: PLATFORM, border: BORDER, overflow: 'hidden', pointerEvents: 'none' } },
-            h(TurnLine, { summary: PREVIEW_TURN, prefs: shown }),
+            h(TurnLine, { summary, prefs: shown }),
             h('div', { style: { display: 'flex', alignItems: 'center', gap: 4, height: 28, color: TERTIARY, fontSize: 12 } },
               h('span', { style: { padding: '0 6px' } }, t('msgPreviewCopy')),
-              h(TurnChip, { summary: PREVIEW_TURN, prefs: shown }),
+              h(TurnChip, { summary, prefs: shown }),
               h('span', { style: { padding: '0 6px' } }, t('msgPreviewBranch')))),
           h('div', null,
             h('div', { style: { fontSize: 14, lineHeight: '20px' } }, t(keys[0])),
@@ -4665,6 +4746,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
           h('div', { style: ui.section }, t('sectionMessages')),
           h(MessageSettings),
+
+          h('div', { style: ui.section }, t('sectionCurrency')),
+          h(CurrencySettings),
 
           h('div', { style: ui.section }, t('sectionSettings')),
           settingRow({ key: 'budget' }, t('budgetSection'), t('budgetHint'),
@@ -5840,6 +5924,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return out
       }
 
+      /** A summary with its total and every model row's costs mapped by `convert` (costs → costs); everything else is shared. */
+      function convertSummary(summary, convert) {
+        return Object.assign({}, summary, {
+          costs: convert(summary.costs),
+          models: summary.models.map((m) => Object.assign({}, m, { costs: convert(m.costs) })),
+        })
+      }
+
       /** All tokens the turn moved (input incl. cache, plus output). */
       const turnTokens = (s) => s.input + s.output + s.cacheRead + s.cacheWrite
 
@@ -6413,7 +6505,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               { value: 'USD', label: t('curUsd') },
               { value: 'original', label: t('curOriginal') },
             ], (value) => store.setPrefs({ statsCurrency: value }), t('currencyView')),
-            folded.length > 0 ? h('span', { style: { fontSize: 12, color: TERTIARY } }, t('fxNote', { from: folded.join(' / '), rate: String(Number(rate.toFixed(4))) })) : null,
+            folded.length > 0 ? h('span', { style: { fontSize: 12, color: TERTIARY } }, fxNoteText(folded, rate)) : null,
             models ? h('button', { type: 'button', onClick: () => setModelPick(null), style: Object.assign({}, plainButton, { fontSize: 12, color: TERTIARY, cursor: 'pointer' }) }, t('filterReset')) : null),
           error ? h('div', { style: { color: LIGHT.red, fontSize: 12, paddingBottom: 8 } }, t('loadFailed', { error })) : null,
           h('div', { role: 'tabpanel', id: 'dsh-cost-panel', 'aria-labelledby': 'dsh-cost-tab-' + tab }, h(Body, { view })))
@@ -6655,13 +6747,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         if (!sid) return h('div', { style: Object.assign({}, wrap, { color: TERTIARY }) }, t('sideNoSession'))
         if (!snap) return h('div', { style: Object.assign({}, wrap, { color: state.error ? LIGHT.red : TERTIARY }) }, state.error ? t('loadFailed', { error: state.error }) : t('statsLoading'))
 
-        // Money is shown in the currency chosen for the statistics page (amounts already in it are kept), as billed otherwise.
-        const mode = prefs.statsCurrency
-        const converted = mode !== 'original'
-        const rate = prefs.usdCny
-        const show = (currency, amount) => (converted ? convertCosts({ [currency]: amount }, mode, rate) : { [currency]: amount })
-        const b = sessionBreakdown(snap, sid, converted ? (costs) => convertCosts(costs, mode, rate) : undefined)
-        const folded = converted ? convertedFrom(b.session ? b.session.costs : {}, mode, rate) : []
+        // Money is shown in the display currency chosen in the settings (amounts already in it are kept), as billed otherwise.
+        const money = moneyView(prefs)
+        const show = (currency, amount) => money.convert({ [currency]: amount })
+        const b = sessionBreakdown(snap, sid, money.convert)
+        const fx = money.note(b.session ? b.session.costs : {})
 
         const budget = snap.budget
         const spent = b.session && b.session.costs && budget ? (b.session.costs[budget.currency] || 0) : 0
@@ -6678,11 +6768,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             h('div', { style: { fontSize: 26, lineHeight: '32px', fontWeight: 600, fontVariantNumeric: 'tabular-nums' } }, formatCosts(b.costs) || t('noCost')),
             hasData ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) },
               [t('tipCalls', { n: b.calls }), formatTok(b.tokens), t('hitRate') + ' ' + formatHitRate(b.inTok, b.cacheRead)].join(' · ')) : null,
-            folded.length > 0 ? h('div', { style: sideNote }, t('fxNote', { from: folded.join(' / '), rate: String(Number(rate.toFixed(4))) })) : null,
+            fx ? h('div', { style: sideNote }, fx) : null,
             light.pct !== null ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: 4, marginTop: 4 } },
               h('div', { style: { height: 4, borderRadius: 2, background: FILL, overflow: 'hidden' } },
                 h('div', { style: { height: '100%', width: Math.min(100, light.pct) + '%', background: light.color } })),
-              h('div', { style: sideNote }, (light.pct >= 100 ? t('overBudget') : t('budgetUsed', { pct: light.pct.toFixed(0) })) + ' · ' + formatMoney(budget.currency, spent) + ' / ' + formatMoney(budget.currency, budget.amount))) : null),
+              h('div', { style: sideNote }, (light.pct >= 100 ? t('overBudget') : t('budgetUsed', { pct: light.pct.toFixed(0) })) + ' · ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount))) : null),
 
           hasData ? null : h('div', { style: { fontSize: 13, color: TERTIARY } }, t('sideEmpty')),
 

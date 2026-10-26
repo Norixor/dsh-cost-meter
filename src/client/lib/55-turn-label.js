@@ -41,9 +41,9 @@ function msgTheme(prefs) {
   return { text, chip, line }
 }
 
-/** Hover card: per-model breakdown, token mix and the caveats of the attribution. */
+/** Hover card: per-model breakdown, token mix and the caveats of the attribution. `fx` is the currency footnote, if any. */
 function TurnDetail(props) {
-  const { summary: s } = props
+  const { summary: s, fx } = props
   const row = { display: 'flex', alignItems: 'baseline', gap: 12, justifyContent: 'space-between' }
   const dim = { color: TERTIARY }
   const hit = hitOf(s)
@@ -58,12 +58,13 @@ function TurnDetail(props) {
     s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
     s.unpriced > 0 ? h('div', null, '! ' + t('msgUnpriced', { n: s.unpriced })) : null,
     s.failed > 0 ? h('div', null, '! ' + t('msgFailed', { n: s.failed })) : null,
+    fx ? h('div', { style: Object.assign({}, dim, { fontSize: 11 }) }, fx) : null,
     h('div', { style: Object.assign({}, dim, { fontSize: 11, marginTop: 2 }) }, t('msgNote')))
 }
 
 /** The chip in the message action row. Opens on hover or focus, closes on leave, blur or Esc. */
 function TurnChip(props) {
-  const { summary, prefs } = props
+  const { summary, prefs, fx } = props
   const theme = msgTheme(prefs)
   const [open, setOpen] = React.useState(false)
   const [shift, setShift] = React.useState(0)
@@ -93,17 +94,24 @@ function TurnChip(props) {
         position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
         boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
       },
-    }, h(TurnDetail, { summary })) : null)
+    }, h(TurnDetail, { summary, fx })) : null)
 }
 
-/** The summary line above the action row. */
+/** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */
 function TurnLine(props) {
   const theme = msgTheme(props.prefs)
-  return h('div', { style: { padding: '2px 0' }, title: t('msgNote') },
+  return h('div', { style: { padding: '2px 0' }, title: t('msgNote') + (props.fx ? '\n' + props.fx : '') },
     h('span', { style: Object.assign({ display: 'inline-block', maxWidth: '100%', boxSizing: 'border-box', lineHeight: '18px' }, theme.text, theme.line) }, turnLineText(props.summary)))
 }
 
 const sessionKey = (value) => (value === undefined || value === null || value === '' ? null : String(value))
+
+/** The calls' totals in the display currency, with the footnote for whatever was folded into it. */
+function shownSummary(calls, prefs) {
+  const money = moneyView(prefs)
+  const raw = summarizeCalls(calls)
+  return { summary: money.converted ? convertSummary(raw, money.convert) : raw, fx: money.note(raw.costs) }
+}
 
 /** Slot `conversation.chat.assistant-actions`: the chip for the turn this assistant message belongs to. */
 function CostChip(props) {
@@ -112,7 +120,7 @@ function CostChip(props) {
   if (!prefs.msgChip) return null
   const turn = turnOfMessage(log.msgs, props.messageId)
   const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
-  return calls.length === 0 ? null : h(TurnChip, { summary: summarizeCalls(calls), prefs })
+  return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs }))
 }
 
 /** Slot `conversation.chat.turnTail`: one summary line for the turn (the prop is the turn number or a view object). */
@@ -122,5 +130,5 @@ function CostTurnLine(props) {
   if (!prefs.msgLine) return null
   const turn = turnNumberOf(props.turn)
   const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
-  return calls.length === 0 ? null : h(TurnLine, { summary: summarizeCalls(calls), prefs })
+  return calls.length === 0 ? null : h(TurnLine, Object.assign(shownSummary(calls, prefs), { prefs }))
 }

@@ -76,25 +76,28 @@ function CostPills(props) {
   const session = snap && snap.sessions ? snap.sessions[sid] : undefined
   const budget = snap ? snap.budget : undefined
   // 每个模型一行的明细，供浮窗展示：费用、单价、输入/输出/缓存读写 token、调用次数；费用高的排前面。
-  const breakdown = sessionBreakdown(snap, sid)
+  // Money is shown in the display currency chosen in the settings (as billed when set to "original").
+  const money = moneyView(prefs)
+  const breakdown = sessionBreakdown(snap, sid, money.convert)
   const { rows, unpriced, unpricedModels } = breakdown
   const sessionTokens = breakdown.tokens
   const sessionInTok = breakdown.inTok
   const sessionCacheRead = breakdown.cacheRead
 
-  // 预算只按预算货币统计本会话的费用。
+  // 预算只按预算货币统计本会话的费用（红绿灯用原始金额算）；显示时再折成所选币种。
   const spent = session && session.costs && budget ? (session.costs[budget.currency] || 0) : 0
   const light = lightFor(spent, budget)
-  const sessionCosts = formatCosts(session && session.costs) || t('noCost')
+  const sessionCosts = formatCosts(breakdown.costs) || t('noCost')
+  const fx = money.note(session && session.costs)
   let detail
   if (light.pct === null) detail = t('noBudget')
-  else if (light.pct >= 100) detail = t('overBudget') + ' ' + formatMoney(budget.currency, spent) + ' / ' + formatMoney(budget.currency, budget.amount)
-  else detail = t('budgetUsed', { pct: light.pct.toFixed(0) }) + ' ' + formatMoney(budget.currency, spent) + ' / ' + formatMoney(budget.currency, budget.amount)
-  const title = t('session') + ' · ' + detail + '\n' + t('tokens') + ' ' + String(sessionTokens) + ' · ' + t('cost') + ' ' + sessionCosts
+  else if (light.pct >= 100) detail = t('overBudget') + ' ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount)
+  else detail = t('budgetUsed', { pct: light.pct.toFixed(0) }) + ' ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount)
+  const title = t('session') + ' · ' + detail + '\n' + t('tokens') + ' ' + String(sessionTokens) + ' · ' + t('cost') + ' ' + sessionCosts + (fx ? '\n' + fx : '')
 
   // 单模型直接显示模型名与费用；多模型合并成「n 个模型」，点击展开逐个明细。
   const modelsLabel = rows.length === 0 ? null : rows.length === 1
-    ? rows[0].model + ' ' + (formatCosts(rows[0].counter.costs) || t('noCost'))
+    ? rows[0].model + ' ' + (formatCosts(rows[0].costs) || t('noCost'))
     : t('modelsCount', { n: rows.length })
 
   const view = {
@@ -157,7 +160,7 @@ function CostPills(props) {
         h('th', { style: headCell }, t('tokCacheWrite')),
         h('th', { style: headCell }, t('hitRate')),
         h('th', { style: headCell }, t('cost')))),
-      h('tbody', null, rows.map(({ model, counter, price, inTok, outTok, cacheRead, cacheWrite }) => h('tr', { key: model },
+      h('tbody', null, rows.map(({ model, counter, price, costs, inTok, outTok, cacheRead, cacheWrite }) => h('tr', { key: model },
         h('td', { style: { padding: '5px 6px', whiteSpace: 'nowrap', verticalAlign: 'top' } },
           h('div', { style: { fontSize: 12, color: PRIMARY } }, model),
           h('div', { style: subLine }, rateLine(price)),
@@ -169,11 +172,11 @@ function CostPills(props) {
         h('td', { style: bodyCell }, cacheWrite > 0 ? formatTok(cacheWrite) : '—'),
         h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead) }) }, formatHitRate(inTok, cacheRead)),
         h('td', { style: Object.assign({}, bodyCell, { color: PRIMARY }) },
-          h('div', null, formatCosts(counter.costs) || t('noCost')),
+          h('div', null, formatCosts(costs) || t('noCost')),
           counter.tierCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('tierCount', { n: counter.tierCalls })) : null,
           counter.peakCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('peakCount', { n: counter.peakCalls })) : null))))),
     h('div', { style: { fontSize: 11, color: TERTIARY, padding: '6px 6px 0', lineHeight: '16px', maxWidth: 560, whiteSpace: 'normal' } },
-      t('rateLegend') + (unpriced > 0 ? ' · ' + t('unpriced', { n: unpriced }) : ''))) : null
+      t('rateLegend') + (unpriced > 0 ? ' · ' + t('unpriced', { n: unpriced }) : '') + (fx ? ' · ' + fx : ''))) : null
 
   return h(DockStrip, {
     prefs,

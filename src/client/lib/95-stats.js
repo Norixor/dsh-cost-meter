@@ -148,7 +148,7 @@ function StatsPage() {
         { value: 'USD', label: t('curUsd') },
         { value: 'original', label: t('curOriginal') },
       ], (value) => store.setPrefs({ statsCurrency: value }), t('currencyView')),
-      folded.length > 0 ? h('span', { style: { fontSize: 12, color: TERTIARY } }, t('fxNote', { from: folded.join(' / '), rate: String(Number(rate.toFixed(4))) })) : null,
+      folded.length > 0 ? h('span', { style: { fontSize: 12, color: TERTIARY } }, fxNoteText(folded, rate)) : null,
       models ? h('button', { type: 'button', onClick: () => setModelPick(null), style: Object.assign({}, plainButton, { fontSize: 12, color: TERTIARY, cursor: 'pointer' }) }, t('filterReset')) : null),
     error ? h('div', { style: { color: LIGHT.red, fontSize: 12, paddingBottom: 8 } }, t('loadFailed', { error })) : null,
     h('div', { role: 'tabpanel', id: 'dsh-cost-panel', 'aria-labelledby': 'dsh-cost-tab-' + tab }, h(Body, { view })))

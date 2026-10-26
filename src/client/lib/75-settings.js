@@ -39,6 +39,9 @@ function SettingsPage() {
     h('div', { style: ui.section }, t('sectionMessages')),
     h(MessageSettings),
 
+    h('div', { style: ui.section }, t('sectionCurrency')),
+    h(CurrencySettings),
+
     h('div', { style: ui.section }, t('sectionSettings')),
     settingRow({ key: 'budget' }, t('budgetSection'), t('budgetHint'),
       h('input', {

@@ -1,14 +1,18 @@
-// Sample numbers for the style previews: a healthy session with one model.
-const PREVIEW_VIEW = {
-  title: '',
-  light: { color: LIGHT.green, pct: 32 },
-  tokens: 48200,
-  costText: '¥0.42',
-  overBudget: false,
-  modelsLabel: 'deepseek-chat ¥0.42',
-  multiModel: false,
-  unpricedText: null,
-  unpricedHint: '',
+// Sample numbers for the style previews: a healthy session with one model, priced in CNY and shown like the real strip
+// (so it follows the display currency).
+function previewView(prefs) {
+  const cost = formatCosts(moneyView(prefs).convert({ CNY: 0.42 }))
+  return {
+    title: '',
+    light: { color: LIGHT.green, pct: 32 },
+    tokens: 48200,
+    costText: cost,
+    overBudget: false,
+    modelsLabel: 'deepseek-chat ' + cost,
+    multiModel: false,
+    unpricedText: null,
+    unpricedHint: '',
+  }
 }
 
 const STYLE_LABEL_KEYS = {
@@ -36,7 +40,7 @@ function stylePreviewCard(style, prefs, onPick) {
   },
     // The preview sits on the platform surface like the real composer area does.
     h('div', { style: { padding: '12px 10px', borderRadius: 12, background: PLATFORM, border: BORDER, overflow: 'hidden', pointerEvents: 'none' } },
-      h(DockStrip, { prefs: Object.assign({}, prefs, { dockStyle: style }), view: PREVIEW_VIEW })),
+      h(DockStrip, { prefs: Object.assign({}, prefs, { dockStyle: style }), view: previewView(prefs) })),
     h('div', null,
       h('div', { style: { fontSize: 14, lineHeight: '20px' } }, t(keys[0])),
       h('div', { style: ui.desc }, t(keys[1]))))
@@ -104,7 +108,19 @@ function SidebarSettings() {
     settingRow({ key: 'sidebar' }, t('sidebarShow'), t('sidebarShowHint'), toggle(prefs.sidebar, (on) => set({ sidebar: on }), t('sidebarShow'))),
     settingRow({ key: 'range' }, t('statsRange'), t('statsRangeHint'), segmented(prefs.statsRange,
       STATS_RANGES.map((n) => ({ value: n, label: t('rangeDays', { n }) })),
-      (value) => set({ statsRange: value }), t('statsRange'))),
+      (value) => set({ statsRange: value }), t('statsRange'))))
+}
+
+/** Settings → the currency every surface shows money in, and the USD → CNY rate used to get there. */
+function CurrencySettings() {
+  const prefs = usePrefs()
+  const set = (change) => store.setPrefs(change)
+  return h('div', null,
+    settingRow({ key: 'currency' }, t('currencyView'), t('currencyViewHint'), segmented(prefs.statsCurrency, [
+      { value: 'CNY', label: t('curCny') },
+      { value: 'USD', label: t('curUsd') },
+      { value: 'original', label: t('curOriginal') },
+    ], (value) => set({ statsCurrency: value }), t('currencyView'))),
     settingRow({ key: 'fx' }, t('fxTitle'), t('fxHint', { rate: DEFAULT_PREFS.usdCny }),
       h(FxRateInput, { value: prefs.usdCny, onCommit: (n) => set({ usdCny: n }) }),
       prefs.usdCny !== DEFAULT_PREFS.usdCny ? btn(t('fxReset'), () => set({ usdCny: DEFAULT_PREFS.usdCny })) : null))
@@ -126,6 +142,7 @@ function msgStyleCard(style, prefs, onPick) {
   const on = prefs.msgStyle === style
   const keys = MSG_STYLE_KEYS[style]
   const shown = Object.assign({}, prefs, { msgStyle: style })
+  const summary = convertSummary(PREVIEW_TURN, moneyView(prefs).convert)
   return h('button', {
     key: style,
     type: 'button',
@@ -139,10 +156,10 @@ function msgStyleCard(style, prefs, onPick) {
     },
   },
     h('div', { style: { padding: '12px 10px', borderRadius: 12, background: PLATFORM, border: BORDER, overflow: 'hidden', pointerEvents: 'none' } },
-      h(TurnLine, { summary: PREVIEW_TURN, prefs: shown }),
+      h(TurnLine, { summary, prefs: shown }),
       h('div', { style: { display: 'flex', alignItems: 'center', gap: 4, height: 28, color: TERTIARY, fontSize: 12 } },
         h('span', { style: { padding: '0 6px' } }, t('msgPreviewCopy')),
-        h(TurnChip, { summary: PREVIEW_TURN, prefs: shown }),
+        h(TurnChip, { summary, prefs: shown }),
         h('span', { style: { padding: '0 6px' } }, t('msgPreviewBranch')))),
     h('div', null,
       h('div', { style: { fontSize: 14, lineHeight: '20px' } }, t(keys[0])),
