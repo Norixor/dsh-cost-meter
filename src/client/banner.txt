@@ -1,0 +1,13 @@
+/**
+ * dsh-cost-meter — browser half.
+ *
+ * 1. 输入框下方统计条（conversation.composer.dock）：本会话费用 + 预算红绿灯 + 各模型费用。
+ *    默认纯文字、无背景（与相邻的系统 UI 一致）；设置里可以换成软胶囊 / 描边 / 一体条等样式。
+ * 2. 设置页（settings.section）：显示样式、会话预算、每个模型的单价（含峰谷价与上下文分档价）。
+ * 3. 左侧栏入口（sidebar.panellist + main）：纯统计页，带图表；入口可在设置里关闭。
+ *
+ * 红绿灯：本会话费用占预算的比例 <70% 绿色，70%–100% 黄色，≥100% 红色（超预算）。
+ * 与 Host 半部通过 /__cost-meter 通信：GET 拉取快照，POST 提交操作。
+ */
+// 宿主把 exports["./client"] 的字节原样拼进 /plugins combo，并以经典 <script> 执行，
+// 因此这里必须是 require 闭包工厂，不能有顶层 import/export。

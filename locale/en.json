@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Cost Meter",
+    "description": "Shows the cost of the current session and of each model under the composer; per-model prices are set in Settings."
+  }
+}

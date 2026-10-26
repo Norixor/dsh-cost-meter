@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Kostenanzeige",
+    "description": "Zeigt unter dem Eingabefeld die Kosten der aktuellen Sitzung und jedes Modells an; die Preise pro Modell werden in den Einstellungen festgelegt."
+  }
+}

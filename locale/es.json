@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Medidor de costos",
+    "description": "Muestra bajo el campo de entrada el costo de la sesión actual y de cada modelo; los precios por modelo se configuran en Ajustes."
+  }
+}

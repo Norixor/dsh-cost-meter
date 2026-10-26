@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+*.log
+*.tgz
+# Local project memory written by the DSH app.
+.dsh-project-memory/

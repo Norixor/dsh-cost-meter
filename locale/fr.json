@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Compteur de coûts",
+    "description": "Affiche sous la zone de saisie le coût de la session en cours et de chaque modèle ; les tarifs par modèle se règlent dans les paramètres."
+  }
+}

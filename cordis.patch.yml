@@ -1,0 +1,3 @@
+- insert:
+    - id: dsh-cost-meter
+      name: '@local/dsh-cost-meter'
