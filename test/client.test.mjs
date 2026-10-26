@@ -60,7 +60,7 @@ async function loadClient(snapshotPrefs, cachedSidebar, localeService, hostServi
     clearInterval: () => {},
   }
   vm.runInNewContext(readFileSync(join(ROOT, 'client.js'), 'utf8'), sandbox, { filename: 'client.js' })
-  assert.equal(definition.id, '@local/dsh-cost-meter')
+  assert.equal(definition.id, '@norixor/dsh-cost-meter')
   const fakeReact = new Proxy({ createElement: () => ({}) }, { get: (target, key) => target[key] || (() => undefined) })
   const plugin = definition.factory((name) => { assert.equal(name, 'react'); return fakeReact })
   assert.deepEqual(Array.from(plugin.inject), ['slots', 'locale'])
@@ -162,10 +162,10 @@ test('with the right sidebar available the plugin adds its page type and body; w
   const types = []
   const hostServices = { sidebarRight: { openTab: () => {} }, sidebarRightTabs: { register: (definition) => { types.push(definition); return () => {} } } }
   const client = await loadClient({ sidebar: true }, undefined, undefined, hostServices)
-  assert.ok(client.names().includes('sidebar.right.pane.tab:@local/dsh-cost-meter/side'))
+  assert.ok(client.names().includes('sidebar.right.pane.tab:@norixor/dsh-cost-meter/side'))
   assert.equal(types.length, 1)
   assert.equal(types[0].kind, 'cost-meter')
-  assert.equal(types[0].id, '@local/dsh-cost-meter/side')
+  assert.equal(types[0].id, '@norixor/dsh-cost-meter/side')
   assert.equal(typeof types[0].title(), 'string')
   assert.equal(types[0].guide.length, 1)
   assert.equal(typeof types[0].guide[0].description(), 'string')

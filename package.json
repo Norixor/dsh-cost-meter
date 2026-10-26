@@ -1,10 +1,33 @@
 {
-  "name": "@local/dsh-cost-meter",
+  "name": "@norixor/dsh-cost-meter",
   "version": "0.7.0",
-  "private": true,
+  "description": "Per-session and per-model cost meter for DeepSeek Harness: preset prices for 60+ models, peak pricing, context-length tiers, budget traffic light, display styles, a sidebar statistics page with charts, latency analysis and experimental image / speech metering.",
   "license": "MIT",
+  "author": "Norixor",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "deepseek",
+    "cost",
+    "usage",
+    "billing",
+    "budget",
+    "token",
+    "pricing"
+  ],
+  "homepage": "https://github.com/Norixor/dsh-cost-meter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Norixor/dsh-cost-meter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Norixor/dsh-cost-meter/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
-  "description": "Per-session and per-model cost meter for DeepSeek Harness: preset prices for 60+ models, peak pricing, context-length tiers, budget traffic light, display styles a sidebar statistics page with charts, latency analysis and experimental image / speech metering.",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -25,7 +48,8 @@
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
-    "README.md"
+    "README.md",
+    "README.zh-CN.md"
   ],
   "dsh": {
     "bundle": {

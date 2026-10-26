@@ -43,15 +43,35 @@
 
 ## 安装与快速开始
 
-1. 取得文件夹：`git clone https://github.com/Norixor/dsh-cost-meter.git`（或直接复制），放在固定位置，例如 Windows 上的 `D:\dsh-plugins\dsh-cost-meter`。路径里没有空格和中文最稳妥。
-2. 打开 DeepSeek Harness → **设置 → 插件**。
-3. 点 **添加插件** 右侧的箭头（「选择添加插件方式」）→ **安装第三方插件**。
-4. 选择该文件夹并确认。
-5. **重启 DeepSeek Harness。**
+费用计量是一个普通的 npm 包，同一个包同时适用于两种形态的 DeepSeek Harness：桌面客户端和 DSH Web（`dsh web`）。两种形态各自维护自己的插件列表（即 *profile*），所以在你用的那一种里安装；两种都用就各装一次。
 
-从本地文件夹安装的插件是软链接而不是拷贝：装好之后不要移动或删除这个文件夹。左侧栏统计页需要支持「左侧栏插件入口」的 DSH 客户端，右侧栏页签需要带右侧栏页面接口的客户端；客户端较旧时，用不了的功能只是不出现，其余功能照常工作。
+**桌面客户端**
 
-卸载：**设置 → 插件 →** 本插件 **→ 移除**，然后重启。
+1. 打开 DeepSeek Harness → **设置 → 插件**。
+2. 点 **添加插件**，填入包名 `@norixor/dsh-cost-meter`，点 **安装**。
+3. **重启 DeepSeek Harness。**
+
+**DSH Web / 命令行**
+
+```bash
+dsh plugin --profile web add @norixor/dsh-cost-meter
+```
+
+然后重启 `dsh web`。想点鼠标的话，Web 界面的**插件**页也接受同一个包名。
+
+左侧栏统计页需要支持「左侧栏插件入口」的 DSH 客户端，右侧栏页签需要带右侧栏页面接口的客户端；客户端较旧时，用不了的功能只是不出现，其余功能照常工作。
+
+升级：先移除再重新添加。卸载：**设置 → 插件 →** 本插件 **→ 移除**（或 `dsh plugin --profile web remove @norixor/dsh-cost-meter`），然后重启。
+
+### 从本地文件夹安装
+
+想试用某个检出版本或自己的改动时用这种方式。**添加插件** 也接受文件夹的绝对路径（或点 **添加插件** 右侧的箭头 → **安装第三方插件**）：
+
+1. `git clone https://github.com/Norixor/dsh-cost-meter.git`，放在固定位置，例如 Windows 上的 `D:\dsh-plugins\dsh-cost-meter`。路径里没有空格和中文最稳妥。
+2. 在 **设置 → 插件 → 添加插件** 里填入该文件夹的绝对路径并安装。
+3. **重启 DeepSeek Harness。**
+
+从本地文件夹安装的插件是软链接而不是拷贝：装好之后不要移动或删除这个文件夹。
 
 ### 第一次使用
 

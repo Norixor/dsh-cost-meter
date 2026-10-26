@@ -51,7 +51,7 @@ export function buildClient() {
     GENERATED,
     "if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefined') {",
     '  window.__ModuleLoader__.load({',
-    "    id: '@local/dsh-cost-meter',",
+    "    id: '@norixor/dsh-cost-meter',",
     '    factory(require) {',
     lib,
     '',

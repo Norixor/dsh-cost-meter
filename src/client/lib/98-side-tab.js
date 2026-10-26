@@ -2,7 +2,7 @@
 // The host owns the column; this file only supplies the page type's body and the controller used to open it.
 
 const SIDE_KIND = 'cost-meter'
-const SIDE_ID = '@local/dsh-cost-meter/side'
+const SIDE_ID = '@norixor/dsh-cost-meter/side'
 const RECENT_SHOWN = 12
 // Keep in sync with CALLS_PER_SESSION in calllog.js: the Host keeps this many finished calls per session.
 const CALLS_KEPT = 80

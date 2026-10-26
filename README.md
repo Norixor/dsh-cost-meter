@@ -43,15 +43,35 @@ A long agent session can burn through tokens across several models, and the bill
 
 ## Installation and quick start
 
-1. Get the folder: `git clone https://github.com/Norixor/dsh-cost-meter.git` (or copy it) and keep it in a fixed place, for example `D:\dsh-plugins\dsh-cost-meter` on Windows. A path without spaces or non-ASCII characters is safest.
-2. Open DeepSeek Harness → **Settings → Plugins**.
-3. Click the arrow next to **Add plugin** (“Choose how to add a plugin”) → **Install third-party plugin**.
-4. Select the folder and confirm.
-5. **Restart DeepSeek Harness.**
+Cost Meter is an ordinary npm package, and the same package works in both forms of DeepSeek Harness: the desktop app and DSH Web (`dsh web`). Each form keeps its own plugin list (its *profile*), so install it in the one you use, or in both.
 
-A plugin installed from a local folder is linked, not copied: do not move or delete the folder afterwards. The left-sidebar statistics page needs a DSH client that supports plugin entries in the left sidebar; the right-sidebar tab needs a client with the right-sidebar page API. On an older client the features that are not available simply do not appear, and everything else keeps working.
+**Desktop app**
 
-To uninstall: **Settings → Plugins →** the plugin **→ Remove**, then restart.
+1. Open DeepSeek Harness → **Settings → Plugins**.
+2. Click **Add plugin**, enter the package name `@norixor/dsh-cost-meter`, and click **Install**.
+3. **Restart DeepSeek Harness.**
+
+**DSH Web / command line**
+
+```bash
+dsh plugin --profile web add @norixor/dsh-cost-meter
+```
+
+Then restart `dsh web`. The **Plugins** page of the web UI accepts the same package name if you prefer to click.
+
+The left-sidebar statistics page needs a DSH client that supports plugin entries in the left sidebar; the right-sidebar tab needs a client with the right-sidebar page API. On an older client the features that are not available simply do not appear, and everything else keeps working.
+
+To upgrade, remove the plugin and add it again. To uninstall: **Settings → Plugins →** the plugin **→ Remove** (or `dsh plugin --profile web remove @norixor/dsh-cost-meter`), then restart.
+
+### Install from a local folder
+
+Use this to try a checkout or your own changes. **Add plugin** also accepts an absolute folder path (or choose **Install third-party plugin** from the arrow next to **Add plugin**):
+
+1. `git clone https://github.com/Norixor/dsh-cost-meter.git` and keep the folder in a fixed place, for example `D:\dsh-plugins\dsh-cost-meter` on Windows. A path without spaces or non-ASCII characters is safest.
+2. In **Settings → Plugins → Add plugin**, enter the folder's absolute path and install.
+3. **Restart DeepSeek Harness.**
+
+A plugin installed from a local folder is linked, not copied: do not move or delete the folder afterwards.
 
 ### First steps
 
