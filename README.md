@@ -7,7 +7,7 @@
   A DeepSeek Harness plugin that counts tokens and money per session and per model, shows them under the input box and in a live right-sidebar tab, and charts the history on a statistics page. Prices, budgets and display styles are yours to set; everything stays on your machine.
 </p>
 <p align="center">
-  <a href="package.json"><img src="https://img.shields.io/badge/version-0.7.0-blue" alt="Version 0.7.0" /></a>
+  <a href="https://www.npmjs.com/package/@norixor/dsh-cost-meter"><img src="https://img.shields.io/npm/v/@norixor/dsh-cost-meter?color=blue" alt="npm version" /></a>
   <a href="#installation-and-quick-start"><img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-8250df" alt="macOS, Windows and Linux" /></a>
   <img src="https://img.shields.io/badge/DeepSeek%20Harness-plugin-1f6feb" alt="DeepSeek Harness plugin" />
   <img src="https://img.shields.io/badge/dependencies-none-brightgreen" alt="No dependencies" />
@@ -43,13 +43,15 @@ A long agent session can burn through tokens across several models, and the bill
 
 ## Installation and quick start
 
-Cost Meter is an ordinary npm package, and the same package works in both forms of DeepSeek Harness: the desktop app and DSH Web (`dsh web`). Each form keeps its own plugin list (its *profile*), so install it in the one you use, or in both.
+Cost Meter is published on npm as [`@norixor/dsh-cost-meter`](https://www.npmjs.com/package/@norixor/dsh-cost-meter), and the same package works in both forms of DeepSeek Harness: the desktop app and DSH Web (`dsh web`). Each form keeps its own plugin list (its *profile*), so install it in the one you use, or in both.
 
 **Desktop app**
 
-1. Open DeepSeek Harness → **Settings → Plugins**.
-2. Click **Add plugin**, enter the package name `@norixor/dsh-cost-meter`, and click **Install**.
+1. In DeepSeek Harness, open **Plugins** in the left sidebar.
+2. Click **Add plugin**, enter the package name `@norixor/dsh-cost-meter` in the **Package name or address** field, and click **Install**.
 3. **Restart DeepSeek Harness.**
+
+If the package cannot be found right after a release, open **Registry** in the same dialog and pick **Official npm registry**: a mirror can lag behind npm for a while.
 
 **DSH Web / command line**
 
@@ -57,18 +59,18 @@ Cost Meter is an ordinary npm package, and the same package works in both forms 
 dsh plugin --profile web add @norixor/dsh-cost-meter
 ```
 
-Then restart `dsh web`. The **Plugins** page of the web UI accepts the same package name if you prefer to click.
+Then restart `dsh web`.
 
 The left-sidebar statistics page needs a DSH client that supports plugin entries in the left sidebar; the right-sidebar tab needs a client with the right-sidebar page API. On an older client the features that are not available simply do not appear, and everything else keeps working.
 
-To upgrade, remove the plugin and add it again. To uninstall: **Settings → Plugins →** the plugin **→ Remove** (or `dsh plugin --profile web remove @norixor/dsh-cost-meter`), then restart.
+To upgrade, uninstall the plugin and add it again. To uninstall: **Plugins →** the plugin **→ Uninstall** (or `dsh plugin --profile web remove @norixor/dsh-cost-meter`), then restart.
 
 ### Install from a local folder
 
-Use this to try a checkout or your own changes. **Add plugin** also accepts an absolute folder path (or choose **Install third-party plugin** from the arrow next to **Add plugin**):
+Use this to try a checkout or your own changes. **Add plugin** also accepts the absolute path of a local folder (or choose **Install a third-party plugin** from the arrow next to **Add plugin**):
 
 1. `git clone https://github.com/Norixor/dsh-cost-meter.git` and keep the folder in a fixed place, for example `D:\dsh-plugins\dsh-cost-meter` on Windows. A path without spaces or non-ASCII characters is safest.
-2. In **Settings → Plugins → Add plugin**, enter the folder's absolute path and install.
+2. In **Plugins → Add plugin**, enter the folder's absolute path and click **Install**.
 3. **Restart DeepSeek Harness.**
 
 A plugin installed from a local folder is linked, not copied: do not move or delete the folder afterwards.
@@ -87,6 +89,7 @@ A plugin installed from a local folder is linked, not copied: do not move or del
 - **Cost on every reply.** A small label in the message action bar and a one-line summary above it show what the turn cost (calls · tokens · model time · cost). Hover the label for the per-model breakdown. Calls are attributed to the turn they started in, so tool-triggered calls count towards the right reply.
 - **Statistics page** in the left sidebar, with five tabs: **Overview** (headline, KPI cards, observations, daily cost by model, cost share, token mix), **Latency** (average / P50 / P95, time to first token, tokens per second, distribution, slowest calls), **Models** (side-by-side comparison), **Sessions** (searchable, sortable) and **Time of use** (24-hour distribution and weekday × hour heat map). Filter by range and by model; every chart has a chart/table view and works in light and dark themes.
 - **Display currency.** Show all money as CNY, USD, or as billed, on every surface: the strip under the input box, the labels under messages, the sidebar page and the statistics page. Conversion uses an exchange rate you set (default 1 USD = 6.8 CNY); amounts already in the chosen currency are never converted, and recorded costs are never changed.
+- **Peak / off-peak status.** For models that have peak windows (the DeepSeek presets do), the strip under the input box shows an icon and “Peak” or “Off-peak”, and the right-sidebar tab shows the state and the peak hours in your local time. The countdown to the next switch, and the weekdays, price ratio, affected models and billing rule in the sidebar, are opt-in. Each part has its own switch in Settings.
 - **Prices you control.** 66 preset models; per-model editing of input, output, cache read and cache write prices; context-length tiers; peak-hour pricing; a session budget in any currency.
 - **Image and speech metering** (experimental, off by default). See below.
 - **Nine languages**, see [Languages](#languages).
@@ -109,7 +112,7 @@ Rendered from sample data in a test page. Colors and fonts in the real client fo
 - A call is costed when it ends and reports its usage, at the price in force when it started and for its own context length. Changing a price later does not rewrite history.
 - Prices resolve in three layers, and a non-zero value in a higher layer wins: **peak price > tier price > base price**. A blank (0) field falls through to the next layer.
 - **Context tiers.** The context of one request is uncached input + cache read + cache write. When it is strictly above a tier's threshold, the whole request (input, output and cache) is billed at that tier's prices; with several tiers, the highest threshold passed applies. Up to four tiers per model.
-- **Peak hours.** Up to two UTC windows, optionally weekdays only; a call that starts inside a window is billed entirely at the peak price.
+- **Peak hours.** Up to two UTC windows, optionally weekdays only; a call that starts inside a window is billed entirely at the peak price. The peak / off-peak status on screen uses the same windows, so what it shows is what a call started right now would be billed at.
 - **Back-fill.** If a model is called before it has a price, the earlier calls are costed once at the base price when you set it. This is a lower-bound estimate for calls that would have hit a peak or tier price.
 - A single call can report several usage chunks; each counter takes the maximum across the chunks.
 

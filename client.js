@@ -496,6 +496,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: '第 {n} 轮',
         sideTtft: '首字 {time}',
         sideNote: '最近调用只保留每个会话最新的 {n} 条；总额和各模型合计来自完整记录。',
+        sectionPeak: '峰谷提示',
+        peakNowPeak: '高峰',
+        peakNowValley: '低谷',
+        peakLeftPeak: '{time} 后转低谷',
+        peakLeftValley: '{time} 后转高峰',
+        peakTipWindows: '高峰时段 {local}（本地时间；UTC {utc}）',
+        peakTipRate: '高峰价约为正常价的 {x} 倍',
+        peakTipModels: '适用模型：{models}',
+        peakTipNote: '在高峰时段开始的调用，整次按高峰价计费；时段和单价在「模型单价」里设置。',
+        peakDockShow: '统计条显示峰谷',
+        peakDockShowHint: '在输入框下方的统计条里显示现在是高峰还是低谷；只对设置了峰时段的模型生效',
+        peakSideShow: '右侧栏显示峰谷',
+        peakSideShowHint: '在右侧栏的费用页里显示峰谷状态和高峰时段',
+        peakCountdownShow: '统计条显示倒计时',
+        peakCountdownShowHint: '在统计条里显示距离下一次切换还有多久，例如「高峰 · 1h 20m 后转低谷」；默认只显示图标和高峰或低谷',
+        peakStatusTitle: '当前状态',
+        peakNone: '还没有模型启用峰谷计价。在下方「模型单价」里给模型设置峰时段后，这里会显示当前状态。',
+        peakWindowsShort: '高峰时段 {local}（本地时间）',
+        peakSideDetailShow: '侧边栏显示详情',
+        peakSideDetailShowHint: '除状态和时段外，再显示适用日、价格倍率、适用模型和计费说明；默认关闭',
       }
 
       const EN = {
@@ -871,6 +891,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: 'Turn {n}',
         sideTtft: 'First token {time}',
         sideNote: 'Only the latest {n} calls per session are listed; the totals come from the full record.',
+        sectionPeak: 'Peak and off-peak',
+        peakNowPeak: 'Peak',
+        peakNowValley: 'Off-peak',
+        peakLeftPeak: 'off-peak in {time}',
+        peakLeftValley: 'peak in {time}',
+        peakTipWindows: 'Peak hours {local} local time (UTC {utc})',
+        peakTipRate: 'Peak price is about {x}× the normal price',
+        peakTipModels: 'Models: {models}',
+        peakTipNote: 'A call that starts inside a peak window is billed entirely at the peak price; set the windows and prices under Model prices.',
+        peakDockShow: 'Show peak status in the strip',
+        peakDockShowHint: 'Show whether it is peak or off-peak right now in the strip under the composer; only applies to models that have peak windows',
+        peakSideShow: 'Show peak status in the sidebar',
+        peakSideShowHint: 'Show the peak status and the peak hours on the cost page in the right sidebar',
+        peakCountdownShow: 'Countdown in the strip',
+        peakCountdownShowHint: 'Show how long until the next switch in the strip, e.g. "Peak · off-peak in 1h 20m"; by default only the icon and Peak or Off-peak are shown',
+        peakStatusTitle: 'Current status',
+        peakNone: 'No model has peak pricing enabled yet. Set peak windows for a model under Model prices below and its status shows up here.',
+        peakWindowsShort: 'Peak hours {local} (local time)',
+        peakSideDetailShow: 'Sidebar details',
+        peakSideDetailShowHint: 'Besides the status and hours, also show the weekdays, price ratio, models and billing rule; off by default',
       }
 
       // Traditional Chinese (Taiwan) UI dictionary; keys mirror EN exactly.
@@ -1247,6 +1287,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: '第 {n} 回合',
         sideTtft: '首字 {time}',
         sideNote: '最近呼叫只保留每個工作階段最新的 {n} 筆；總額與各模型合計來自完整記錄。',
+        sectionPeak: '尖峰提示',
+        peakNowPeak: '尖峰',
+        peakNowValley: '離峰',
+        peakLeftPeak: '{time} 後轉離峰',
+        peakLeftValley: '{time} 後轉尖峰',
+        peakTipWindows: '尖峰時段 {local}（本地時間；UTC {utc}）',
+        peakTipRate: '尖峰價約為正常價的 {x} 倍',
+        peakTipModels: '適用模型：{models}',
+        peakTipNote: '在尖峰時段開始的呼叫，整次依尖峰價計費；時段與單價請在「模型單價」中設定。',
+        peakDockShow: '統計列顯示尖峰離峰',
+        peakDockShowHint: '在輸入框下方的統計列顯示目前是尖峰還是離峰；僅對已設定尖峰時段的模型生效',
+        peakSideShow: '右側欄顯示尖峰離峰',
+        peakSideShowHint: '在右側欄的費用頁顯示尖峰狀態與尖峰時段',
+        peakCountdownShow: '統計列顯示倒數',
+        peakCountdownShowHint: '在統計列顯示距離下一次切換還有多久，例如「尖峰 · 1h 20m 後轉離峰」；預設只顯示圖示與尖峰或離峰',
+        peakStatusTitle: '目前狀態',
+        peakNone: '尚未有模型啟用尖峰計價。在下方「模型單價」為模型設定尖峰時段後，這裡會顯示目前狀態。',
+        peakWindowsShort: '尖峰時段 {local}（本地時間）',
+        peakSideDetailShow: '側邊欄顯示詳情',
+        peakSideDetailShowHint: '除狀態與時段外，另顯示適用日、價格倍率、適用模型與計費說明；預設關閉',
       }
 
       // Japanese UI dictionary; keys mirror EN in 21-locale-en.js.
@@ -1623,6 +1683,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: 'ターン {n}',
         sideTtft: '初回トークン {time}',
         sideNote: '最近の呼び出しは各セッションの直近 {n} 件のみ表示します。合計は完全な記録に基づきます。',
+        sectionPeak: 'ピーク表示',
+        peakNowPeak: 'ピーク',
+        peakNowValley: 'オフピーク',
+        peakLeftPeak: '{time} 後にオフピーク',
+        peakLeftValley: '{time} 後にピーク',
+        peakTipWindows: 'ピーク時間帯 {local}（現地時刻、UTC {utc}）',
+        peakTipRate: 'ピーク料金は通常料金の約 {x} 倍',
+        peakTipModels: '対象モデル：{models}',
+        peakTipNote: 'ピーク時間帯に開始した呼び出しは、全体がピーク料金で計算されます。時間帯と単価は「モデル価格」で設定します。',
+        peakDockShow: '統計バーにピークを表示',
+        peakDockShowHint: '入力欄の下の統計バーに、今がピークかオフピークかを表示します。ピーク時間帯を設定したモデルにのみ適用されます',
+        peakSideShow: 'サイドバーにピークを表示',
+        peakSideShowHint: 'ピークの状態とピーク時間帯を、右サイドバーの費用ページに表示します',
+        peakCountdownShow: '統計バーにカウントダウンを表示',
+        peakCountdownShowHint: '統計バーに次の切り替えまでの残り時間を表示します（例：「ピーク · 1h 20m 後にオフピーク」）。既定ではアイコンとピーク／オフピークだけを表示します',
+        peakStatusTitle: '現在の状態',
+        peakNone: 'ピーク料金を有効にしたモデルはまだありません。下の「モデル価格」でモデルにピーク時間帯を設定すると、ここに状態が表示されます。',
+        peakWindowsShort: 'ピーク時間帯 {local}（現地時刻）',
+        peakSideDetailShow: 'サイドバーに詳細を表示',
+        peakSideDetailShowHint: '状態と時間帯に加えて、対象曜日・料金倍率・対象モデル・課金ルールも表示します。既定ではオフです',
       }
 
       // Korean UI dictionary; keys mirror EN exactly.
@@ -1999,6 +2079,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: '{n}번째 턴',
         sideTtft: '첫 토큰 {time}',
         sideNote: '최근 호출은 세션마다 최신 {n}건만 보여 줘요. 합계는 전체 기록을 기준으로 해요.',
+        sectionPeak: '피크 표시',
+        peakNowPeak: '피크',
+        peakNowValley: '비피크',
+        peakLeftPeak: '{time} 후 비피크',
+        peakLeftValley: '{time} 후 피크',
+        peakTipWindows: '피크 시간대 {local}(현지 시간, UTC {utc})',
+        peakTipRate: '피크 요금은 평상시 요금의 약 {x}배',
+        peakTipModels: '대상 모델: {models}',
+        peakTipNote: '피크 시간대에 시작한 호출은 전체가 피크 요금으로 계산돼요. 시간대와 단가는 모델 단가에서 설정하세요.',
+        peakDockShow: '통계 줄에 피크 표시',
+        peakDockShowHint: '입력창 아래 통계 줄에 지금이 피크인지 비피크인지 표시해요. 피크 시간대를 설정한 모델에만 적용돼요',
+        peakSideShow: '사이드바에 피크 표시',
+        peakSideShowHint: '오른쪽 사이드바의 비용 페이지에 피크 상태와 피크 시간대를 표시해요',
+        peakCountdownShow: '통계 줄에 카운트다운 표시',
+        peakCountdownShowHint: '통계 줄에 다음 전환까지 남은 시간을 표시해요. 예: "피크 · 1h 20m 후 비피크". 기본값은 아이콘과 피크/비피크만 표시해요',
+        peakStatusTitle: '현재 상태',
+        peakNone: '피크 요금을 켠 모델이 아직 없어요. 아래 모델 단가에서 모델에 피크 시간대를 설정하면 여기에 상태가 표시돼요.',
+        peakWindowsShort: '피크 시간대 {local}(현지 시간)',
+        peakSideDetailShow: '사이드바에 상세 표시',
+        peakSideDetailShowHint: '상태와 시간대 외에 적용 요일, 요금 배율, 대상 모델, 과금 규칙도 표시해요. 기본값은 꺼짐이에요',
       }
 
       // German UI dictionary; keys and order mirror EN.
@@ -2375,6 +2475,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: 'Runde {n}',
         sideTtft: 'Erstes Token {time}',
         sideNote: 'Es werden nur die letzten {n} Aufrufe je Sitzung aufgelistet; die Summen stammen aus der vollständigen Aufzeichnung.',
+        sectionPeak: 'Spitze und Nebenzeit',
+        peakNowPeak: 'Spitze',
+        peakNowValley: 'Nebenzeit',
+        peakLeftPeak: 'Nebenzeit in {time}',
+        peakLeftValley: 'Spitze in {time}',
+        peakTipWindows: 'Spitzenzeiten {local} Ortszeit (UTC {utc})',
+        peakTipRate: 'Der Spitzenpreis beträgt etwa das {x}-Fache des Normalpreises',
+        peakTipModels: 'Modelle: {models}',
+        peakTipNote: 'Ein Aufruf, der innerhalb eines Spitzenfensters beginnt, wird vollständig zum Spitzenpreis abgerechnet; Zeiten und Preise legst du unter Modellpreise fest.',
+        peakDockShow: 'Spitze in der Leiste anzeigen',
+        peakDockShowHint: 'Zeigt in der Leiste unter dem Eingabefeld, ob gerade Spitze oder Nebenzeit ist; gilt nur für Modelle mit Spitzenfenstern',
+        peakSideShow: 'Spitze in der Seitenleiste anzeigen',
+        peakSideShowHint: 'Zeigt auf der Kostenseite in der rechten Seitenleiste den Spitzenstatus und die Spitzenzeiten',
+        peakCountdownShow: 'Countdown in der Leiste',
+        peakCountdownShowHint: 'Zeigt in der Leiste, wie lange es bis zum nächsten Wechsel dauert, z. B. „Spitze · Nebenzeit in 1h 20m“; standardmäßig nur Symbol und Spitze bzw. Nebenzeit',
+        peakStatusTitle: 'Aktueller Status',
+        peakNone: 'Für kein Modell ist die Spitzenpreisberechnung aktiv. Lege unten unter Modellpreise Spitzenfenster für ein Modell fest, dann erscheint der Status hier.',
+        peakWindowsShort: 'Spitzenzeiten {local} (Ortszeit)',
+        peakSideDetailShow: 'Details in der Seitenleiste',
+        peakSideDetailShowHint: 'Zeigt zusätzlich zu Status und Zeiten die Wochentage, das Preisverhältnis, die Modelle und die Abrechnungsregel; standardmäßig aus',
       }
 
       // French UI dictionary; keys and order mirror EN.
@@ -2751,6 +2871,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: 'Tour {n}',
         sideTtft: 'Premier token {time}',
         sideNote: 'Seuls les {n} derniers appels de chaque session sont listés ; les totaux proviennent de l’enregistrement complet.',
+        sectionPeak: 'Pointe et heures creuses',
+        peakNowPeak: 'Pointe',
+        peakNowValley: 'Heures creuses',
+        peakLeftPeak: 'heures creuses dans {time}',
+        peakLeftValley: 'pointe dans {time}',
+        peakTipWindows: 'Heures de pointe {local} heure locale (UTC {utc})',
+        peakTipRate: 'Le tarif de pointe vaut environ {x} fois le tarif normal',
+        peakTipModels: 'Modèles : {models}',
+        peakTipNote: 'Un appel qui démarre dans une plage de pointe est facturé entièrement au tarif de pointe ; réglez les plages et les tarifs dans Tarifs des modèles.',
+        peakDockShow: 'Afficher la pointe dans la barre',
+        peakDockShowHint: 'Indique dans la barre sous la zone de saisie si l\'on est en pointe ou en heures creuses ; ne concerne que les modèles ayant des plages de pointe',
+        peakSideShow: 'Afficher la pointe dans la barre latérale',
+        peakSideShowHint: 'Affiche l\'état de pointe et les heures de pointe sur la page des coûts de la barre latérale droite',
+        peakCountdownShow: 'Compte à rebours dans la barre',
+        peakCountdownShowHint: 'Indique dans la barre le temps restant avant le prochain changement, p. ex. « Pointe · heures creuses dans 1h 20m » ; par défaut, seuls l\'icône et Pointe ou Heures creuses s\'affichent',
+        peakStatusTitle: 'État actuel',
+        peakNone: 'Aucun modèle n\'a de tarification de pointe activée. Définissez des plages de pointe pour un modèle dans Tarifs des modèles ci-dessous et son état apparaîtra ici.',
+        peakWindowsShort: 'Heures de pointe {local} (heure locale)',
+        peakSideDetailShow: 'Détails dans la barre latérale',
+        peakSideDetailShowHint: 'Affiche en plus de l\'état et des heures les jours concernés, le rapport de prix, les modèles et la règle de facturation ; désactivé par défaut',
       }
 
       // Spanish (es) UI dictionary; keys mirror EN exactly.
@@ -3127,6 +3267,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: 'Turno {n}',
         sideTtft: 'Primer token {time}',
         sideNote: 'Solo se listan las últimas {n} llamadas de cada sesión; los totales provienen del registro completo.',
+        sectionPeak: 'Hora punta y hora valle',
+        peakNowPeak: 'Hora punta',
+        peakNowValley: 'Hora valle',
+        peakLeftPeak: 'hora valle en {time}',
+        peakLeftValley: 'hora punta en {time}',
+        peakTipWindows: 'Horas punta {local} hora local (UTC {utc})',
+        peakTipRate: 'La tarifa punta es aproximadamente {x} veces la normal',
+        peakTipModels: 'Modelos: {models}',
+        peakTipNote: 'Una llamada que empieza dentro de una franja punta se factura entera a la tarifa punta; las franjas y los precios se configuran en Precios de los modelos.',
+        peakDockShow: 'Mostrar hora punta en la barra',
+        peakDockShowHint: 'Muestra en la barra bajo el cuadro de entrada si ahora es hora punta o valle; solo afecta a los modelos con franjas punta',
+        peakSideShow: 'Mostrar hora punta en la barra lateral',
+        peakSideShowHint: 'Muestra el estado y las horas punta en la página de costos de la barra lateral derecha',
+        peakCountdownShow: 'Cuenta atrás en la barra',
+        peakCountdownShowHint: 'Muestra en la barra cuánto falta para el próximo cambio, p. ej. «Hora punta · hora valle en 1h 20m»; por defecto solo se muestran el icono y Hora punta u Hora valle',
+        peakStatusTitle: 'Estado actual',
+        peakNone: 'Ningún modelo tiene activada la tarificación punta. Define franjas punta para un modelo en Precios de los modelos (abajo) y su estado aparecerá aquí.',
+        peakWindowsShort: 'Horas punta {local} (hora local)',
+        peakSideDetailShow: 'Detalles en la barra lateral',
+        peakSideDetailShowHint: 'Además del estado y las horas, muestra los días, la proporción de precio, los modelos y la regla de facturación; desactivado por defecto',
       }
 
       // Russian UI dictionary for the cost meter plugin (keys mirror EN).
@@ -3503,6 +3663,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sideTurn: 'Ход {n}',
         sideTtft: 'Первый токен {time}',
         sideNote: 'Показаны только последние {n} вызовов каждой сессии; итоги берутся из полной записи.',
+        sectionPeak: 'Пик и спад',
+        peakNowPeak: 'Пик',
+        peakNowValley: 'Вне пика',
+        peakLeftPeak: 'вне пика через {time}',
+        peakLeftValley: 'пик через {time}',
+        peakTipWindows: 'Часы пика {local} по местному времени (UTC {utc})',
+        peakTipRate: 'Цена в пик ≈ ×{x} к обычной',
+        peakTipModels: 'Модели: {models}',
+        peakTipNote: 'Вызов, начавшийся в пиковое окно, оплачивается целиком по пиковой цене; окна и цены задаются в разделе «Цены моделей».',
+        peakDockShow: 'Показывать пик в строке',
+        peakDockShowHint: 'Показывает в строке под полем ввода, сейчас пик или нет; действует только для моделей с пиковыми окнами',
+        peakSideShow: 'Показывать пик в боковой панели',
+        peakSideShowHint: 'Показывает статус пика и часы пика на странице затрат в правой боковой панели',
+        peakCountdownShow: 'Обратный отсчёт в строке',
+        peakCountdownShowHint: 'Показывает в строке, сколько осталось до следующей смены, например «Пик · вне пика через 1h 20m»; по умолчанию только значок и «Пик» или «Вне пика»',
+        peakStatusTitle: 'Текущий статус',
+        peakNone: 'Ни у одной модели не включён пиковый тариф. Задайте пиковые окна для модели в разделе «Цены моделей» ниже, и её статус появится здесь.',
+        peakWindowsShort: 'Часы пика {local} (местное время)',
+        peakSideDetailShow: 'Подробности в боковой панели',
+        peakSideDetailShowHint: 'Помимо статуса и часов показывает дни, соотношение цен, модели и правило тарификации; по умолчанию выключено',
       }
 
       // Dictionaries registered next to zh and en. The host ships only zh and en; these take effect when the active language
@@ -3616,6 +3796,10 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         dockTokens: true,
         dockLight: true,
         dockModels: true,
+        dockPeak: true,
+        sidePeak: true,
+        peakCountdown: false,
+        sidePeakDetail: false,
         statsRange: 30,
         statsAuto: true,
         mediaMeter: false,
@@ -3716,6 +3900,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         panel: 'M2.5 13.5h11 M4.7 13.5V8.2 M8 13.5V2.8 M11.3 13.5V5.8',
         refresh: 'M13.2 8A5.2 5.2 0 1 1 11.6 4.3 M13.4 2.6v3.2h-3.2',
         chevron: 'M4 6.2 8 10l4-3.8',
+        // Peak: a bolt. Off-peak: a crescent.
+        peak: 'M9.2 1.8 3.8 9h4l-1 5.2L12.2 7H8.2z',
+        valley: 'M13.2 9.6A5.6 5.6 0 1 1 6.4 2.8a4.4 4.4 0 0 0 6.8 6.8z',
       }
 
       function uiIcon(kind, size = 14, spin = false) {
@@ -3740,7 +3927,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
       /**
        * The strip itself, shared by the real dock and the style previews in the settings page.
-       * `view` carries ready-to-print text; `popover` is only passed by the real dock.
+       * `view` carries ready-to-print text (and the peak schedule, drawn by PeakBadge); `popover` is only passed by the real dock.
        */
       function DockStrip(props) {
         const { prefs, view } = props
@@ -3771,6 +3958,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('span', null, view.modelsLabel),
               view.multiModel ? h('span', { style: { fontSize: 9, opacity: 0.7 } }, props.open ? '▴' : '▾') : null),
             props.popover || null) : null,
+
+          // Peak / off-peak right now, for the models this session uses (hidden when none of them has peak windows).
+          prefs.dockPeak && view.peak ? h(PeakBadge, { schedule: view.peak, prefs, item: theme.item }) : null,
 
           view.unpricedText ? h('span', {
             style: Object.assign({}, theme.item, { color: LIGHT.red }),
@@ -3848,6 +4038,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           overBudget: light.pct !== null && light.pct >= 100,
           modelsLabel,
           multiModel: rows.length > 1,
+          peak: peakSchedules(snap, sid)[0] || null,
           unpricedText: unpriced > 0 ? t('unpricedNamed', { models: unpricedModels.join(', '), n: unpriced }) : null,
           unpricedHint: t('unpricedHint') + '\n' + unpricedModels.join('\n'),
         }
@@ -4060,6 +4251,114 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const turn = turnNumberOf(props.turn)
         const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
         return calls.length === 0 ? null : h(TurnLine, Object.assign(shownSummary(calls, prefs), { prefs }))
+      }
+
+      // Peak / off-peak status as the user sees it: a small item in the dock strip, a block on the right-sidebar page and the
+      // settings section that switches them. The numbers come from 84-peak.js; this file formats and draws, and owns the clock
+      // that keeps the countdown moving (only while one of these is on screen).
+
+      const PEAK_TICK_MS = 15000
+      const PEAK_MODELS_SHOWN = 4
+
+      // A DeepSeek-like schedule for the style previews in the settings page (the status itself follows the real clock).
+      const PREVIEW_PEAK = {
+        key: 'preview',
+        peak: { enabled: true, weekdaysOnly: true, windows: [{ start: '01:00', end: '04:00' }, { start: '06:00', end: '10:00' }] },
+        models: ['deepseek-flash'],
+        multiplier: 2,
+      }
+
+      /** The current time, refreshed every `ms` while the caller is mounted. */
+      function useNow(ms) {
+        const [now, setNow] = React.useState(() => Date.now())
+        React.useEffect(() => {
+          const id = setInterval(() => setNow(Date.now()), ms)
+          return () => clearInterval(id)
+        }, [ms])
+        return now
+      }
+
+      /** Words, colour and icon for a state; the countdown rides along only when asked for and when the state ever flips. */
+      function peakLook(state, now, countdown) {
+        const left = countdown && state.changeAt !== null
+          ? ' · ' + t(state.peak ? 'peakLeftPeak' : 'peakLeftValley', { time: formatCountdown(state.changeAt - now) })
+          : ''
+        return {
+          text: t(state.peak ? 'peakNowPeak' : 'peakNowValley') + left,
+          color: state.peak ? LIGHT.yellow : LIGHT.green,
+          icon: state.peak ? 'peak' : 'valley',
+        }
+      }
+
+      /** Detail lines for a tooltip or the sidebar block: hours (local and UTC), weekdays, price ratio, models, billing rule. */
+      function peakDetailLines(schedule, now) {
+        const offset = -new Date(now).getTimezoneOffset()
+        const lines = [t('peakTipWindows', { local: windowsText(schedule.peak, offset), utc: windowsText(schedule.peak, 0) })]
+        if (schedule.peak.weekdaysOnly !== false) lines.push(t('peakWeekdays') + ' (UTC)')
+        if (schedule.multiplier !== null) lines.push(t('peakTipRate', { x: Number(schedule.multiplier.toFixed(2)) }))
+        const extra = schedule.models.length - PEAK_MODELS_SHOWN
+        lines.push(t('peakTipModels', { models: schedule.models.slice(0, PEAK_MODELS_SHOWN).join(', ') + (extra > 0 ? ' +' + extra : '') }))
+        lines.push(t('peakTipNote'))
+        return lines
+      }
+
+      /** The state icon in its colour. */
+      const peakIcon = (look, size) => h('span', { style: { color: look.color, display: 'inline-flex', flex: '0 0 auto' } }, uiIcon(look.icon, size))
+
+      /** Dock strip item: peak or off-peak right now, and (when switched on) how long until that flips. `item` is the strip's item style. */
+      function PeakBadge(props) {
+        const { schedule, prefs, item } = props
+        const now = useNow(PEAK_TICK_MS)
+        const state = peakState(schedule.peak, now)
+        const look = peakLook(state, now, prefs.peakCountdown)
+        const title = [peakLook(state, now, true).text].concat(peakDetailLines(schedule, now)).join('\n')
+        return h('span', { style: item, title }, peakIcon(look, 13), h('span', null, look.text))
+      }
+
+      /** Peak hours in local time on one line; the UTC hours the vendor publishes are in the tooltip. */
+      function peakHoursLine(schedule, now) {
+        const offset = -new Date(now).getTimezoneOffset()
+        return {
+          text: t('peakWindowsShort', { local: windowsText(schedule.peak, offset) }),
+          title: t('peakTipWindows', { local: windowsText(schedule.peak, offset), utc: windowsText(schedule.peak, 0) }),
+        }
+      }
+
+      /**
+       * One schedule as a block on the right-sidebar page and in the settings: the state in words (with the countdown when
+       * `countdown`), then the peak hours; `detail` adds weekdays, price ratio, models and the billing rule.
+       */
+      function PeakBlock(props) {
+        const { schedule, countdown, detail } = props
+        const now = useNow(PEAK_TICK_MS)
+        const look = peakLook(peakState(schedule.peak, now), now, countdown)
+        const note = { fontSize: 11, lineHeight: '16px', color: TERTIARY }
+        const hours = peakHoursLine(schedule, now)
+        return h('div', { style: { display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 } },
+          h('div', { style: { display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, lineHeight: '20px', color: PRIMARY } }, peakIcon(look, 15), h('span', null, look.text)),
+          detail
+            ? peakDetailLines(schedule, now).map((line, i) => h('div', { key: i, style: note }, line))
+            : h('div', { style: note, title: hours.title }, hours.text))
+      }
+
+      /** Settings → what to show and where; below it the status as it is right now. */
+      function PeakSettings(props) {
+        const prefs = usePrefs()
+        const set = (change) => store.setPrefs(change)
+        const schedules = allPeakSchedules(props.snap)
+        return h('div', null,
+          settingRow({ key: 'peakDock' }, t('peakDockShow'), t('peakDockShowHint'), toggle(prefs.dockPeak, (on) => set({ dockPeak: on }), t('peakDockShow'))),
+          // The strip's countdown only matters while the strip item is shown.
+          h('div', { key: 'peakCountdownBox', style: { opacity: prefs.dockPeak ? 1 : 0.45, pointerEvents: prefs.dockPeak ? 'auto' : 'none' } },
+            settingRow({ key: 'peakCountdown' }, t('peakCountdownShow'), t('peakCountdownShowHint'), toggle(prefs.peakCountdown, (on) => set({ peakCountdown: on }), t('peakCountdownShow')))),
+          settingRow({ key: 'peakSide' }, t('peakSideShow'), t('peakSideShowHint'), toggle(prefs.sidePeak, (on) => set({ sidePeak: on }), t('peakSideShow'))),
+          h('div', { key: 'peakDetailBox', style: { opacity: prefs.sidePeak ? 1 : 0.45, pointerEvents: prefs.sidePeak ? 'auto' : 'none' } },
+            settingRow({ key: 'peakDetail' }, t('peakSideDetailShow'), t('peakSideDetailShowHint'), toggle(prefs.sidePeakDetail, (on) => set({ sidePeakDetail: on }), t('peakSideDetailShow')))),
+          h('div', { style: { padding: '18px 0', borderBottom: BORDER, display: 'flex', flexDirection: 'column', gap: 12 } },
+            h('div', { style: ui.title }, t('peakStatusTitle')),
+            schedules.length === 0
+              ? h('div', { style: ui.desc }, t('peakNone'))
+              : schedules.map((schedule) => h(PeakBlock, { key: schedule.key, schedule, countdown: true, detail: true }))))
       }
 
       const blankTier = () => {
@@ -4289,6 +4588,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           overBudget: false,
           modelsLabel: 'deepseek-chat ' + cost,
           multiModel: false,
+          peak: PREVIEW_PEAK,
           unpricedText: null,
           unpricedHint: '',
         }
@@ -4746,6 +5046,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
           h('div', { style: ui.section }, t('sectionMessages')),
           h(MessageSettings),
+
+          h('div', { style: ui.section }, t('sectionPeak')),
+          h(PeakSettings, { snap }),
 
           h('div', { style: ui.section }, t('sectionCurrency')),
           h(CurrencySettings),
@@ -5357,6 +5660,144 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             props.extra || null,
             props.table ? segmented(view, [{ value: 'chart', label: t('viewChart') }, { value: 'table', label: t('viewTable') }], setView, props.title, true) : null),
           view === 'table' && props.table ? h(DataTable, props.table) : [props.legend ? h(Legend, { key: 'legend', items: props.legend }) : null, h(React.Fragment, { key: 'body' }, ...React.Children.toArray(props.children))])
+      }
+
+      // Pure peak / off-peak status for the dock strip and the right-sidebar page. Inlined into client.js and imported by tests.
+      // It answers the question the billing code answers per call: "would a call that starts at this instant be priced at the
+      // peak rate?" The window test below mirrors isPeakAt() in pricing.js (the browser half cannot import it); the test suite
+      // compares the two over a grid of instants so they cannot drift apart.
+
+      const PEAK_MINUTE_MS = 60000
+      const PEAK_TIME_RE = /^([01]\d|2[0-3]):([0-5]\d)$/
+      // A weekday-only schedule flips at least once a week; one extra day of slack.
+      const PEAK_SEARCH_DAYS = 8
+      const PEAK_FIELDS = ['input', 'output', 'cacheRead', 'cacheWrite']
+
+      /** "HH:MM" -> minutes since midnight; -1 when invalid. */
+      function clockMinutes(text) {
+        const match = PEAK_TIME_RE.exec(String(text || ''))
+        return match ? Number(match[1]) * 60 + Number(match[2]) : -1
+      }
+
+      /** The windows that can ever match: both ends valid and not equal (an empty window never matches). */
+      function usableWindows(peak) {
+        return (Array.isArray(peak && peak.windows) ? peak.windows : [])
+          .filter((w) => clockMinutes(w && w.start) >= 0 && clockMinutes(w && w.end) >= 0 && clockMinutes(w.start) !== clockMinutes(w.end))
+      }
+
+      /** Whether the schedule is switched on and has at least one usable window. */
+      const hasPeakWindows = (peak) => !!peak && peak.enabled === true && usableWindows(peak).length > 0
+
+      /** UTC instant `atMs` inside a peak window? Windows may wrap past midnight; weekdaysOnly (default on) skips Sat/Sun in UTC. */
+      function isPeakNow(peak, atMs) {
+        if (!peak || peak.enabled !== true) return false
+        const at = new Date(atMs)
+        if (peak.weekdaysOnly !== false) {
+          const weekday = at.getUTCDay()
+          if (weekday === 0 || weekday === 6) return false
+        }
+        const m = at.getUTCHours() * 60 + at.getUTCMinutes()
+        return usableWindows(peak).some((w) => {
+          const start = clockMinutes(w.start)
+          const end = clockMinutes(w.end)
+          return start < end ? m >= start && m < end : m >= start || m < end
+        })
+      }
+
+      /**
+       * Status at `nowMs`: `peak` is the state now and `changeAt` the first whole minute (epoch ms) at which it flips, or null
+       * when it never does within the search horizon (no windows). Walks minute by minute with isPeakNow(), so weekends and
+       * windows that wrap midnight need no special cases here.
+       */
+      function peakState(peak, nowMs) {
+        const start = Math.floor(nowMs / PEAK_MINUTE_MS) * PEAK_MINUTE_MS
+        const peakNow = isPeakNow(peak, start)
+        if (!hasPeakWindows(peak)) return { peak: peakNow, changeAt: null }
+        for (let k = 1; k <= PEAK_SEARCH_DAYS * 1440; k++) {
+          const at = start + k * PEAK_MINUTE_MS
+          if (isPeakNow(peak, at) !== peakNow) return { peak: peakNow, changeAt: at }
+        }
+        return { peak: peakNow, changeAt: null }
+      }
+
+      /** "45m", "1h 20m", "2h", "2d 3h": time left, rounded up to the minute so it never reads 0 while a minute remains. */
+      function formatCountdown(ms) {
+        const minutes = Math.max(1, Math.ceil(ms / PEAK_MINUTE_MS))
+        if (minutes < 60) return minutes + 'm'
+        if (minutes < 1440) return Math.floor(minutes / 60) + 'h' + (minutes % 60 ? ' ' + (minutes % 60) + 'm' : '')
+        const hours = Math.floor((minutes % 1440) / 60)
+        return Math.floor(minutes / 1440) + 'd' + (hours ? ' ' + hours + 'h' : '')
+      }
+
+      /** The windows as "09:00–12:00 · 14:00–18:00", shifted by `offsetMinutes` from UTC (0 = UTC, +480 = UTC+8). */
+      function windowsText(peak, offsetMinutes) {
+        const shift = (text) => {
+          const m = (((clockMinutes(text) + (offsetMinutes || 0)) % 1440) + 1440) % 1440
+          return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0')
+        }
+        return usableWindows(peak).map((w) => shift(w.start) + '–' + shift(w.end)).join(' · ')
+      }
+
+      /**
+       * Peak price / normal price when every rate that has both agrees (DeepSeek: all 2), else null. A peak field left blank
+       * falls back to the normal price in billing, so it carries no ratio and is skipped.
+       */
+      function peakMultiplier(price) {
+        const peak = price && price.peak
+        if (!peak) return null
+        let ratio = null
+        for (const field of PEAK_FIELDS) {
+          const normal = Number(price[field])
+          const raised = Number(peak[field])
+          if (!(normal > 0) || !(raised > 0)) continue
+          const r = raised / normal
+          if (ratio === null) ratio = r
+          else if (Math.abs(r - ratio) > 1e-6) return null
+        }
+        return ratio
+      }
+
+      /** Effective prices by model, as billing looks them up: a saved price replaces the preset of the same name as a whole. */
+      const effectivePrices = (snap) => Object.assign({}, snap && snap.presets, snap && snap.prices)
+
+      /**
+       * The distinct peak schedules that apply to a session, each with the models that share it. Which models count:
+       * the ones this session has called; before its first call, the ones seen anywhere; on a fresh install, every priced model.
+       */
+      function peakSchedules(snap, sessionId) {
+        const prices = effectivePrices(snap)
+        const session = snap && snap.sessions && sessionId ? snap.sessions[sessionId] : undefined
+        const pools = [
+          Object.keys((session && session.models) || {}),
+          Object.keys((snap && snap.models) || {}).filter((name) => ((snap.models[name] && snap.models[name].calls) || 0) > 0),
+          Object.keys(prices),
+        ]
+        return groupSchedules(prices, pools.find((pool) => pool.length > 0) || [])
+      }
+
+      /** Every distinct peak schedule among all priced models, used or not (the settings page lists what is configured). */
+      function allPeakSchedules(snap) {
+        const prices = effectivePrices(snap)
+        return groupSchedules(prices, Object.keys(prices))
+      }
+
+      /** Group `names` by identical schedule; a group keeps a price ratio only while all its models agree on it. */
+      function groupSchedules(prices, names) {
+        const groups = new Map()
+        for (const model of names) {
+          const price = prices[model]
+          const peak = price && price.peak
+          if (!hasPeakWindows(peak)) continue
+          const key = (peak.weekdaysOnly !== false ? 'w' : 'a') + '|' + usableWindows(peak).map((w) => w.start + '-' + w.end).join(',')
+          const multiplier = peakMultiplier(price)
+          const group = groups.get(key)
+          if (!group) groups.set(key, { key, peak, models: [model], multiplier })
+          else {
+            group.models.push(model)
+            if (group.multiplier !== multiplier) group.multiplier = null
+          }
+        }
+        return Array.from(groups.values())
       }
 
       // Pure aggregation for the statistics page. No React, no translator, no imports: the build inlines this
@@ -6758,6 +7199,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const light = lightFor(spent, budget)
         const recent = log.calls.slice(-RECENT_SHOWN).reverse()
         const hasData = b.rows.length > 0 || recent.length > 0
+        const peaks = peakSchedules(snap, sid)
 
         return h('div', { style: wrap },
           h('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },
@@ -6775,6 +7217,10 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('div', { style: sideNote }, (light.pct >= 100 ? t('overBudget') : t('budgetUsed', { pct: light.pct.toFixed(0) })) + ' · ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount))) : null),
 
           hasData ? null : h('div', { style: { fontSize: 13, color: TERTIARY } }, t('sideEmpty')),
+
+          prefs.sidePeak && peaks.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
+            h('div', { style: sideLabel }, t('peakTag')),
+            peaks.map((schedule) => h(PeakBlock, { key: schedule.key, schedule, countdown: true, detail: prefs.sidePeakDetail }))) : null,
 
           b.rows.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
             h('div', { style: sideLabel }, t('sideModels')),

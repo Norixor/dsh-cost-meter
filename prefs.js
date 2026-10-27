@@ -27,6 +27,12 @@ export const DEFAULT_PREFS = Object.freeze({
   dockTokens: true,
   dockLight: true,
   dockModels: true,
+  // Peak / off-peak status (from the models' peak windows): in the strip and on the right-sidebar page.
+  dockPeak: true,
+  sidePeak: true,
+  // Strip: icon + Peak / Off-peak by default; the countdown is opt-in. Right-sidebar page: state and hours; the rest (weekdays, ratio, models, billing rule) is opt-in.
+  peakCountdown: false,
+  sidePeakDetail: false,
   // Default time range of the statistics page, in days.
   statsRange: 30,
   // Statistics page refreshes itself while it is open; off = only the refresh button updates it.

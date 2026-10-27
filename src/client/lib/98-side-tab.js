@@ -85,6 +85,7 @@ function SideCostTab(props) {
   const light = lightFor(spent, budget)
   const recent = log.calls.slice(-RECENT_SHOWN).reverse()
   const hasData = b.rows.length > 0 || recent.length > 0
+  const peaks = peakSchedules(snap, sid)
 
   return h('div', { style: wrap },
     h('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },
@@ -102,6 +103,10 @@ function SideCostTab(props) {
         h('div', { style: sideNote }, (light.pct >= 100 ? t('overBudget') : t('budgetUsed', { pct: light.pct.toFixed(0) })) + ' · ' + money.one(budget.currency, spent) + ' / ' + money.one(budget.currency, budget.amount))) : null),
 
     hasData ? null : h('div', { style: { fontSize: 13, color: TERTIARY } }, t('sideEmpty')),
+
+    prefs.sidePeak && peaks.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
+      h('div', { style: sideLabel }, t('peakTag')),
+      peaks.map((schedule) => h(PeakBlock, { key: schedule.key, schedule, countdown: true, detail: prefs.sidePeakDetail }))) : null,
 
     b.rows.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
       h('div', { style: sideLabel }, t('sideModels')),

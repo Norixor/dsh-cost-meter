@@ -1,6 +1,6 @@
 /**
  * The strip itself, shared by the real dock and the style previews in the settings page.
- * `view` carries ready-to-print text; `popover` is only passed by the real dock.
+ * `view` carries ready-to-print text (and the peak schedule, drawn by PeakBadge); `popover` is only passed by the real dock.
  */
 function DockStrip(props) {
   const { prefs, view } = props
@@ -31,6 +31,9 @@ function DockStrip(props) {
         h('span', null, view.modelsLabel),
         view.multiModel ? h('span', { style: { fontSize: 9, opacity: 0.7 } }, props.open ? '▴' : '▾') : null),
       props.popover || null) : null,
+
+    // Peak / off-peak right now, for the models this session uses (hidden when none of them has peak windows).
+    prefs.dockPeak && view.peak ? h(PeakBadge, { schedule: view.peak, prefs, item: theme.item }) : null,
 
     view.unpricedText ? h('span', {
       style: Object.assign({}, theme.item, { color: LIGHT.red }),
@@ -108,6 +111,7 @@ function CostPills(props) {
     overBudget: light.pct !== null && light.pct >= 100,
     modelsLabel,
     multiModel: rows.length > 1,
+    peak: peakSchedules(snap, sid)[0] || null,
     unpricedText: unpriced > 0 ? t('unpricedNamed', { models: unpricedModels.join(', '), n: unpriced }) : null,
     unpricedHint: t('unpricedHint') + '\n' + unpricedModels.join('\n'),
   }

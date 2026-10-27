@@ -12,6 +12,9 @@ const ICON_PATHS = {
   panel: 'M2.5 13.5h11 M4.7 13.5V8.2 M8 13.5V2.8 M11.3 13.5V5.8',
   refresh: 'M13.2 8A5.2 5.2 0 1 1 11.6 4.3 M13.4 2.6v3.2h-3.2',
   chevron: 'M4 6.2 8 10l4-3.8',
+  // Peak: a bolt. Off-peak: a crescent.
+  peak: 'M9.2 1.8 3.8 9h4l-1 5.2L12.2 7H8.2z',
+  valley: 'M13.2 9.6A5.6 5.6 0 1 1 6.4 2.8a4.4 4.4 0 0 0 6.8 6.8z',
 }
 
 function uiIcon(kind, size = 14, spin = false) {

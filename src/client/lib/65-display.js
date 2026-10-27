@@ -10,6 +10,7 @@ function previewView(prefs) {
     overBudget: false,
     modelsLabel: 'deepseek-chat ' + cost,
     multiModel: false,
+    peak: PREVIEW_PEAK,
     unpricedText: null,
     unpricedHint: '',
   }

@@ -39,6 +39,9 @@ function SettingsPage() {
     h('div', { style: ui.section }, t('sectionMessages')),
     h(MessageSettings),
 
+    h('div', { style: ui.section }, t('sectionPeak')),
+    h(PeakSettings, { snap }),
+
     h('div', { style: ui.section }, t('sectionCurrency')),
     h(CurrencySettings),
 

@@ -44,6 +44,13 @@ test('zh and en dictionaries have the same keys and cover every literal t() key 
   assert.deepEqual(dynamic.filter((k) => !zh.has(k)), [], 'dynamic keys not defined')
 })
 
+test('the browser-side preference defaults and enums mirror prefs.js', async () => {
+  const host = await import('../prefs.js')
+  const names = ['DEFAULT_PREFS', 'DOCK_STYLES', 'DOCK_FONTS', 'DOCK_SIZES', 'STATS_RANGES', 'MSG_STYLES', 'STATS_CURRENCIES']
+  const mirror = new Function(readFileSync(join(ROOT, 'src/client/lib/35-prefs.js'), 'utf8') + ';return {' + names.join(',') + '}')()
+  for (const name of names) assert.deepEqual(mirror[name], host[name], name)
+})
+
 /** Runs client.js in a sandbox with just enough of a browser, React and the slots service to call apply(). */
 async function loadClient(snapshotPrefs, cachedSidebar, localeService, hostServices) {
   const registered = []
