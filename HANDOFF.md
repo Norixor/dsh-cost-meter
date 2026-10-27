@@ -1,8 +1,8 @@
 # 交接：dsh-cost-meter（DSH 费用计量插件）
 
-**代码目录**：`/Users/vincent/Documents/deepseek-harness/default-workspace/dsh-cost-meter`（git 仓库，主线 `main`；GitHub 私有仓库 `Norixor/dsh-cost-meter`，`origin` 指向它；`README.md` 英文、`README.zh-CN.md` 中文，截图在 `docs/images/`）
+**代码目录**：`/Users/vincent/Documents/deepseek-harness/default-workspace/dsh-cost-meter`（git 仓库，主线 `main`；GitHub 公开仓库 `Norixor/dsh-cost-meter`（2026-10-27 由私有改为公开），`origin` 指向它；`README.md` 英文、`README.zh-CN.md` 中文，截图在 `docs/images/`）
 **版本**：0.8.0（`package.json`；0.7.0 是 npm 上已发布的上一版）。Windows 副本在 `C:\dsh-plugins\dsh-cost-meter`，经 `ssh win`（`~/.ssh/config` 别名，Tailscale 上的 Windows 电脑，密钥登录）由 `scripts/sync-windows.sh` 同步：只推 `package.json` 与其 `files` 列表，逐文件校验 SHA-256，`--check` 只比对，`--backup` 先备份远端旧目录（默认不备份，用户确认都是测试环境）。**用户要求每次 Mac 上交付（运行时文件有变、`npm test` 通过）后同步一次，并提醒在 Windows 上重启 DSH 才生效**；桌面另有 0.4.2 的 zip。0.4.2 的目录备份在 `../dsh-cost-meter-0.4.2-backup.tgz`。
-**包名与安装**：包名 `@norixor/dsh-cost-meter`（原 `@local/dsh-cost-meter`；无作用域的 `dsh-cost-meter` 在 npm 上已被别人占用，不能用），已去掉 `private`，`publishConfig.access` 为 public；**0.7.0 已于 2026-10-26 由用户自己 `npm publish --access public` 发布**（核对过：25 个文件、515,748 字节、latest 标签；npm 页的 README 是 0.7.0 那一份，下次发布才会更新，仓库私有时 README 里的相对图片在 npm 页看不到）。桌面端与 DSH Web 是两个独立 profile（`~/.dsh/profiles/desktop`、`~/.dsh/profiles/web`），同一个包两边通用，README 的快速使用按这两种写（桌面：左侧栏「插件」→ 添加插件，在「包名或地址」填包名（也接受 Git 地址和本地目录绝对路径，不是 npm 网址）→ 安装；Web / CLI：`dsh plugin --profile web add <包名>`；卸载 / 升级：桌面端在「插件」里卸载再装），本地目录安装降为「开发 / 试用」小节。本地目录安装是软链接，目录不可移动/删除。
+**包名与安装**：包名 `@norixor/dsh-cost-meter`（原 `@local/dsh-cost-meter`；无作用域的 `dsh-cost-meter` 在 npm 上已被别人占用，不能用），已去掉 `private`，`publishConfig.access` 为 public；**0.7.0 已于 2026-10-26 由用户自己 `npm publish --access public` 发布**（核对过：25 个文件、515,748 字节、latest 标签；npm 页的 README 是 0.7.0 那一份，下次发布才会更新；仓库已公开，下次发布后 npm 页会按 `repository` 链接显示 README 里的相对路径图片）。桌面端与 DSH Web 是两个独立 profile（`~/.dsh/profiles/desktop`、`~/.dsh/profiles/web`），同一个包两边通用，README 的快速使用按这两种写（桌面：左侧栏「插件」→ 添加插件，在「包名或地址」填包名（也接受 Git 地址和本地目录绝对路径，不是 npm 网址）→ 安装；Web / CLI：`dsh plugin --profile web add <包名>`；卸载 / 升级：桌面端在「插件」里卸载再装），本地目录安装降为「开发 / 试用」小节。本地目录安装是软链接，目录不可移动/删除。
 **本机现状（2026-10-26 已迁移到新包名）**：Mac `~/.dsh/profiles/desktop` 与 Windows `C:\Users\Administrator\.dsh\profiles\desktop`（`admin` 用户的 profile 没装本插件）里，依赖键、`dsh.profile.bundles` 条目、`pnpm-lock.yaml` 的 importer 键都改成了 `@norixor/dsh-cost-meter`，`node_modules/@norixor/dsh-cost-meter` 是指向代码目录的软链接（Windows 是 junction，指向 `C:\dsh-plugins\dsh-cost-meter`），旧的 `node_modules/@local` 已删。这是只改名的最小手工迁移，没有跑 pnpm（跑一次会动其他插件）；回退用 profile 目录里的 `package.json.bak-rename-*` / `pnpm-lock.yaml.bak-rename-*`（Mac 与 Windows 各一份）。**两边都要重启 DSH 才生效，重启后能否正常加载还没有在真实 DSH 里验证。** Windows 副本已用 `scripts/sync-windows.sh` 同步到新名。
 
 ## 结构
@@ -56,7 +56,7 @@
 - 会话分析不显示会话标题（已用 `app.asar` 核实）：`ctx.sessionTitle` 只有 `register()` / `refresh()`，没有读取接口，`llm/stream` 也没有标题字段；目前用「`#` + 会话 id 末 6 位 + 主要模型」区分。若以后宿主给了读取接口，改 `94-stats-sessions.js` 的会话名函数和 Host 即可。
 - 云端语音识别没有可观察的事件，无法计量；本地 TTS（sherpa-onnx）/ STT（SenseVoice）免费，也不计。图片 / 语音模板价（2026-10-26 核对）：OpenAI tts-1 $15 / 百万字符、tts-1-hd $30、whisper-1 与 gpt-4o-transcribe $0.006 / 分钟、mini $0.003；阿里云百炼 qwen-image / wan 系列按张。
 - 预置只含有官方依据的分档：Claude Haiku 5.5（>100K）、gpt-6.1-terra（>272K）、glm-5.1（>32K，该档缓存读价没有记录，沿用基础价，数值沿用旧注释、本次未重新抓取官方页）。其他 OpenAI 模型的 >272K 档尚未核实。
-- 发布前注意：GitHub 仓库是私有的，npm 页面上 README 的相对路径图片（`icon.svg`、`docs/images/*`）和 `repository` 链接对外不可见；README 里的包名安装步骤在发布之前无法照做（本地目录那一节现在可用）。
+- 发布后注意：GitHub 仓库已公开，npm 页面上 README 的相对路径图片（`icon.svg`、`docs/images/*`）和 `repository` 链接要等下次 `npm publish` 之后才会更新；README 里的截图是 2026-10-26 拍的，还没有峰谷、价格目录、历史导入、余额这几块新界面。
 - 分档是「整次请求」计价，不支持阶梯累进；货币只在显示时折算（固定汇率）；无价格表导入 / 导出。
 - 模板价：gpt-image-2 各档与 2.5-sunburst / flare 是按 token 价估算的每张价（标 `est.`），2.5 两个来自页面摘要，gemini-2.5-flash-image 已标注 2026-10-02 停用；USD/CNY 默认 6.8 只是约数。
 - 历史导入只认日志 v4；导入的调用没有耗时；费用按当前单价估算；失败的 / 标题 / 联网搜索调用不在日志里；分叉会话继承来的前缀会跳过；旧版本已裁剪过会话状态时，插件从没见过的会话要先「清空累计」才能导入。
