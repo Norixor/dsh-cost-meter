@@ -513,6 +513,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: '在统计条里显示距离下一次切换还有多久，例如「高峰 · 1h 20m 后转低谷」；默认只显示图标和高峰或低谷',
         peakStatusTitle: '当前状态',
         peakNone: '还没有模型启用峰谷计价。在下方「模型单价」里给模型设置峰时段后，这里会显示当前状态。',
+        sectionHistory: '历史导入',
+        histStatus: '导入历史对话',
+        histNever: '还没有导入过。装插件之前的对话用量，可以从 DSH 自己的会话记录补进统计。',
+        histLast: '上次导入于 {when}，累计导入 {n} 次调用。',
+        histScan: '扫描历史',
+        histScanning: '扫描中…',
+        histImport: '导入',
+        histImporting: '导入中…',
+        histScanFound: '找到 {calls} 次可导入的调用，来自 {sessions} 个会话，时间 {from} 至 {to}。',
+        histScanNone: '没有找到可导入的新调用。',
+        histScanCost: '按当前单价估算 {cost}。',
+        histScanUnpriced: '其中 {n} 次没有对应单价，只计次数，不计金额。',
+        histSkipUnsupported: '{n} 份会话记录的格式不受支持，已跳过。',
+        histSkipDamaged: '{n} 份会话记录已损坏，已跳过。',
+        histSkipSeeded: '{n} 份分叉会话缺少分叉标记，无法区分继承的内容，已跳过。',
+        histPruned: '旧统计已被精简，无法确定哪些对话已经记过，所以没记过的会话不会导入，免得重复计费。点「清空累计」后可导入全部历史。',
+        histNote: '只读取每次调用的模型、用量和时间，不读对话内容。金额按当前单价估算，历史调用没有首字延迟；失败的调用、标题和联网搜索的调用在会话记录里没有用量，不会补上。导入前会备份统计文件，已导入的内容不会重复计入。',
+        histDone: '已导入 {calls} 次调用（{sessions} 个会话）。',
+        histDoneCost: '按当前单价估算 {cost}。',
+        histBusy: '正在扫描或导入，请稍后再试。',
+        histFailed: '导入失败：{error}',
+        histPromptTitle: '发现装插件之前的历史对话',
+        histPromptLater: '以后再说',
+        histPromptWhere: '只读用量，不读对话内容。以后也可以在 设置 → 历史导入 里手动导入。',
+        histDockHint: '可导入历史',
+        histDockTip: '发现 {calls} 次历史调用可以补进统计，点击查看',
         peakWindowsShort: '高峰时段 {local}（本地时间）',
         peakSideDetailShow: '侧边栏显示详情',
         peakSideDetailShowHint: '除状态和时段外，再显示适用日、价格倍率、适用模型和计费说明；默认关闭',
@@ -908,6 +934,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: 'Show how long until the next switch in the strip, e.g. "Peak · off-peak in 1h 20m"; by default only the icon and Peak or Off-peak are shown',
         peakStatusTitle: 'Current status',
         peakNone: 'No model has peak pricing enabled yet. Set peak windows for a model under Model prices below and its status shows up here.',
+        sectionHistory: 'Import history',
+        histStatus: 'Import past conversations',
+        histNever: 'Nothing imported yet. Usage from before the plugin was installed can be added to the statistics from DSH\'s own session logs.',
+        histLast: 'Last imported {when}; {n} calls imported in total.',
+        histScan: 'Scan history',
+        histScanning: 'Scanning…',
+        histImport: 'Import',
+        histImporting: 'Importing…',
+        histScanFound: '{calls} calls can be imported, from {sessions} sessions, {from} to {to}.',
+        histScanNone: 'No new calls to import.',
+        histScanCost: 'Estimated {cost} at the current prices.',
+        histScanUnpriced: '{n} of them have no price and are counted without a cost.',
+        histSkipUnsupported: '{n} session logs are in an unsupported format and were skipped.',
+        histSkipDamaged: '{n} session logs are damaged and were skipped.',
+        histSkipSeeded: '{n} forked sessions have no fork marker, so the inherited part cannot be told apart; skipped.',
+        histPruned: 'The older statistics were trimmed, so it is unknown which conversations were already counted. Sessions the plugin never recorded are not imported, to avoid counting them twice. Use Clear totals to import all history.',
+        histNote: 'Only the model, usage and time of each call are read, never the conversation text. Costs are estimated at the current prices and past calls carry no first-token delay. Failed calls, titles and web searches have no usage in the logs and are not added. The statistics file is backed up before an import, and nothing is counted twice.',
+        histDone: 'Imported {calls} calls from {sessions} sessions.',
+        histDoneCost: 'Estimated {cost} at the current prices.',
+        histBusy: 'A scan or import is already running; try again in a moment.',
+        histFailed: 'Import failed: {error}',
+        histPromptTitle: 'Found conversations from before the plugin was installed',
+        histPromptLater: 'Not now',
+        histPromptWhere: 'Only usage is read, never the conversation text. You can also import later under Settings → Import history.',
+        histDockHint: 'History to import',
+        histDockTip: '{calls} past calls can be added to the statistics; click to see',
         peakWindowsShort: 'Peak hours {local} (local time)',
         peakSideDetailShow: 'Sidebar details',
         peakSideDetailShowHint: 'Besides the status and hours, also show the weekdays, price ratio, models and billing rule; off by default',
@@ -1304,6 +1356,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: '在統計列顯示距離下一次切換還有多久，例如「尖峰 · 1h 20m 後轉離峰」；預設只顯示圖示與尖峰或離峰',
         peakStatusTitle: '目前狀態',
         peakNone: '尚未有模型啟用尖峰計價。在下方「模型單價」為模型設定尖峰時段後，這裡會顯示目前狀態。',
+        sectionHistory: '匯入歷史',
+        histStatus: '匯入歷史對話',
+        histNever: '尚未匯入。安裝外掛之前的對話用量，可以從 DSH 自己的工作階段紀錄補進統計。',
+        histLast: '上次匯入於 {when}，累計匯入 {n} 次呼叫。',
+        histScan: '掃描歷史',
+        histScanning: '掃描中…',
+        histImport: '匯入',
+        histImporting: '匯入中…',
+        histScanFound: '找到 {calls} 次可匯入的呼叫，來自 {sessions} 個工作階段，時間 {from} 至 {to}。',
+        histScanNone: '沒有找到可匯入的新呼叫。',
+        histScanCost: '依目前單價估算 {cost}。',
+        histScanUnpriced: '其中 {n} 次沒有對應單價，只計次數，不計金額。',
+        histSkipUnsupported: '{n} 份工作階段紀錄的格式不受支援，已略過。',
+        histSkipDamaged: '{n} 份工作階段紀錄已損毀，已略過。',
+        histSkipSeeded: '{n} 份分岔的工作階段缺少分岔標記，無法區分繼承的內容，已略過。',
+        histPruned: '舊統計已被精簡，無法確定哪些對話已經記過，所以沒記過的工作階段不會匯入，以免重複計費。按「清除累計」後可匯入全部歷史。',
+        histNote: '只讀取每次呼叫的模型、用量與時間，不讀對話內容。金額依目前單價估算，歷史呼叫沒有首字延遲；失敗的呼叫、標題與聯網搜尋在紀錄中沒有用量，不會補上。匯入前會備份統計檔，已匯入的內容不會重複計入。',
+        histDone: '已匯入 {calls} 次呼叫（{sessions} 個工作階段）。',
+        histDoneCost: '依目前單價估算 {cost}。',
+        histBusy: '正在掃描或匯入，請稍後再試。',
+        histFailed: '匯入失敗：{error}',
+        histPromptTitle: '發現安裝外掛之前的歷史對話',
+        histPromptLater: '以後再說',
+        histPromptWhere: '只讀用量，不讀對話內容。之後也可以在 設定 → 匯入歷史 手動匯入。',
+        histDockHint: '可匯入歷史',
+        histDockTip: '發現 {calls} 次歷史呼叫可補進統計，點擊查看',
         peakWindowsShort: '尖峰時段 {local}（本地時間）',
         peakSideDetailShow: '側邊欄顯示詳情',
         peakSideDetailShowHint: '除狀態與時段外，另顯示適用日、價格倍率、適用模型與計費說明；預設關閉',
@@ -1700,6 +1778,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: '統計バーに次の切り替えまでの残り時間を表示します（例：「ピーク · 1h 20m 後にオフピーク」）。既定ではアイコンとピーク／オフピークだけを表示します',
         peakStatusTitle: '現在の状態',
         peakNone: 'ピーク料金を有効にしたモデルはまだありません。下の「モデル価格」でモデルにピーク時間帯を設定すると、ここに状態が表示されます。',
+        sectionHistory: '履歴のインポート',
+        histStatus: '過去の会話をインポート',
+        histNever: 'まだインポートしていません。プラグインを入れる前の使用量は、DSH 自身のセッション記録から統計に取り込めます。',
+        histLast: '前回のインポート：{when}、累計 {n} 件の呼び出し。',
+        histScan: '履歴をスキャン',
+        histScanning: 'スキャン中…',
+        histImport: 'インポート',
+        histImporting: 'インポート中…',
+        histScanFound: 'インポートできる呼び出しが {calls} 件見つかりました（{sessions} セッション、{from} ～ {to}）。',
+        histScanNone: 'インポートできる新しい呼び出しはありません。',
+        histScanCost: '現在の価格で概算 {cost}。',
+        histScanUnpriced: 'うち {n} 件は価格がないため、回数のみ数えて金額は含めません。',
+        histSkipUnsupported: '{n} 件のセッション記録は未対応の形式のためスキップしました。',
+        histSkipDamaged: '{n} 件のセッション記録は壊れているためスキップしました。',
+        histSkipSeeded: '分岐元の印がない分岐セッションが {n} 件あり、引き継いだ部分を区別できないためスキップしました。',
+        histPruned: '古い統計が整理されていて、どの会話が記録済みか判別できません。二重計上を避けるため、プラグインが一度も記録していないセッションはインポートしません。「累計をクリア」を実行すると全履歴をインポートできます。',
+        histNote: '各呼び出しのモデル・使用量・時刻だけを読み取り、会話の内容は読みません。金額は現在の価格での概算で、過去の呼び出しには最初のトークンまでの遅延がありません。失敗した呼び出し、タイトル生成、Web 検索は記録に使用量がないため追加されません。インポート前に統計ファイルをバックアップし、取り込み済みの分は二重に計上されません。',
+        histDone: '{calls} 件の呼び出しをインポートしました（{sessions} セッション）。',
+        histDoneCost: '現在の価格で概算 {cost}。',
+        histBusy: 'スキャンまたはインポートの実行中です。しばらくしてからもう一度お試しください。',
+        histFailed: 'インポートに失敗しました：{error}',
+        histPromptTitle: 'プラグインを入れる前の会話が見つかりました',
+        histPromptLater: '後で',
+        histPromptWhere: '読み取るのは使用量だけで、会話の内容は読みません。あとから 設定 → 履歴のインポート で手動でも取り込めます。',
+        histDockHint: 'インポート可能な履歴',
+        histDockTip: '過去の呼び出し {calls} 件を統計に取り込めます。クリックで確認',
         peakWindowsShort: 'ピーク時間帯 {local}（現地時刻）',
         peakSideDetailShow: 'サイドバーに詳細を表示',
         peakSideDetailShowHint: '状態と時間帯に加えて、対象曜日・料金倍率・対象モデル・課金ルールも表示します。既定ではオフです',
@@ -2096,6 +2200,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: '통계 줄에 다음 전환까지 남은 시간을 표시해요. 예: "피크 · 1h 20m 후 비피크". 기본값은 아이콘과 피크/비피크만 표시해요',
         peakStatusTitle: '현재 상태',
         peakNone: '피크 요금을 켠 모델이 아직 없어요. 아래 모델 단가에서 모델에 피크 시간대를 설정하면 여기에 상태가 표시돼요.',
+        sectionHistory: '기록 가져오기',
+        histStatus: '지난 대화 가져오기',
+        histNever: '아직 가져오지 않았어요. 플러그인을 설치하기 전의 사용량은 DSH의 세션 기록에서 통계로 가져올 수 있어요.',
+        histLast: '마지막 가져오기: {when}, 누적 {n}건의 호출.',
+        histScan: '기록 스캔',
+        histScanning: '스캔 중…',
+        histImport: '가져오기',
+        histImporting: '가져오는 중…',
+        histScanFound: '가져올 수 있는 호출이 {calls}건 있어요 ({sessions}개 세션, {from} ~ {to}).',
+        histScanNone: '가져올 새 호출이 없어요.',
+        histScanCost: '현재 단가로 추정 {cost}.',
+        histScanUnpriced: '그중 {n}건은 단가가 없어 횟수만 세고 금액은 넣지 않아요.',
+        histSkipUnsupported: '세션 기록 {n}개는 지원하지 않는 형식이라 건너뛰었어요.',
+        histSkipDamaged: '세션 기록 {n}개는 손상되어 건너뛰었어요.',
+        histSkipSeeded: '분기 표시가 없는 분기 세션이 {n}개 있어 물려받은 부분을 구분할 수 없어 건너뛰었어요.',
+        histPruned: '이전 통계가 정리되어 어떤 대화가 이미 기록됐는지 알 수 없어요. 중복 집계를 막기 위해 플러그인이 한 번도 기록하지 않은 세션은 가져오지 않아요. 누적 초기화를 하면 전체 기록을 가져올 수 있어요.',
+        histNote: '각 호출의 모델, 사용량, 시간만 읽고 대화 내용은 읽지 않아요. 금액은 현재 단가로 추정하며, 지난 호출에는 첫 토큰 지연이 없어요. 실패한 호출, 제목 생성, 웹 검색은 기록에 사용량이 없어 더하지 않아요. 가져오기 전에 통계 파일을 백업하고, 이미 가져온 내용은 중복 집계되지 않아요.',
+        histDone: '{calls}건의 호출을 가져왔어요 ({sessions}개 세션).',
+        histDoneCost: '현재 단가로 추정 {cost}.',
+        histBusy: '스캔 또는 가져오기가 진행 중이에요. 잠시 뒤에 다시 시도하세요.',
+        histFailed: '가져오기에 실패했어요: {error}',
+        histPromptTitle: '플러그인 설치 전의 대화를 찾았어요',
+        histPromptLater: '나중에',
+        histPromptWhere: '사용량만 읽고 대화 내용은 읽지 않아요. 나중에 설정 → 기록 가져오기에서 직접 가져올 수도 있어요.',
+        histDockHint: '가져올 기록',
+        histDockTip: '지난 호출 {calls}건을 통계에 추가할 수 있어요. 눌러서 확인',
         peakWindowsShort: '피크 시간대 {local}(현지 시간)',
         peakSideDetailShow: '사이드바에 상세 표시',
         peakSideDetailShowHint: '상태와 시간대 외에 적용 요일, 요금 배율, 대상 모델, 과금 규칙도 표시해요. 기본값은 꺼짐이에요',
@@ -2492,6 +2622,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: 'Zeigt in der Leiste, wie lange es bis zum nächsten Wechsel dauert, z. B. „Spitze · Nebenzeit in 1h 20m“; standardmäßig nur Symbol und Spitze bzw. Nebenzeit',
         peakStatusTitle: 'Aktueller Status',
         peakNone: 'Für kein Modell ist die Spitzenpreisberechnung aktiv. Lege unten unter Modellpreise Spitzenfenster für ein Modell fest, dann erscheint der Status hier.',
+        sectionHistory: 'Verlauf importieren',
+        histStatus: 'Frühere Gespräche importieren',
+        histNever: 'Noch nichts importiert. Die Nutzung aus der Zeit vor der Installation des Plugins lässt sich aus den Sitzungsprotokollen von DSH in die Statistik übernehmen.',
+        histLast: 'Zuletzt importiert am {when}; insgesamt {n} Aufrufe importiert.',
+        histScan: 'Verlauf scannen',
+        histScanning: 'Scannen…',
+        histImport: 'Importieren',
+        histImporting: 'Importiere…',
+        histScanFound: '{calls} Aufrufe können importiert werden, aus {sessions} Sitzungen, {from} bis {to}.',
+        histScanNone: 'Keine neuen Aufrufe zum Importieren.',
+        histScanCost: 'Geschätzt {cost} zu den aktuellen Preisen.',
+        histScanUnpriced: 'Davon haben {n} keinen Preis und werden ohne Kosten gezählt.',
+        histSkipUnsupported: '{n} Sitzungsprotokolle haben ein nicht unterstütztes Format und wurden übersprungen.',
+        histSkipDamaged: '{n} Sitzungsprotokolle sind beschädigt und wurden übersprungen.',
+        histSkipSeeded: '{n} abgezweigte Sitzungen haben keine Abzweigmarke, der geerbte Teil lässt sich nicht abgrenzen; übersprungen.',
+        histPruned: 'Die älteren Statistiken wurden gekürzt, daher ist unklar, welche Gespräche schon gezählt wurden. Sitzungen, die das Plugin nie erfasst hat, werden nicht importiert, um Doppelzählungen zu vermeiden. Mit „Summen löschen“ lässt sich der gesamte Verlauf importieren.',
+        histNote: 'Gelesen werden nur Modell, Nutzung und Zeit jedes Aufrufs, nie der Gesprächstext. Die Kosten sind zu den aktuellen Preisen geschätzt, und frühere Aufrufe haben keine Zeit bis zum ersten Token. Fehlgeschlagene Aufrufe, Titel und Websuchen haben in den Protokollen keine Nutzungsangaben und werden nicht ergänzt. Vor dem Import wird die Statistikdatei gesichert, und nichts wird doppelt gezählt.',
+        histDone: '{calls} Aufrufe aus {sessions} Sitzungen importiert.',
+        histDoneCost: 'Geschätzt {cost} zu den aktuellen Preisen.',
+        histBusy: 'Es läuft bereits ein Scan oder Import; versuche es gleich noch einmal.',
+        histFailed: 'Import fehlgeschlagen: {error}',
+        histPromptTitle: 'Gespräche aus der Zeit vor dem Plugin gefunden',
+        histPromptLater: 'Später',
+        histPromptWhere: 'Gelesen wird nur die Nutzung, nie der Gesprächstext. Du kannst auch später unter Einstellungen → Verlauf importieren importieren.',
+        histDockHint: 'Verlauf importierbar',
+        histDockTip: '{calls} frühere Aufrufe können in die Statistik übernommen werden; zum Ansehen klicken',
         peakWindowsShort: 'Spitzenzeiten {local} (Ortszeit)',
         peakSideDetailShow: 'Details in der Seitenleiste',
         peakSideDetailShowHint: 'Zeigt zusätzlich zu Status und Zeiten die Wochentage, das Preisverhältnis, die Modelle und die Abrechnungsregel; standardmäßig aus',
@@ -2888,6 +3044,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: 'Indique dans la barre le temps restant avant le prochain changement, p. ex. « Pointe · heures creuses dans 1h 20m » ; par défaut, seuls l\'icône et Pointe ou Heures creuses s\'affichent',
         peakStatusTitle: 'État actuel',
         peakNone: 'Aucun modèle n\'a de tarification de pointe activée. Définissez des plages de pointe pour un modèle dans Tarifs des modèles ci-dessous et son état apparaîtra ici.',
+        sectionHistory: 'Importer l\'historique',
+        histStatus: 'Importer les conversations passées',
+        histNever: 'Rien n\'a encore été importé. L\'utilisation d\'avant l\'installation du plugin peut être ajoutée aux statistiques à partir des journaux de session de DSH.',
+        histLast: 'Dernier import le {when} ; {n} appels importés au total.',
+        histScan: 'Analyser l\'historique',
+        histScanning: 'Analyse…',
+        histImport: 'Importer',
+        histImporting: 'Import en cours…',
+        histScanFound: '{calls} appels peuvent être importés, issus de {sessions} sessions, du {from} au {to}.',
+        histScanNone: 'Aucun nouvel appel à importer.',
+        histScanCost: 'Estimation de {cost} aux tarifs actuels.',
+        histScanUnpriced: 'Parmi eux, {n} n\'ont pas de tarif et sont comptés sans coût.',
+        histSkipUnsupported: '{n} journaux de session ont un format non pris en charge et ont été ignorés.',
+        histSkipDamaged: '{n} journaux de session sont endommagés et ont été ignorés.',
+        histSkipSeeded: '{n} sessions dérivées n\'ont pas de marque de dérivation : la partie héritée ne peut pas être isolée, elles sont ignorées.',
+        histPruned: 'Les anciennes statistiques ont été réduites : on ne sait pas quelles conversations ont déjà été comptées. Les sessions que le plugin n\'a jamais enregistrées ne sont pas importées, pour éviter les doublons. « Effacer les totaux » permet ensuite d\'importer tout l\'historique.',
+        histNote: 'Seuls le modèle, l\'utilisation et l\'heure de chaque appel sont lus, jamais le texte des conversations. Les coûts sont estimés aux tarifs actuels et les appels passés n\'ont pas de délai avant le premier jeton. Les appels en échec, les titres et les recherches web n\'ont pas d\'utilisation dans les journaux et ne sont pas ajoutés. Le fichier de statistiques est sauvegardé avant l\'import et rien n\'est compté deux fois.',
+        histDone: '{calls} appels importés depuis {sessions} sessions.',
+        histDoneCost: 'Estimation de {cost} aux tarifs actuels.',
+        histBusy: 'Une analyse ou un import est déjà en cours ; réessayez dans un instant.',
+        histFailed: 'Échec de l\'import : {error}',
+        histPromptTitle: 'Conversations d\'avant l\'installation du plugin trouvées',
+        histPromptLater: 'Plus tard',
+        histPromptWhere: 'Seule l\'utilisation est lue, jamais le texte des conversations. Vous pouvez aussi importer plus tard dans Réglages → Importer l\'historique.',
+        histDockHint: 'Historique à importer',
+        histDockTip: '{calls} appels passés peuvent être ajoutés aux statistiques ; cliquez pour voir',
         peakWindowsShort: 'Heures de pointe {local} (heure locale)',
         peakSideDetailShow: 'Détails dans la barre latérale',
         peakSideDetailShowHint: 'Affiche en plus de l\'état et des heures les jours concernés, le rapport de prix, les modèles et la règle de facturation ; désactivé par défaut',
@@ -3284,6 +3466,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: 'Muestra en la barra cuánto falta para el próximo cambio, p. ej. «Hora punta · hora valle en 1h 20m»; por defecto solo se muestran el icono y Hora punta u Hora valle',
         peakStatusTitle: 'Estado actual',
         peakNone: 'Ningún modelo tiene activada la tarificación punta. Define franjas punta para un modelo en Precios de los modelos (abajo) y su estado aparecerá aquí.',
+        sectionHistory: 'Importar historial',
+        histStatus: 'Importar conversaciones anteriores',
+        histNever: 'Aún no se ha importado nada. El uso anterior a la instalación del complemento puede añadirse a las estadísticas desde los registros de sesión de DSH.',
+        histLast: 'Última importación: {when}; {n} llamadas importadas en total.',
+        histScan: 'Analizar historial',
+        histScanning: 'Analizando…',
+        histImport: 'Importar',
+        histImporting: 'Importando…',
+        histScanFound: 'Se pueden importar {calls} llamadas, de {sessions} sesiones, del {from} al {to}.',
+        histScanNone: 'No hay llamadas nuevas que importar.',
+        histScanCost: 'Estimado {cost} con los precios actuales.',
+        histScanUnpriced: '{n} de ellas no tienen precio y se cuentan sin costo.',
+        histSkipUnsupported: '{n} registros de sesión tienen un formato no compatible y se omitieron.',
+        histSkipDamaged: '{n} registros de sesión están dañados y se omitieron.',
+        histSkipSeeded: '{n} sesiones bifurcadas no tienen marca de bifurcación y no se puede separar la parte heredada; se omitieron.',
+        histPruned: 'Las estadísticas antiguas se recortaron y no se sabe qué conversaciones ya se contaron. Las sesiones que el complemento nunca registró no se importan, para evitar contarlas dos veces. Con «Borrar totales» se puede importar todo el historial.',
+        histNote: 'Solo se leen el modelo, el uso y la hora de cada llamada, nunca el texto de las conversaciones. Los costos se estiman con los precios actuales y las llamadas pasadas no tienen tiempo hasta el primer token. Las llamadas fallidas, los títulos y las búsquedas web no tienen uso en los registros y no se añaden. Antes de importar se hace una copia del archivo de estadísticas y nada se cuenta dos veces.',
+        histDone: 'Se importaron {calls} llamadas de {sessions} sesiones.',
+        histDoneCost: 'Estimado {cost} con los precios actuales.',
+        histBusy: 'Ya hay un análisis o una importación en curso; inténtalo de nuevo en un momento.',
+        histFailed: 'Error al importar: {error}',
+        histPromptTitle: 'Se encontraron conversaciones anteriores a la instalación del complemento',
+        histPromptLater: 'Ahora no',
+        histPromptWhere: 'Solo se lee el uso, nunca el texto de las conversaciones. También puedes importar más tarde en Ajustes → Importar historial.',
+        histDockHint: 'Historial por importar',
+        histDockTip: 'Se pueden añadir {calls} llamadas anteriores a las estadísticas; haz clic para verlas',
         peakWindowsShort: 'Horas punta {local} (hora local)',
         peakSideDetailShow: 'Detalles en la barra lateral',
         peakSideDetailShowHint: 'Además del estado y las horas, muestra los días, la proporción de precio, los modelos y la regla de facturación; desactivado por defecto',
@@ -3680,6 +3888,32 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakCountdownShowHint: 'Показывает в строке, сколько осталось до следующей смены, например «Пик · вне пика через 1h 20m»; по умолчанию только значок и «Пик» или «Вне пика»',
         peakStatusTitle: 'Текущий статус',
         peakNone: 'Ни у одной модели не включён пиковый тариф. Задайте пиковые окна для модели в разделе «Цены моделей» ниже, и её статус появится здесь.',
+        sectionHistory: 'Импорт истории',
+        histStatus: 'Импортировать прошлые разговоры',
+        histNever: 'Пока ничего не импортировано. Использование до установки плагина можно добавить в статистику из журналов сессий самого DSH.',
+        histLast: 'Последний импорт: {when}; всего импортировано вызовов: {n}.',
+        histScan: 'Сканировать историю',
+        histScanning: 'Сканирование…',
+        histImport: 'Импортировать',
+        histImporting: 'Импорт…',
+        histScanFound: 'Можно импортировать вызовов: {calls}, из сессий: {sessions}, с {from} по {to}.',
+        histScanNone: 'Новых вызовов для импорта нет.',
+        histScanCost: 'Оценка по текущим ценам: {cost}.',
+        histScanUnpriced: 'У {n} из них нет цены: они учитываются без стоимости.',
+        histSkipUnsupported: 'Журналов сессий в неподдерживаемом формате: {n}; пропущены.',
+        histSkipDamaged: 'Повреждённых журналов сессий: {n}; пропущены.',
+        histSkipSeeded: 'У ответвлённых сессий ({n}) нет метки ответвления, унаследованную часть не отделить; пропущены.',
+        histPruned: 'Старая статистика была сокращена, поэтому неизвестно, какие разговоры уже учтены. Сессии, которые плагин никогда не записывал, не импортируются, чтобы не считать дважды. После «Сбросить итоги» можно импортировать всю историю.',
+        histNote: 'Читаются только модель, использование и время каждого вызова, но не текст разговоров. Стоимость оценивается по текущим ценам, а у прошлых вызовов нет задержки до первого токена. У неудачных вызовов, заголовков и веб-поиска в журналах нет данных об использовании, они не добавляются. Перед импортом файл статистики копируется, и ничего не считается дважды.',
+        histDone: 'Импортировано вызовов: {calls} (сессий: {sessions}).',
+        histDoneCost: 'Оценка по текущим ценам: {cost}.',
+        histBusy: 'Сканирование или импорт уже выполняется; повторите чуть позже.',
+        histFailed: 'Не удалось импортировать: {error}',
+        histPromptTitle: 'Найдены разговоры, сделанные до установки плагина',
+        histPromptLater: 'Позже',
+        histPromptWhere: 'Читается только использование, но не текст разговоров. Импортировать можно и позже: Настройки → Импорт истории.',
+        histDockHint: 'История для импорта',
+        histDockTip: 'Прошлые вызовы ({calls}) можно добавить в статистику; нажмите, чтобы посмотреть',
         peakWindowsShort: 'Часы пика {local} (местное время)',
         peakSideDetailShow: 'Подробности в боковой панели',
         peakSideDetailShowHint: 'Помимо статуса и часов показывает дни, соотношение цен, модели и правило тарификации; по умолчанию выключено',
@@ -3903,6 +4137,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         // Peak: a bolt. Off-peak: a crescent.
         peak: 'M9.2 1.8 3.8 9h4l-1 5.2L12.2 7H8.2z',
         valley: 'M13.2 9.6A5.6 5.6 0 1 1 6.4 2.8a4.4 4.4 0 0 0 6.8 6.8z',
+        // History: a clock face with a counter-clockwise arrow.
+        history: 'M2.4 8a5.6 5.6 0 1 0 1.8-4.1 M2.4 2.6v3.1h3.1 M8 4.8V8l2.2 1.4',
       }
 
       function uiIcon(kind, size = 14, spin = false) {
@@ -3965,7 +4201,10 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           view.unpricedText ? h('span', {
             style: Object.assign({}, theme.item, { color: LIGHT.red }),
             title: view.unpricedHint,
-          }, view.unpricedText) : null)
+          }, view.unpricedText) : null,
+
+          // While the "import past usage?" question is open: number of importable calls (null otherwise).
+          view.historyCalls ? h(HistoryHint, { calls: view.historyCalls, item: theme.item }) : null)
       }
 
       function CostPills(props) {
@@ -4039,6 +4278,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           modelsLabel,
           multiModel: rows.length > 1,
           peak: peakSchedules(snap, sid)[0] || null,
+          historyCalls: historyAsk(snap) ? snap.history.scan.calls : null,
           unpricedText: unpriced > 0 ? t('unpricedNamed', { models: unpricedModels.join(', '), n: unpriced }) : null,
           unpricedHint: t('unpricedHint') + '\n' + unpricedModels.join('\n'),
         }
@@ -5038,6 +5278,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             h('div', { style: { fontSize: 18, fontWeight: 600, color: PRIMARY } }, t('title')),
             h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('settingsIntro'))),
 
+          h(HistoryPrompt, { snap, style: { marginTop: 16 } }),
+
           h('div', { style: ui.section }, t('sectionDock')),
           h(DockSettings),
 
@@ -5073,6 +5315,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
           h('div', { style: Object.assign({}, ui.section, { display: 'flex', alignItems: 'center', gap: 8 }) }, t('sectionMedia'), h('span', { style: ui.badge }, t('mediaExperimental'))),
           h(MediaSettings),
+
+          h('div', { style: ui.section }, t('sectionHistory')),
+          h(HistorySettings, { snap }),
 
           h('div', { style: ui.section }, t('sectionData')),
           settingRow({ key: 'reset' }, t('reset'), t('resetHint'), btn(t('reset'), resetTotals)))
@@ -5259,6 +5504,151 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           }
         })
         return out
+      }
+
+      // Importing past usage from DSH's own session logs: the one-time question, the settings section and a hint in the dock
+      // strip. The Host does the reading and the booking (history.js); this file shows what it found and sends the answer.
+
+      const HISTORY_MODELS_SHOWN = 5
+
+      /** The question is open while the Host has found importable calls and nobody has answered it yet. */
+      const historyAsk = (snap) => Boolean(snap && snap.history && snap.history.prompt === 'pending' && snap.history.scan && snap.history.scan.calls > 0)
+
+      const historyDay = (ms) => {
+        const d = new Date(ms)
+        return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate())
+      }
+      const historyWhen = (ms) => historyDay(ms) + ' ' + clockText(ms).slice(0, 5)
+
+      /** One Host call of the history panel; always resolves to an object with `ok` and `code`. */
+      const historyCall = (action) => postAction({ action })
+        .then((res) => res || { ok: false, code: 'empty' })
+        .catch((err) => ({ ok: false, code: 'network', error: (err && err.message) || String(err) }))
+
+      /** What a scan found as lines of text: counts and range, the estimate, and (unless `brief`) whatever could not be read. */
+      function historyFacts(scan, money, brief) {
+        const lines = []
+        if (scan.calls === 0) lines.push({ text: t('histScanNone') })
+        else {
+          lines.push({ text: t('histScanFound', { calls: scan.calls, sessions: scan.sessions, from: historyDay(scan.from), to: historyDay(scan.to) }) })
+          const cost = formatCosts(money.convert(scan.costs))
+          if (cost) lines.push({ text: t('histScanCost', { cost }) })
+          const fx = money.note(scan.costs)
+          if (fx) lines.push({ text: fx })
+          if (scan.unpriced > 0) lines.push({ text: t('histScanUnpriced', { n: scan.unpriced }), warn: true })
+        }
+        if (brief) return lines
+        const skipped = scan.skipped || {}
+        if (skipped.unsupported > 0) lines.push({ text: t('histSkipUnsupported', { n: skipped.unsupported }) })
+        if (skipped.damaged > 0) lines.push({ text: t('histSkipDamaged', { n: skipped.damaged }) })
+        if (skipped.seeded > 0) lines.push({ text: t('histSkipSeeded', { n: skipped.seeded }) })
+        if (scan.legacyPruned) lines.push({ text: t('histPruned') })
+        return lines
+      }
+
+      /** The answer of an import as lines of text. */
+      function historyOutcome(res, money) {
+        if (!res.ok) return [{ text: res.code === 'busy' ? t('histBusy') : t('histFailed', { error: res.error || res.code || 'unknown' }), warn: true }]
+        const lines = [{ text: t('histDone', { calls: res.calls, sessions: res.sessions }) }]
+        const cost = formatCosts(money.convert(res.costs))
+        if (cost) lines.push({ text: t('histDoneCost', { cost }) })
+        if (res.unpriced > 0) lines.push({ text: t('histScanUnpriced', { n: res.unpriced }), warn: true })
+        return lines
+      }
+
+      const historyLines = (lines) => lines.map((line, i) => h('div', { key: i, style: { fontSize: 12, lineHeight: '18px', color: line.warn ? LIGHT.red : SECONDARY } }, line.text))
+
+      /** The top models of a scan: name on the left, calls and estimated cost on the right. */
+      function historyModels(scan, money) {
+        const rows = Array.isArray(scan.models) ? scan.models.slice(0, HISTORY_MODELS_SHOWN) : []
+        if (rows.length === 0) return null
+        return h('div', { style: { display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto', gap: '2px 16px', marginTop: 6 } }, rows.map((row) => [
+          h('span', { key: row.model + 'n', title: row.model, style: { minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 12, color: SECONDARY } }, row.model),
+          h('span', { key: row.model + 'v', style: { fontSize: 12, color: TERTIARY, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' } },
+            t('tipCalls', { n: row.calls }) + ' · ' + (formatCosts(money.convert(row.costs)) || '—')),
+        ]))
+      }
+
+      /**
+       * The one-time question. Shown on the settings page, the statistics page and the right-sidebar page while it is open;
+       * after "import" it stays for a few seconds with the result, then disappears.
+       */
+      function HistoryPrompt(props) {
+        const { snap } = props
+        const prefs = usePrefs()
+        const [busy, setBusy] = React.useState(false)
+        const [outcome, setOutcome] = React.useState(null)
+        React.useEffect(() => {
+          if (!outcome) return undefined
+          const id = setTimeout(() => setOutcome(null), 8000)
+          return () => clearTimeout(id)
+        }, [outcome])
+
+        // `props.style` carries the caller's spacing, so a hidden prompt leaves no gap behind.
+        const box = Object.assign({ display: 'flex', flexDirection: 'column', gap: 8, padding: '14px 16px', borderRadius: 12, background: FILL, color: PRIMARY, minWidth: 0 }, props.style)
+        const money = moneyView(prefs)
+        if (outcome) return h('div', { style: box }, historyLines(historyOutcome(outcome, money)))
+        if (!historyAsk(snap)) return null
+
+        const answer = (action) => {
+          setBusy(true)
+          historyCall(action)
+            .then((res) => { if (action === 'history-import') setOutcome(res) })
+            .then(() => store.refresh())
+            .then(() => setBusy(false))
+        }
+        return h('div', { style: box },
+          h('div', { style: { fontSize: 14, lineHeight: '22px', fontWeight: 600 } }, t('histPromptTitle')),
+          historyLines(historyFacts(snap.history.scan, money, true)),
+          h('div', { style: { fontSize: 12, lineHeight: '18px', color: TERTIARY } }, t('histPromptWhere')),
+          h('div', { style: { display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 4 } },
+            btn(busy ? t('histImporting') : t('histImport'), () => answer('history-import'), 'primary', busy),
+            btn(t('histPromptLater'), () => answer('history-dismiss'), null, busy)))
+      }
+
+      /** Dock strip item while the question is open: opens the right-sidebar page when the host has one. `item` is the strip's item style. */
+      function HistoryHint(props) {
+        const { calls, item } = props
+        const tip = t('histDockTip', { calls })
+        const icon = uiIcon('history')
+        const text = h('span', null, t('histDockHint'))
+        if (!canOpenSide()) return h('span', { style: item, title: tip }, icon, text)
+        return h('button', {
+          type: 'button',
+          title: tip,
+          onClick: openSideTab,
+          style: Object.assign({}, plainButton, item, { cursor: 'pointer', fontFamily: item.fontFamily || 'inherit' }),
+        }, icon, text)
+      }
+
+      /** Settings → scan the logs, look at what would be imported, import it. */
+      function HistorySettings(props) {
+        const hist = props.snap.history || { prompt: 'done', scan: null, scanning: false, importing: false, importedCalls: 0, lastImportAt: null }
+        const prefs = usePrefs()
+        const money = moneyView(prefs)
+        const [busy, setBusy] = React.useState(null)
+        const [outcome, setOutcome] = React.useState(null)
+        const working = busy !== null || hist.scanning || hist.importing
+        const scan = hist.scan
+
+        const run = (action) => {
+          setBusy(action)
+          setOutcome(null)
+          historyCall(action)
+            .then((res) => { if (action === 'history-import') setOutcome(res) })
+            .then(() => store.refresh())
+            .then(() => setBusy(null))
+        }
+        const status = hist.lastImportAt ? t('histLast', { when: historyWhen(hist.lastImportAt), n: hist.importedCalls }) : t('histNever')
+
+        return h('div', null,
+          settingRow({ key: 'histStatus' }, t('histStatus'), status,
+            btn(busy === 'history-scan' || hist.scanning ? t('histScanning') : t('histScan'), () => run('history-scan'), null, working),
+            scan && scan.calls > 0 ? btn(busy === 'history-import' || hist.importing ? t('histImporting') : t('histImport'), () => run('history-import'), 'primary', working) : null),
+          scan || outcome ? h('div', { style: { padding: '14px 0', borderBottom: BORDER, display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 } },
+            outcome ? historyLines(historyOutcome(outcome, money)) : historyLines(historyFacts(scan, money)),
+            outcome ? null : historyModels(scan, money)) : null,
+          h('div', { style: Object.assign({}, ui.desc, { padding: '12px 0 0' }) }, t('histNote')))
       }
 
       // Chart primitives for the statistics page (hand-drawn SVG / flex, no chart library).
@@ -6936,6 +7326,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('div', { style: { fontSize: 18, fontWeight: 600, color: PRIMARY } }, t('statsTitle')),
               h('div', { style: Object.assign({}, ui.desc, { marginTop: 4 }) }, stats.since ? t('statsSub', { since: stats.since }) : null)),
             h(StatsRefresh, { auto, onAuto: setAuto, onRefresh: refreshNow, loading, updatedAt })),
+          h(HistoryPrompt, { snap: state.snap, style: { margin: '8px 0 10px' } }),
           h(StatsTabs, { tabs, value: tab, onChange: setTab }),
           // Secondary row: the filters that scope every tab.
           h('div', { style: { display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '14px 0 16px' } },
@@ -7202,6 +7593,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const peaks = peakSchedules(snap, sid)
 
         return h('div', { style: wrap },
+          h(HistoryPrompt, { snap }),
           h('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },
             h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 } },
               h('span', { style: sideLabel }, t('session')),

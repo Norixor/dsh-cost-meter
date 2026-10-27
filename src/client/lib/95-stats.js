@@ -138,6 +138,7 @@ function StatsPage() {
         h('div', { style: { fontSize: 18, fontWeight: 600, color: PRIMARY } }, t('statsTitle')),
         h('div', { style: Object.assign({}, ui.desc, { marginTop: 4 }) }, stats.since ? t('statsSub', { since: stats.since }) : null)),
       h(StatsRefresh, { auto, onAuto: setAuto, onRefresh: refreshNow, loading, updatedAt })),
+    h(HistoryPrompt, { snap: state.snap, style: { margin: '8px 0 10px' } }),
     h(StatsTabs, { tabs, value: tab, onChange: setTab }),
     // Secondary row: the filters that scope every tab.
     h('div', { style: { display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '14px 0 16px' } },

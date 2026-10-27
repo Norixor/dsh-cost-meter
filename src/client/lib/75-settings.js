@@ -30,6 +30,8 @@ function SettingsPage() {
       h('div', { style: { fontSize: 18, fontWeight: 600, color: PRIMARY } }, t('title')),
       h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('settingsIntro'))),
 
+    h(HistoryPrompt, { snap, style: { marginTop: 16 } }),
+
     h('div', { style: ui.section }, t('sectionDock')),
     h(DockSettings),
 
@@ -65,6 +67,9 @@ function SettingsPage() {
 
     h('div', { style: Object.assign({}, ui.section, { display: 'flex', alignItems: 'center', gap: 8 }) }, t('sectionMedia'), h('span', { style: ui.badge }, t('mediaExperimental'))),
     h(MediaSettings),
+
+    h('div', { style: ui.section }, t('sectionHistory')),
+    h(HistorySettings, { snap }),
 
     h('div', { style: ui.section }, t('sectionData')),
     settingRow({ key: 'reset' }, t('reset'), t('resetHint'), btn(t('reset'), resetTotals)))

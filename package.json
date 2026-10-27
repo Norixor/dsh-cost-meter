@@ -43,6 +43,7 @@
     "timing.js",
     "calllog.js",
     "media.js",
+    "history.js",
     "prefs.js",
     "client.js",
     "cordis.patch.yml",

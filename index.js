@@ -30,6 +30,7 @@ import { DAILY_KEEP_DAYS, dayKey, firstDay, hourOf, pruneDaily } from './daily.j
 import { DEFAULT_PREFS, sanitizePrefs } from './prefs.js'
 import { LATENCY_BOUNDS_MS, addTiming, pushSlowest, sanitizeSlowest } from './timing.js'
 import { appendCall, appendMessage, sanitizeCallLog } from './calllog.js'
+import { createHistoryService, freshHistory, legacyFirstLiveAt, migrateSessions, sanitizeHistory } from './history.js'
 import { MEDIA_TEMPLATES, argsOf, compileRules, matchRule, modelOf, observeTool, quantityOf, sanitizeObserved, sanitizeRules } from './media.js'
 
 export const name = 'dsh-cost-meter'
@@ -39,11 +40,13 @@ export const inject = ['webServer']
 const API = '/__cost-meter'
 const DSH_HOME = process.env.DSH_HOME || join(homedir(), '.dsh')
 const STATE_FILE = join(DSH_HOME, 'cost-meter.json')
+const SESSIONS_ROOT = join(DSH_HOME, 'sessions')
 const PERSIST_DELAY_MS = 1500
 const MAX_SESSIONS = 200
+const STARTUP_SCAN_DELAY_MS = 4000
 
 function emptyState() {
-  return { prices: {}, models: {}, sessions: {}, daily: {}, hourly: {}, slowest: [], callLog: {}, media: { rules: [], observed: {} }, budget: { currency: 'CNY', amount: 0 }, prefs: { ...DEFAULT_PREFS } }
+  return { prices: {}, models: {}, sessions: {}, daily: {}, hourly: {}, slowest: [], callLog: {}, media: { rules: [], observed: {} }, budget: { currency: 'CNY', amount: 0 }, prefs: { ...DEFAULT_PREFS }, history: freshHistory() }
 }
 
 /**
@@ -64,12 +67,15 @@ function migrateHourly(raw) {
 function loadState() {
   try {
     const raw = JSON.parse(readFileSync(STATE_FILE, 'utf8'))
+    const sessions = raw.sessions && typeof raw.sessions === 'object' ? raw.sessions : {}
+    const daily = raw.daily && typeof raw.daily === 'object' ? raw.daily : {}
+    migrateSessions(sessions)
     return {
       prices: raw.prices && typeof raw.prices === 'object' ? raw.prices : {},
       models: raw.models && typeof raw.models === 'object' ? raw.models : {},
-      sessions: raw.sessions && typeof raw.sessions === 'object' ? raw.sessions : {},
+      sessions,
       // Older state files (before 0.6.0) have no per-day / per-hour buckets; they start empty.
-      daily: raw.daily && typeof raw.daily === 'object' ? raw.daily : {},
+      daily,
       hourly: migrateHourly(raw.hourly),
       slowest: sanitizeSlowest(raw.slowest),
       callLog: sanitizeCallLog(raw.callLog),
@@ -79,6 +85,7 @@ function loadState() {
       },
       budget: raw.budget && typeof raw.budget === 'object' ? raw.budget : { currency: 'CNY', amount: 0 },
       prefs: sanitizePrefs(raw.prefs),
+      history: sanitizeHistory(raw.history, legacyFirstLiveAt(sessions, daily)),
     }
   } catch {
     return emptyState()
@@ -97,6 +104,7 @@ export function apply(ctx) {
   const state = loadState()
   const { prices, models, sessions, daily, hourly } = state
   let persistTimer = null
+  let scanTimer = null
   // Bumped on every logged call so the browser half knows when to refetch a session's call log.
   // Seeded from the clock so a restarted Host never repeats a value the browser has already cached.
   let callSeq = Date.now()
@@ -166,25 +174,39 @@ export function apply(ctx) {
     pruneDaily(hourly, atMs)
   }
 
+  /** The plugin has now metered something live for this session (and overall): history imports must stop short of it. */
+  function markLive(sessionEntry, atMs) {
+    if (sessionEntry && !Number.isFinite(sessionEntry.liveAt)) sessionEntry.liveAt = atMs
+    if (state.history.firstLiveAt === null) state.history.firstLiveAt = atMs
+  }
+
   /**
    * `timing` = { durationMs, ttftMs } measured by the llm/stream wrapper. Only calls that ended with a usage chunk
    * feed the latency statistics (aborted or failed streams would skew averages); every call can enter the slowest list.
+   * `past` = { end, messageId } books a call read from a session log by the history import: it has no timing, its
+   * session keeps the plugin's own first-record time (`liveAt`) untouched, and days outside the retention window get no bucket.
+   * Returns the price that was applied (or null).
    */
-  function recordCall(model, sessionId, usage, startedAt, timing, turn) {
-    recordHour(startedAt, model, usage)
+  function recordCall(model, sessionId, usage, startedAt, timing, turn, past) {
+    const now = Date.now()
+    const dated = !past || startedAt >= now - (DAILY_KEEP_DAYS - 1) * 86_400_000
+    if (dated) recordHour(startedAt, model, usage)
     const modelEntry = models[model] || (models[model] = newCounter())
     const sessionEntry = sessionId
-      ? (sessions[sessionId] || (sessions[sessionId] = { firstAt: Date.now(), updatedAt: 0, models: {}, costs: {} }))
+      ? (sessions[sessionId] || (sessions[sessionId] = { firstAt: past ? startedAt : now, liveAt: null, updatedAt: 0, models: {}, costs: {} }))
       : null
+    if (past) { if (sessionEntry) sessionEntry.firstAt = Math.min(Number.isFinite(sessionEntry.firstAt) ? sessionEntry.firstAt : startedAt, startedAt) } else markLive(sessionEntry, startedAt)
     const sessionModel = sessionEntry
       ? (sessionEntry.models[model] || (sessionEntry.models[model] = newCounter()))
       : null
     const buckets = sessionModel ? [modelEntry, sessionModel] : [modelEntry]
-    buckets.push(dailyBucket(model, startedAt))
-    pruneDaily(daily, startedAt)
+    if (dated) {
+      buckets.push(dailyBucket(model, startedAt))
+      pruneDaily(daily, startedAt)
+    }
 
     for (const bucket of buckets) bucket.calls += 1
-    if (sessionEntry) sessionEntry.updatedAt = Date.now()
+    if (sessionEntry) sessionEntry.updatedAt = past ? Math.max(sessionEntry.updatedAt || 0, past.end) : now
 
     if (timing) {
       state.slowest = pushSlowest(state.slowest, {
@@ -204,7 +226,7 @@ export function apply(ctx) {
       for (const bucket of buckets) bucket.failed += 1
       logCall(sessionId, turn, startedAt, model, null, null, timing)
       schedulePersist()
-      return
+      return null
     }
     if (timing) {
       const sample = { ...timing, outputTokens: usage.outputTokens || 0 }
@@ -228,9 +250,11 @@ export function apply(ctx) {
       }
     }
     if (priced && sessionEntry) addCost(sessionEntry, priced.currency, priced.amount)
-    logCall(sessionId, turn, startedAt, model, usage, priced, timing)
+    logCall(sessionId, turn, startedAt, model, usage, priced, timing, past ? { end: past.end } : undefined)
+    if (past && sessionId && past.messageId) appendMessage(state.callLog, sessionId, past.messageId, turn, past.end)
     trimSessions()
     schedulePersist()
+    return priced
   }
 
   /** Remember the finished call for per-message labels (see calllog.js). Calls without a session cannot be attributed. */
@@ -284,8 +308,9 @@ export function apply(ctx) {
     recordHour(atMs, model, null)
     const modelEntry = models[model] || (models[model] = newCounter())
     const sessionEntry = sessionId
-      ? (sessions[sessionId] || (sessions[sessionId] = { firstAt: atMs, updatedAt: 0, models: {}, costs: {} }))
+      ? (sessions[sessionId] || (sessions[sessionId] = { firstAt: atMs, liveAt: null, updatedAt: 0, models: {}, costs: {} }))
       : null
+    markLive(sessionEntry, atMs)
     const sessionModel = sessionEntry ? (sessionEntry.models[model] || (sessionEntry.models[model] = newCounter())) : null
     const buckets = sessionModel ? [modelEntry, sessionModel] : [modelEntry]
     buckets.push(dailyBucket(model, atMs))
@@ -335,12 +360,25 @@ export function apply(ctx) {
       .map((name) => ({ name, calls: observed[name].calls, last: observed[name].last, argKeys: observed[name].argKeys, modelArg: observed[name].modelArg || '', models: observed[name].models || [] }))
   }
 
+  // ---------- 历史导入（读 DSH 自己的会话日志，见 history.js） ----------
+
+  const history = createHistoryService({
+    root: SESSIONS_ROOT,
+    state,
+    sessions,
+    price: (model, usage, atMs) => priceUsage(model, usage, atMs),
+    book: (sessionId, call) => recordCall(call.model, sessionId, call.usage, call.at, null, call.turn, { end: call.end, messageId: call.messageId }),
+    persistNow,
+    stateFile: STATE_FILE,
+  })
+
   // ---------- 快照与操作 ----------
 
   function snapshot() {
     return {
       ok: true, prices, presets: PRESET_PRICES, models, sessions, budget: state.budget, prefs: state.prefs,
       media: { rules: state.media.rules, templates: MEDIA_TEMPLATES, observed: observedList() },
+      history: history.snapshot(),
       callSeq, serverTime: Date.now(),
     }
   }
@@ -439,9 +477,18 @@ export function apply(ctx) {
         for (const key of Object.keys(hourly)) delete hourly[key]
         state.slowest = []
         state.callLog = {}
+        history.reset()
         schedulePersist()
         return { ok: true }
       }
+      case 'history-scan':
+        return history.scan().then(() => ({ ok: true, code: 'ok', history: history.snapshot() }))
+      case 'history-import':
+        return history.importAll().then((result) => Object.assign({}, result, { history: history.snapshot() }))
+      case 'history-dismiss':
+        history.dismiss()
+        schedulePersist()
+        return { ok: true, code: 'ok', history: history.snapshot() }
       case 'stats':
         return statsView()
       case 'calls': {
@@ -491,6 +538,13 @@ export function apply(ctx) {
     }
     if (changed) schedulePersist()
   })()
+
+  // While the "import history?" question is open, look for importable calls a moment after start so the prompt can appear.
+  if (state.history.prompt === 'pending') {
+    scanTimer = setTimeout(() => { history.scan().catch(() => {}) }, STARTUP_SCAN_DELAY_MS)
+    scanTimer.unref?.()
+  }
+
 
   // ---------- 钩子与路由 ----------
 
@@ -554,8 +608,8 @@ export function apply(ctx) {
           sendJson(res, { ok: false, error: 'method not allowed' }, 405)
           return
         }
-        return parseJsonRequest(req).then((body) => {
-          sendJson(res, handleAction(body))
+        return parseJsonRequest(req).then((body) => Promise.resolve(handleAction(body))).then((out) => {
+          sendJson(res, out)
         }).catch(() => {
           sendJson(res, { ok: false, error: 'bad request' }, 400)
         })
@@ -565,6 +619,7 @@ export function apply(ctx) {
 
   ctx.on('dispose', () => {
     disposed = true
+    if (scanTimer) clearTimeout(scanTimer)
     if (persistTimer) {
       clearTimeout(persistTimer)
       persistTimer = null

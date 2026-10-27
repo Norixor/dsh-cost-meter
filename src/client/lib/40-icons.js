@@ -15,6 +15,8 @@ const ICON_PATHS = {
   // Peak: a bolt. Off-peak: a crescent.
   peak: 'M9.2 1.8 3.8 9h4l-1 5.2L12.2 7H8.2z',
   valley: 'M13.2 9.6A5.6 5.6 0 1 1 6.4 2.8a4.4 4.4 0 0 0 6.8 6.8z',
+  // History: a clock face with a counter-clockwise arrow.
+  history: 'M2.4 8a5.6 5.6 0 1 0 1.8-4.1 M2.4 2.6v3.1h3.1 M8 4.8V8l2.2 1.4',
 }
 
 function uiIcon(kind, size = 14, spin = false) {

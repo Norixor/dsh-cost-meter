@@ -38,7 +38,10 @@ function DockStrip(props) {
     view.unpricedText ? h('span', {
       style: Object.assign({}, theme.item, { color: LIGHT.red }),
       title: view.unpricedHint,
-    }, view.unpricedText) : null)
+    }, view.unpricedText) : null,
+
+    // While the "import past usage?" question is open: number of importable calls (null otherwise).
+    view.historyCalls ? h(HistoryHint, { calls: view.historyCalls, item: theme.item }) : null)
 }
 
 function CostPills(props) {
@@ -112,6 +115,7 @@ function CostPills(props) {
     modelsLabel,
     multiModel: rows.length > 1,
     peak: peakSchedules(snap, sid)[0] || null,
+    historyCalls: historyAsk(snap) ? snap.history.scan.calls : null,
     unpricedText: unpriced > 0 ? t('unpricedNamed', { models: unpricedModels.join(', '), n: unpriced }) : null,
     unpricedHint: t('unpricedHint') + '\n' + unpricedModels.join('\n'),
   }

@@ -88,6 +88,7 @@ function SideCostTab(props) {
   const peaks = peakSchedules(snap, sid)
 
   return h('div', { style: wrap },
+    h(HistoryPrompt, { snap }),
     h('div', { style: { display: 'flex', flexDirection: 'column', gap: 6 } },
       h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 } },
         h('span', { style: sideLabel }, t('session')),

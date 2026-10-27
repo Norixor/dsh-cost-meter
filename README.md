@@ -91,6 +91,7 @@ A plugin installed from a local folder is linked, not copied: do not move or del
 - **Display currency.** Show all money as CNY, USD, or as billed, on every surface: the strip under the input box, the labels under messages, the sidebar page and the statistics page. Conversion uses an exchange rate you set (default 1 USD = 6.8 CNY); amounts already in the chosen currency are never converted, and recorded costs are never changed.
 - **Peak / off-peak status.** For models that have peak windows (the DeepSeek presets do), the strip under the input box shows an icon and “Peak” or “Off-peak”, and the right-sidebar tab shows the state and the peak hours in your local time. The countdown to the next switch, and the weekdays, price ratio, affected models and billing rule in the sidebar, are opt-in. Each part has its own switch in Settings.
 - **Prices you control.** 66 preset models; per-model editing of input, output, cache read and cache write prices; context-length tiers; peak-hour pricing; a session budget in any currency.
+- **Import past conversations.** DSH keeps its own session logs. If there are calls from before the plugin was installed, it asks once on first start whether to import them; Settings → History import does the same at any time. Only usage (model, tokens, time) is read, never message text, and importing again does not double count.
 - **Image and speech metering** (experimental, off by default). See below.
 - **Nine languages**, see [Languages](#languages).
 
@@ -136,6 +137,8 @@ Simplified Chinese and English are built in. Traditional Chinese (`zh-hant`), Ja
 - State is stored in `~/.dsh/cost-meter.json` (`%USERPROFILE%\.dsh\cost-meter.json` on Windows, or `$DSH_HOME/cost-meter.json` when `DSH_HOME` is set): totals, session buckets, per-day and per-hour buckets (last 90 days), prices and preferences. Delete the file to reset everything; **Clear totals** in Settings → Cost Meter clears the totals (prices and budget are kept).
 - For the per-message labels and the sidebar tab, the host also keeps the last 80 calls of each of the 20 most recent sessions (time, model, tokens, locked-in cost). No prompts or replies are stored.
 - Per-day and per-hour history starts from version 0.6.0 and latency from 0.7.0; older calls only exist as running totals.
+- Other files next to the state file: `cost-meter.json.before-import` (a backup made before a history import).
+- History import reads DSH's session logs under `$DSH_HOME/sessions` (model, token counts and times only) and only when you ask for it.
 
 ## Known limitations and status
 
@@ -156,6 +159,7 @@ Other limits:
 - Tiers apply to the whole request, not progressively.
 - Currency conversion is display-only, at a fixed rate you choose. The session budget is still counted in the budget's own currency (its traffic light uses the raw amounts); only the printed figures are converted.
 - Only tiers with an official source are preset (Claude Haiku 5.5, gpt-6.1-terra, glm-5.1); add others by hand.
+- History import understands DSH's session log format v4 only. Imported calls have no latency, and their cost is estimated at today's prices. Failed, title and web-search calls are not in the logs; a session forked from another one skips the part it inherited. If an older version of the plugin had already pruned some session state, sessions it never saw cannot be imported until you use **Clear totals**.
 
 ## Development from source
 
@@ -174,6 +178,7 @@ To try it without DSH, load `client.js` into a page that provides `window.__Modu
 index.js, pricing.js, daily.js,   Host half: llm/stream hook, endpoint, pricing rules, per-day buckets,
 timing.js, calllog.js, media.js,  latency, call log, media rules, preferences, preset prices
 prefs.js, presets.js, route-security.js
+history.js                        Import of past conversations from DSH's session logs
 client.js                         Generated browser half (do not edit)
 src/client/lib/                   UI, statistics and translations, in file-name order
 src/client/apply/                 Slot registrations (apply(ctx))
