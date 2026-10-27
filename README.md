@@ -93,6 +93,7 @@ A plugin installed from a local folder is linked, not copied: do not move or del
 - **Prices you control.** 66 preset models; per-model editing of input, output, cache read and cache write prices; context-length tiers; peak-hour pricing; a session budget in any currency.
 - **Price catalog.** Settings → Price catalog fetches OpenRouter's public model list on request. It can fill the price of models you use but never priced (only when the name matches exactly one catalog entry), and the model editor can search the catalog and take any entry's price. The prices are OpenRouter's listing (USD, which can differ from the vendor's own), keep a source mark, and a hand edit replaces them. An opt-in daily refresh keeps them current.
 - **Import past conversations.** DSH keeps its own session logs. If there are calls from before the plugin was installed, it asks once on first start whether to import them; Settings → History import does the same at any time. Only usage (model, tokens, time) is read, never message text, and importing again does not double count.
+- **Account balances.** Add your DeepSeek, Kimi, SiliconFlow or OpenRouter account, or any provider with a JSON balance endpoint, together with its API key, and see what is left in the provider's own currency in Settings and on the right-sidebar tab. Keys stay on your machine and are only sent to that provider. Subscription quotas such as Coding Plans are not supported.
 - **Image and speech metering** (experimental, off by default). See below.
 - **Nine languages**, see [Languages](#languages).
 
@@ -134,10 +135,11 @@ Simplified Chinese and English are built in. Traditional Chinese (`zh-hant`), Ja
 
 ## Data and privacy
 
-- By default the plugin makes no network requests of its own. The browser half talks to a loopback-only endpoint (`/__cost-meter`) of the DSH host. The Host contacts the network for one thing you ask for: the OpenRouter price catalog (`https://openrouter.ai/api/v1/models`; nothing about you is sent). It runs when you click, or on a timer you switch on (`catalogAuto`, once a day); the timer is off by default.
+- By default the plugin makes no network requests of its own. The browser half talks to a loopback-only endpoint (`/__cost-meter`) of the DSH host. The Host contacts the network for two things you ask for: the OpenRouter price catalog (`https://openrouter.ai/api/v1/models`; nothing about you is sent) and the balance endpoint of each account you add (with that account's key). Both run when you click, or on a timer you switch on (`catalogAuto` once a day, `balanceAuto` every 10 minutes); both timers are off by default.
 - State is stored in `~/.dsh/cost-meter.json` (`%USERPROFILE%\.dsh\cost-meter.json` on Windows, or `$DSH_HOME/cost-meter.json` when `DSH_HOME` is set): totals, session buckets, per-day and per-hour buckets (last 90 days), prices and preferences. Delete the file to reset everything; **Clear totals** in Settings → Cost Meter clears the totals (prices and budget are kept).
 - For the per-message labels and the sidebar tab, the host also keeps the last 80 calls of each of the 20 most recent sessions (time, model, tokens, locked-in cost). No prompts or replies are stored.
 - Per-day and per-hour history starts from version 0.6.0 and latency from 0.7.0; older calls only exist as running totals.
+- API keys for balance queries are stored in `cost-meter.balance.json` next to the state file, readable by your user only (mode 0600 where the OS supports modes; on Windows the profile folder's permissions apply). The file is not encrypted. Keys never reach the browser (the page only learns whether a key is set), are sent only as `Authorization: Bearer` to the account's own address with redirects refused, and a custom account's key is dropped when its address moves to another host.
 - Other files next to the state file: `cost-meter.catalog.json` (cache of the price catalog) and `cost-meter.json.before-import` (a backup made before a history import).
 - History import reads DSH's session logs under `$DSH_HOME/sessions` (model, token counts and times only) and only when you ask for it.
 
@@ -162,6 +164,7 @@ Other limits:
 - Only tiers with an official source are preset (Claude Haiku 5.5, gpt-6.1-terra, glm-5.1); add others by hand.
 - History import understands DSH's session log format v4 only. Imported calls have no latency, and their cost is estimated at today's prices. Failed, title and web-search calls are not in the logs; a session forked from another one skips the part it inherited. If an older version of the plugin had already pruned some session state, sessions it never saw cannot be imported until you use **Clear totals**.
 - Price catalog prices are OpenRouter's, in USD, and can differ from the vendors' own. Time-of-day prices are only taken over when they fit the peak settings (weekdays, at most two windows, one peak rate); a name that matches no entry, or several, has to be picked by hand.
+- Balances: DeepSeek, Kimi, SiliconFlow and OpenRouter have presets (OpenRouter needs a Management Key), other providers go through a custom account. Amounts are shown in the provider's currency and are not converted. The response formats were implemented from the providers' API documentation and tested with sample responses, not against real accounts.
 
 ## Development from source
 
@@ -182,6 +185,7 @@ timing.js, calllog.js, media.js,  latency, call log, media rules, preferences, p
 prefs.js, presets.js, route-security.js
 history.js                        Import of past conversations from DSH's session logs
 catalog.js, catalog-apply.js      OpenRouter price catalog: fetch, cache, name matching, applying prices
+balance.js, fetch-json.js         Account balances (presets, custom endpoint, key storage) and the bounded JSON fetch they share with the catalog
 client.js                         Generated browser half (do not edit)
 src/client/lib/                   UI, statistics and translations, in file-name order
 src/client/apply/                 Slot registrations (apply(ctx))

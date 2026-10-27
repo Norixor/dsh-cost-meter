@@ -11,6 +11,7 @@ import { join } from 'node:path'
 export async function startHost() {
   if (!process.env.DSH_HOME) process.env.DSH_HOME = mkdtempSync(join(tmpdir(), 'cost-meter-'))
   rmSync(join(process.env.DSH_HOME, 'cost-meter.json'), { force: true })
+  rmSync(join(process.env.DSH_HOME, 'cost-meter.balance.json'), { force: true })
   const { apply } = await import('../index.js')
   const handlers = {}
   let route

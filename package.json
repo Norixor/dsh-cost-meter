@@ -46,6 +46,7 @@
     "history.js",
     "catalog.js",
     "catalog-apply.js",
+    "balance.js",
     "fetch-json.js",
     "prefs.js",
     "client.js",

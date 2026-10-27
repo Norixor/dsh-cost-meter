@@ -93,6 +93,7 @@ dsh plugin --profile web add @norixor/dsh-cost-meter
 - **单价由你掌握。** 66 个预置模型；每个模型可单独编辑输入、输出、缓存读、缓存写单价；上下文分档；峰谷计价；任意币种的会话预算。
 - **价格目录。** 设置 → 价格目录可以按需从 OpenRouter 的公开模型列表取一份价格表：给用过但没配价的模型填价（只在名字能唯一对上一个条目时），也可以在模型编辑里搜索目录、把任意条目的价格拿来用。价格是 OpenRouter 的标价（美元，可能和厂商官方定价不同），带来源标记，手动改过就不再算目录价；可选的每日自动更新会让它们保持最新。
 - **导入历史对话。** DSH 自己保存了会话日志。首次启动时，如果有装插件之前的调用，会问一次要不要导入；设置 → 历史导入随时可以手动导入。只读用量（模型、token、时间），不读消息正文；重复导入不会重复计数。
+- **账户余额。** 添加 DeepSeek、Kimi、硅基流动或 OpenRouter 账号，或任何有 JSON 余额接口的服务商，填上 API 密钥，就能在设置和右侧栏页签里看到按服务商自己币种显示的余额。密钥只存在本机、只发给该服务商。不支持 Coding Plan 等订阅额度。
 - **图片与语音计量**（实验性，默认关闭），见下文。
 - **九种语言**，见[多语言](#多语言)。
 
@@ -134,10 +135,11 @@ dsh plugin --profile web add @norixor/dsh-cost-meter
 
 ## 数据与隐私
 
-- 默认情况下插件自己不发起任何网络请求。浏览器半部只与 DSH 宿主上仅限本机回环访问的端点（`/__cost-meter`）通信。Host 只为一件你主动要求的事联网：OpenRouter 价格目录（`https://openrouter.ai/api/v1/models`，不发送任何与你有关的信息）。它在你点击时运行，或由你打开的定时开关触发（`catalogAuto` 每天一次），定时默认关闭。
+- 默认情况下插件自己不发起任何网络请求。浏览器半部只与 DSH 宿主上仅限本机回环访问的端点（`/__cost-meter`）通信。Host 只为两件你主动要求的事联网：OpenRouter 价格目录（`https://openrouter.ai/api/v1/models`，不发送任何与你有关的信息）和你添加的账号各自的余额接口（带该账号的密钥）。两者都在你点击时运行，或由你打开的定时开关触发（`catalogAuto` 每天一次、`balanceAuto` 每 10 分钟一次），定时默认都关闭。
 - 状态保存在 `~/.dsh/cost-meter.json`（Windows 为 `%USERPROFILE%\.dsh\cost-meter.json`，设置了 `DSH_HOME` 则为 `$DSH_HOME/cost-meter.json`）：累计、会话桶、按天与按小时的桶（最近 90 天）、单价和偏好。删除该文件即重置全部；设置 → 费用计量里的「清空累计」只清累计（单价和预算保留）。
 - 为了给消息打标签和驱动右侧栏页签，宿主还会保留最近 20 个会话、每个会话最近 80 次调用的明细（时间、模型、token、已锁定的费用）。不保存提示词或回复内容。
 - 按天与按小时的历史从 0.6.0 开始记录，耗时从 0.7.0 开始记录；更早的调用只有累计总数。
+- 查询余额用的 API 密钥保存在状态文件旁的 `cost-meter.balance.json`，只有当前用户可读（系统支持文件权限时为 0600；Windows 上沿用用户目录的权限）。该文件没有加密。密钥不会进入浏览器（页面只知道有没有密钥），只以 `Authorization: Bearer` 发往该账号自己的地址且拒绝重定向，自定义账号的地址换到另一个域名时会清除已保存的密钥。
 - 状态文件旁还有：`cost-meter.catalog.json`（价格目录缓存）和 `cost-meter.json.before-import`（历史导入前的备份）。
 - 历史导入读取 `$DSH_HOME/sessions` 下 DSH 的会话日志（只取模型、token 数和时间），且只在你要求时才读。
 
@@ -162,6 +164,7 @@ dsh plugin --profile web add @norixor/dsh-cost-meter
 - 预置只含有官方依据的分档（Claude Haiku 5.5、gpt-6.1-terra、glm-5.1），其他的请手动添加。
 - 历史导入只认 DSH 会话日志的 v4 格式。导入的调用没有耗时，费用按当前单价估算。失败的、标题和联网搜索的调用不在日志里；从别的会话分叉出来的会话会跳过继承来的那一段。如果旧版本插件已经裁剪过某些会话的状态，插件从没见过的会话要先「清空累计」才能导入。
 - 价格目录里的价格是 OpenRouter 的标价（美元），可能和厂商官方定价不同。按时段计价的只有能对上峰谷设置（工作日、最多两个窗口、统一的峰价）时才会带入；名字对不上或对上多个的，需要手动选择。
+- 余额：DeepSeek、Kimi、硅基流动、OpenRouter 有预置（OpenRouter 需要 Management Key），其他服务商用自定义账号。金额按服务商自己的币种显示，不折算。各家响应格式是按其 API 文档实现、用示例响应测试的，没有用真实账号验证。
 
 ## 从源码开发
 
@@ -182,6 +185,7 @@ timing.js, calllog.js, media.js,  耗时、调用日志、媒体规则、偏好�
 prefs.js, presets.js, route-security.js
 history.js                        历史导入：读 DSH 会话日志里的用量
 catalog.js, catalog-apply.js      OpenRouter 价格目录：获取、缓存、名称匹配、填入价格
+balance.js, fetch-json.js         账户余额（预置、自定义接口、密钥存储）与它和目录共用的有界 JSON 请求
 client.js                         生成的浏览器半部（不要直接改）
 src/client/lib/                   界面、统计与译文，按文件名顺序拼接
 src/client/apply/                 槽位登记（apply(ctx)）

@@ -22,6 +22,8 @@ const DEFAULT_PREFS = {
   statsCurrency: 'CNY',
   usdCny: 6.8,
   catalogAuto: false,
+  sideBalance: true,
+  balanceAuto: false,
 }
 const DOCK_STYLES = ['plain', 'soft', 'outline', 'bar']
 const DOCK_FONTS = ['system', 'mono']

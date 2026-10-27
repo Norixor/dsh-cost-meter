@@ -578,6 +578,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: '这会用目录价替换你手动设置的价格，继续吗？',
         catFailed: '操作失败：{error}',
         sourceCatalog: '目录价',
+        sectionBalance: '账户余额',
+        balIntro: '添加你自己的服务商账号，查看账户里还剩多少钱。密钥只保存在本机一个仅当前用户可读的文件里，页面读不到，也只会发给该服务商自己的地址；只有点「刷新」（或开启下面的自动刷新）才会联网。不含 Coding Plan 等订阅额度。',
+        balEmpty: '还没有添加账号。',
+        balAdd: '添加账号',
+        balRefresh: '刷新',
+        balRefreshAll: '全部刷新',
+        balRefreshing: '查询中…',
+        balEdit: '编辑',
+        balDelete: '删除',
+        balDeleteConfirm: '删除账号「{label}」和它保存的密钥？',
+        balCustom: '自定义',
+        balLabel: '名称',
+        balKey: '密钥',
+        balKeyPlaceholder: '粘贴 API 密钥',
+        balKeySaved: '已保存，留空则不更改',
+        balKeyClear: '清除密钥',
+        balKeyManagement: 'OpenRouter 查询余额需要 Management Key（在 OpenRouter 的密钥页面创建），普通密钥会被拒绝。',
+        balUrl: '接口地址',
+        balPath: '余额字段',
+        balCurrency: '币种',
+        balCustomHint: '自定义账号用 GET 访问这个地址，密钥以 Authorization: Bearer 发送；从返回的 JSON 里取「余额字段」指向的数字，用点分隔，数组用序号，例如 data.balance 或 data.items.0.amount。地址只支持 https（本机可用 http），不能带 ? 参数、用户名或 #；换到另一个域名时，已保存的密钥会被清除。',
+        balSave: '保存',
+        balCancel: '取消',
+        balKeyDropped: '接口地址换了域名，已保存的密钥已清除，请重新填写。',
+        balNoKey: '未填写密钥',
+        balNever: '还没有查询过',
+        balUpdated: '更新于 {when}',
+        balGranted: '赠送',
+        balToppedUp: '充值',
+        balUsed: '已用',
+        balLow: '余额不足',
+        balAuto: '自动刷新',
+        balAutoHint: '开启后每 10 分钟查询一次已填写密钥的账号；关闭时只有点「刷新」才会联网。',
+        balSide: '在右侧栏显示',
+        balSideHint: '在右侧栏页面列出账户余额（添加账号后才会出现）。',
+        balErrNetwork: '连不上服务商，请检查网络后重试。',
+        balErrTimeout: '请求超时，请稍后重试。',
+        balErrUnauthorized: '密钥被拒绝：请检查密钥是否正确、是否有查询余额的权限。',
+        balErrHttp: '服务商返回了错误（HTTP {status}）。',
+        balErrTooLarge: '返回的数据过大，已放弃。',
+        balErrFormat: '返回的数据格式不是预期的，没能读出余额。',
+        balErrNoValue: '返回的数据里没有「余额字段」指向的数字，请检查字段路径。',
+        balErrBusy: '正在查询，请稍候。',
+        balErrChanged: '查询期间账号被修改，结果已丢弃，请再刷新一次。',
+        balErrBadUrl: '接口地址不可用：需要 https 地址（本机可用 http），且不能带 ? 参数、用户名或 #。',
+        balErrBadPath: '余额字段不对：只能用字母、数字、下划线、短横线，用点分隔。',
+        balErrBadCurrency: '币种需要 3 个字母，例如 USD、CNY。',
+        balErrBadKey: '密钥不能含空格或换行，且不超过 512 个字符。',
+        balErrTooMany: '最多添加 {n} 个账号。',
+        balErrWrite: '保存失败，请检查数据目录是否可写。',
+        balFailed: '操作失败：{error}',
+        sideBalance: '账户余额',
       }
 
       const EN = {
@@ -1035,6 +1087,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: 'This replaces the price you set by hand with the catalog price. Continue?',
         catFailed: 'Failed: {error}',
         sourceCatalog: 'Catalog',
+        sectionBalance: 'Account balances',
+        balIntro: 'Add your own provider accounts to see how much money is left in them. Keys are kept in a file on this machine that only your user can read; the page never sees them, and they are sent only to the provider\'s own address. Nothing goes online until you click Refresh (or switch on auto refresh below). Subscription quotas such as Coding Plans are not included.',
+        balEmpty: 'No accounts yet.',
+        balAdd: 'Add account',
+        balRefresh: 'Refresh',
+        balRefreshAll: 'Refresh all',
+        balRefreshing: 'Asking…',
+        balEdit: 'Edit',
+        balDelete: 'Delete',
+        balDeleteConfirm: 'Delete the account "{label}" and its saved key?',
+        balCustom: 'Custom',
+        balLabel: 'Name',
+        balKey: 'API key',
+        balKeyPlaceholder: 'Paste the API key',
+        balKeySaved: 'Saved, leave blank to keep',
+        balKeyClear: 'Clear key',
+        balKeyManagement: 'OpenRouter needs a Management Key to read credits (create it on OpenRouter\'s keys page); an ordinary key is refused.',
+        balUrl: 'Endpoint',
+        balPath: 'Balance field',
+        balCurrency: 'Currency',
+        balCustomHint: 'A custom account sends a GET request to this address with the key as Authorization: Bearer, then reads the number the balance field points to in the returned JSON: dot-separated, arrays by index, e.g. data.balance or data.items.0.amount. Only https addresses are accepted (http on this machine), without ? parameters, user names or #. If the address moves to another domain, the saved key is cleared.',
+        balSave: 'Save',
+        balCancel: 'Cancel',
+        balKeyDropped: 'The endpoint moved to another domain, so the saved key was cleared. Enter it again.',
+        balNoKey: 'No key entered',
+        balNever: 'Not asked yet',
+        balUpdated: 'Updated {when}',
+        balGranted: 'Granted',
+        balToppedUp: 'Topped up',
+        balUsed: 'Used',
+        balLow: 'Balance too low',
+        balAuto: 'Refresh automatically',
+        balAutoHint: 'Ask accounts that have a key every 10 minutes. While off, nothing goes online unless you click Refresh.',
+        balSide: 'Show in the right sidebar',
+        balSideHint: 'List the balances on the right-sidebar page (appears once an account is added).',
+        balErrNetwork: 'Cannot reach the provider. Check the network and try again.',
+        balErrTimeout: 'The request timed out. Try again later.',
+        balErrUnauthorized: 'The key was refused: check that it is correct and allowed to read the balance.',
+        balErrHttp: 'The provider returned an error (HTTP {status}).',
+        balErrTooLarge: 'The response was too large and was dropped.',
+        balErrFormat: 'The response was not in the expected format; no balance could be read.',
+        balErrNoValue: 'The response has no number at the balance field. Check the field path.',
+        balErrBusy: 'A request is already running.',
+        balErrChanged: 'The account was changed during the request, so the result was dropped. Refresh again.',
+        balErrBadUrl: 'The endpoint is not usable: it needs an https address (http on this machine) without ? parameters, user name or #.',
+        balErrBadPath: 'The balance field is not valid: letters, digits, underscores and hyphens, separated by dots.',
+        balErrBadCurrency: 'The currency needs 3 letters, e.g. USD or CNY.',
+        balErrBadKey: 'The key must not contain spaces or line breaks and can be at most 512 characters.',
+        balErrTooMany: 'At most {n} accounts can be added.',
+        balErrWrite: 'Could not save. Check that the data folder is writable.',
+        balFailed: 'Failed: {error}',
+        sideBalance: 'Account balances',
       }
 
       // Traditional Chinese (Taiwan) UI dictionary; keys mirror EN exactly.
@@ -1493,6 +1597,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: '這會用目錄價取代你手動設定的價格，要繼續嗎？',
         catFailed: '操作失敗：{error}',
         sourceCatalog: '目錄價',
+        sectionBalance: '帳戶餘額',
+        balIntro: '新增你自己的服務商帳號，查看帳戶裡還剩多少錢。金鑰只儲存在本機一個僅目前使用者可讀的檔案中，頁面讀不到，也只會傳給該服務商自己的網址；只有按「重新整理」（或開啟下方的自動重新整理）才會連網。不含 Coding Plan 等訂閱額度。',
+        balEmpty: '尚未新增帳號。',
+        balAdd: '新增帳號',
+        balRefresh: '重新整理',
+        balRefreshAll: '全部重新整理',
+        balRefreshing: '查詢中…',
+        balEdit: '編輯',
+        balDelete: '刪除',
+        balDeleteConfirm: '刪除帳號「{label}」和它儲存的金鑰？',
+        balCustom: '自訂',
+        balLabel: '名稱',
+        balKey: '金鑰',
+        balKeyPlaceholder: '貼上 API 金鑰',
+        balKeySaved: '已儲存，留空則不變更',
+        balKeyClear: '清除金鑰',
+        balKeyManagement: 'OpenRouter 查詢餘額需要 Management Key（在 OpenRouter 的金鑰頁面建立），一般金鑰會被拒絕。',
+        balUrl: '介面網址',
+        balPath: '餘額欄位',
+        balCurrency: '幣別',
+        balCustomHint: '自訂帳號會用 GET 存取這個網址，金鑰以 Authorization: Bearer 傳送；從回傳的 JSON 取「餘額欄位」指向的數字，以點分隔，陣列用序號，例如 data.balance 或 data.items.0.amount。網址只支援 https（本機可用 http），不能帶 ? 參數、使用者名稱或 #；換到另一個網域時，已儲存的金鑰會被清除。',
+        balSave: '儲存',
+        balCancel: '取消',
+        balKeyDropped: '介面網址換了網域，已儲存的金鑰已清除，請重新填寫。',
+        balNoKey: '尚未填寫金鑰',
+        balNever: '尚未查詢過',
+        balUpdated: '更新於 {when}',
+        balGranted: '贈送',
+        balToppedUp: '儲值',
+        balUsed: '已用',
+        balLow: '餘額不足',
+        balAuto: '自動重新整理',
+        balAutoHint: '開啟後每 10 分鐘查詢一次已填寫金鑰的帳號；關閉時只有按「重新整理」才會連網。',
+        balSide: '在右側欄顯示',
+        balSideHint: '在右側欄頁面列出帳戶餘額（新增帳號後才會出現）。',
+        balErrNetwork: '連不上服務商，請檢查網路後重試。',
+        balErrTimeout: '請求逾時，請稍後重試。',
+        balErrUnauthorized: '金鑰被拒絕：請檢查金鑰是否正確、是否有查詢餘額的權限。',
+        balErrHttp: '服務商回傳錯誤（HTTP {status}）。',
+        balErrTooLarge: '回傳的資料過大，已放棄。',
+        balErrFormat: '回傳的資料格式不符預期，無法讀出餘額。',
+        balErrNoValue: '回傳的資料中沒有「餘額欄位」指向的數字，請檢查欄位路徑。',
+        balErrBusy: '正在查詢，請稍候。',
+        balErrChanged: '查詢期間帳號被修改，結果已捨棄，請再重新整理一次。',
+        balErrBadUrl: '介面網址不可用：需要 https 網址（本機可用 http），且不能帶 ? 參數、使用者名稱或 #。',
+        balErrBadPath: '餘額欄位不正確：只能使用字母、數字、底線、連字號，以點分隔。',
+        balErrBadCurrency: '幣別需要 3 個字母，例如 USD、CNY。',
+        balErrBadKey: '金鑰不能含空白或換行，且不超過 512 個字元。',
+        balErrTooMany: '最多新增 {n} 個帳號。',
+        balErrWrite: '儲存失敗，請檢查資料目錄是否可寫入。',
+        balFailed: '操作失敗：{error}',
+        sideBalance: '帳戶餘額',
       }
 
       // Japanese UI dictionary; keys mirror EN in 21-locale-en.js.
@@ -1951,6 +2107,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: '手動で設定した価格がカタログ価格に置き換わります。続けますか？',
         catFailed: '失敗しました：{error}',
         sourceCatalog: 'カタログ',
+        sectionBalance: 'アカウント残高',
+        balIntro: 'ご自身のプロバイダーのアカウントを追加して、残高を確認できます。キーはこのマシン上の、現在のユーザーだけが読めるファイルに保存され、ページからは読めず、そのプロバイダー自身のアドレスにだけ送信されます。「更新」を押したとき（または下の自動更新をオンにしたとき）以外は通信しません。Coding Plan などのサブスクリプション枠は対象外です。',
+        balEmpty: 'アカウントはまだありません。',
+        balAdd: 'アカウントを追加',
+        balRefresh: '更新',
+        balRefreshAll: 'すべて更新',
+        balRefreshing: '問い合わせ中…',
+        balEdit: '編集',
+        balDelete: '削除',
+        balDeleteConfirm: 'アカウント「{label}」と保存したキーを削除しますか？',
+        balCustom: 'カスタム',
+        balLabel: '名前',
+        balKey: 'APIキー',
+        balKeyPlaceholder: 'APIキーを貼り付け',
+        balKeySaved: '保存済み（空欄のままなら変更しません）',
+        balKeyClear: 'キーを消去',
+        balKeyManagement: 'OpenRouterの残高取得にはManagement Keyが必要です（OpenRouterのキーのページで作成）。通常のキーは拒否されます。',
+        balUrl: 'エンドポイント',
+        balPath: '残高フィールド',
+        balCurrency: '通貨',
+        balCustomHint: 'カスタムアカウントはこのアドレスにGETで接続し、キーを Authorization: Bearer で送ります。返ってきたJSONから「残高フィールド」が指す数値を読みます（ドット区切り、配列は番号、例：data.balance、data.items.0.amount）。https のアドレスのみ使えます（このマシン上では http も可）。? パラメータ、ユーザー名、# は付けられません。別のドメインに変えると、保存済みのキーは消去されます。',
+        balSave: '保存',
+        balCancel: 'キャンセル',
+        balKeyDropped: 'エンドポイントのドメインが変わったため、保存済みのキーを消去しました。もう一度入力してください。',
+        balNoKey: 'キー未入力',
+        balNever: '未取得',
+        balUpdated: '{when} に更新',
+        balGranted: '付与',
+        balToppedUp: 'チャージ',
+        balUsed: '使用済み',
+        balLow: '残高不足',
+        balAuto: '自動更新',
+        balAutoHint: 'オンにすると、キーを入力済みのアカウントを10分ごとに問い合わせます。オフの間は「更新」を押したときだけ通信します。',
+        balSide: '右サイドバーに表示',
+        balSideHint: '右サイドバーのページに残高を一覧表示します（アカウントを追加すると表示されます）。',
+        balErrNetwork: 'プロバイダーに接続できません。ネットワークを確認して再試行してください。',
+        balErrTimeout: 'リクエストがタイムアウトしました。しばらくして再試行してください。',
+        balErrUnauthorized: 'キーが拒否されました。キーが正しいか、残高を読む権限があるか確認してください。',
+        balErrHttp: 'プロバイダーがエラーを返しました（HTTP {status}）。',
+        balErrTooLarge: '応答が大きすぎるため破棄しました。',
+        balErrFormat: '応答の形式が想定と異なり、残高を読み取れませんでした。',
+        balErrNoValue: '応答に「残高フィールド」が指す数値がありません。フィールドのパスを確認してください。',
+        balErrBusy: '問い合わせ中です。しばらくお待ちください。',
+        balErrChanged: '問い合わせ中にアカウントが変更されたため、結果を破棄しました。もう一度更新してください。',
+        balErrBadUrl: 'エンドポイントを使えません。https のアドレス（このマシン上では http も可）で、? パラメータ、ユーザー名、# は付けられません。',
+        balErrBadPath: '残高フィールドが正しくありません。英数字・アンダースコア・ハイフンをドットで区切ってください。',
+        balErrBadCurrency: '通貨は3文字のコードで指定してください（例：USD、CNY）。',
+        balErrBadKey: 'キーに空白や改行は使えず、512文字までです。',
+        balErrTooMany: 'アカウントは最大 {n} 件まで追加できます。',
+        balErrWrite: '保存できませんでした。データフォルダーに書き込めるか確認してください。',
+        balFailed: '失敗しました：{error}',
+        sideBalance: 'アカウント残高',
       }
 
       // Korean UI dictionary; keys mirror EN exactly.
@@ -2409,6 +2617,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: '직접 설정한 가격이 카탈로그 가격으로 바뀌어요. 계속할까요?',
         catFailed: '실패했어요: {error}',
         sourceCatalog: '카탈로그',
+        sectionBalance: '계정 잔액',
+        balIntro: '직접 사용하는 서비스 제공업체 계정을 추가해 남은 금액을 확인합니다. 키는 이 컴퓨터에서 현재 사용자만 읽을 수 있는 파일에 저장되며, 페이지에서는 읽을 수 없고 해당 제공업체의 주소로만 전송됩니다. 「새로고침」을 누르거나 아래의 자동 새로고침을 켤 때만 네트워크에 연결합니다. Coding Plan 같은 구독 한도는 포함되지 않습니다.',
+        balEmpty: '추가된 계정이 없습니다.',
+        balAdd: '계정 추가',
+        balRefresh: '새로고침',
+        balRefreshAll: '모두 새로고침',
+        balRefreshing: '조회 중…',
+        balEdit: '편집',
+        balDelete: '삭제',
+        balDeleteConfirm: '계정 「{label}」과(와) 저장된 키를 삭제할까요?',
+        balCustom: '사용자 지정',
+        balLabel: '이름',
+        balKey: 'API 키',
+        balKeyPlaceholder: 'API 키 붙여넣기',
+        balKeySaved: '저장됨 (비워 두면 변경 안 함)',
+        balKeyClear: '키 지우기',
+        balKeyManagement: 'OpenRouter 잔액 조회에는 Management Key가 필요합니다 (OpenRouter 키 페이지에서 생성). 일반 키는 거부됩니다.',
+        balUrl: '엔드포인트',
+        balPath: '잔액 필드',
+        balCurrency: '통화',
+        balCustomHint: '사용자 지정 계정은 이 주소로 GET 요청을 보내며 키는 Authorization: Bearer로 전송합니다. 반환된 JSON에서 「잔액 필드」가 가리키는 숫자를 읽습니다 (점으로 구분, 배열은 번호, 예: data.balance 또는 data.items.0.amount). https 주소만 허용되며 (이 컴퓨터에서는 http도 가능), ? 매개변수·사용자 이름·#은 쓸 수 없습니다. 다른 도메인으로 바꾸면 저장된 키가 지워집니다.',
+        balSave: '저장',
+        balCancel: '취소',
+        balKeyDropped: '엔드포인트의 도메인이 바뀌어 저장된 키를 지웠습니다. 다시 입력하세요.',
+        balNoKey: '키가 입력되지 않음',
+        balNever: '아직 조회하지 않음',
+        balUpdated: '{when} 업데이트',
+        balGranted: '지급',
+        balToppedUp: '충전',
+        balUsed: '사용',
+        balLow: '잔액 부족',
+        balAuto: '자동 새로고침',
+        balAutoHint: '켜면 키가 입력된 계정을 10분마다 조회합니다. 꺼 두면 「새로고침」을 누를 때만 네트워크에 연결합니다.',
+        balSide: '오른쪽 사이드바에 표시',
+        balSideHint: '오른쪽 사이드바 페이지에 계정 잔액을 표시합니다 (계정을 추가하면 나타납니다).',
+        balErrNetwork: '제공업체에 연결할 수 없습니다. 네트워크를 확인하고 다시 시도하세요.',
+        balErrTimeout: '요청 시간이 초과되었습니다. 잠시 후 다시 시도하세요.',
+        balErrUnauthorized: '키가 거부되었습니다. 키가 올바른지, 잔액 조회 권한이 있는지 확인하세요.',
+        balErrHttp: '제공업체가 오류를 반환했습니다 (HTTP {status}).',
+        balErrTooLarge: '응답이 너무 커서 버렸습니다.',
+        balErrFormat: '응답 형식이 예상과 달라 잔액을 읽지 못했습니다.',
+        balErrNoValue: '응답에 「잔액 필드」가 가리키는 숫자가 없습니다. 필드 경로를 확인하세요.',
+        balErrBusy: '이미 조회 중입니다. 잠시 기다려 주세요.',
+        balErrChanged: '조회 중에 계정이 변경되어 결과를 버렸습니다. 다시 새로고침하세요.',
+        balErrBadUrl: '엔드포인트를 사용할 수 없습니다. https 주소 (이 컴퓨터에서는 http 가능)여야 하며 ? 매개변수·사용자 이름·#은 쓸 수 없습니다.',
+        balErrBadPath: '잔액 필드가 올바르지 않습니다. 영문자, 숫자, 밑줄, 하이픈을 점으로 구분해 쓰세요.',
+        balErrBadCurrency: '통화는 USD, CNY처럼 3글자여야 합니다.',
+        balErrBadKey: '키에는 공백이나 줄바꿈을 넣을 수 없고 512자 이하여야 합니다.',
+        balErrTooMany: '계정은 최대 {n}개까지 추가할 수 있습니다.',
+        balErrWrite: '저장하지 못했습니다. 데이터 폴더에 쓸 수 있는지 확인하세요.',
+        balFailed: '실패했습니다: {error}',
+        sideBalance: '계정 잔액',
       }
 
       // German UI dictionary; keys and order mirror EN.
@@ -2867,6 +3127,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: 'Dadurch wird der von Hand gesetzte Preis durch den Katalogpreis ersetzt. Fortfahren?',
         catFailed: 'Fehlgeschlagen: {error}',
         sourceCatalog: 'Katalog',
+        sectionBalance: 'Kontostände',
+        balIntro: 'Fügen Sie Ihre eigenen Konten bei Anbietern hinzu, um zu sehen, wie viel Guthaben übrig ist. Schlüssel liegen in einer Datei auf diesem Rechner, die nur Ihr Benutzer lesen kann; die Seite sieht sie nie, und sie werden nur an die Adresse des jeweiligen Anbieters gesendet. Ins Netz geht nichts, bis Sie auf „Aktualisieren“ klicken (oder unten die automatische Aktualisierung einschalten). Abo-Kontingente wie Coding Plans sind nicht enthalten.',
+        balEmpty: 'Noch keine Konten.',
+        balAdd: 'Konto hinzufügen',
+        balRefresh: 'Aktualisieren',
+        balRefreshAll: 'Alle aktualisieren',
+        balRefreshing: 'Abfrage läuft…',
+        balEdit: 'Bearbeiten',
+        balDelete: 'Löschen',
+        balDeleteConfirm: 'Konto „{label}“ und den gespeicherten Schlüssel löschen?',
+        balCustom: 'Benutzerdefiniert',
+        balLabel: 'Name',
+        balKey: 'API-Schlüssel',
+        balKeyPlaceholder: 'API-Schlüssel einfügen',
+        balKeySaved: 'Gespeichert, leer lassen zum Beibehalten',
+        balKeyClear: 'Schlüssel löschen',
+        balKeyManagement: 'OpenRouter braucht für das Guthaben einen Management Key (auf der Schlüsselseite von OpenRouter erstellen); ein normaler Schlüssel wird abgelehnt.',
+        balUrl: 'Endpunkt',
+        balPath: 'Guthabenfeld',
+        balCurrency: 'Währung',
+        balCustomHint: 'Ein benutzerdefiniertes Konto sendet ein GET an diese Adresse, der Schlüssel geht als Authorization: Bearer mit. Aus dem zurückgegebenen JSON wird die Zahl gelesen, auf die das Guthabenfeld zeigt: durch Punkte getrennt, Arrays per Index, z. B. data.balance oder data.items.0.amount. Erlaubt sind nur https-Adressen (auf diesem Rechner auch http) ohne ?-Parameter, Benutzernamen oder #. Wechselt die Adresse zu einer anderen Domain, wird der gespeicherte Schlüssel gelöscht.',
+        balSave: 'Speichern',
+        balCancel: 'Abbrechen',
+        balKeyDropped: 'Der Endpunkt hat die Domain gewechselt, daher wurde der gespeicherte Schlüssel gelöscht. Bitte erneut eingeben.',
+        balNoKey: 'Kein Schlüssel eingetragen',
+        balNever: 'Noch nicht abgefragt',
+        balUpdated: 'Aktualisiert {when}',
+        balGranted: 'Geschenkt',
+        balToppedUp: 'Aufgeladen',
+        balUsed: 'Verbraucht',
+        balLow: 'Guthaben zu niedrig',
+        balAuto: 'Automatisch aktualisieren',
+        balAutoHint: 'Fragt Konten mit Schlüssel alle 10 Minuten ab. Solange es aus ist, geht nur beim Klick auf „Aktualisieren“ etwas ins Netz.',
+        balSide: 'In der rechten Seitenleiste anzeigen',
+        balSideHint: 'Listet die Kontostände auf der Seite der rechten Seitenleiste auf (erscheint, sobald ein Konto hinzugefügt ist).',
+        balErrNetwork: 'Der Anbieter ist nicht erreichbar. Netzwerk prüfen und erneut versuchen.',
+        balErrTimeout: 'Zeitüberschreitung. Bitte später erneut versuchen.',
+        balErrUnauthorized: 'Der Schlüssel wurde abgelehnt: Prüfen Sie, ob er stimmt und das Guthaben lesen darf.',
+        balErrHttp: 'Der Anbieter hat einen Fehler gemeldet (HTTP {status}).',
+        balErrTooLarge: 'Die Antwort war zu groß und wurde verworfen.',
+        balErrFormat: 'Die Antwort hatte nicht das erwartete Format; das Guthaben konnte nicht gelesen werden.',
+        balErrNoValue: 'In der Antwort steht an der Stelle des Guthabenfelds keine Zahl. Feldpfad prüfen.',
+        balErrBusy: 'Eine Abfrage läuft bereits.',
+        balErrChanged: 'Das Konto wurde während der Abfrage geändert, das Ergebnis wurde verworfen. Bitte erneut aktualisieren.',
+        balErrBadUrl: 'Der Endpunkt ist nicht nutzbar: nötig ist eine https-Adresse (auf diesem Rechner auch http) ohne ?-Parameter, Benutzernamen oder #.',
+        balErrBadPath: 'Das Guthabenfeld ist ungültig: Buchstaben, Ziffern, Unterstriche und Bindestriche, durch Punkte getrennt.',
+        balErrBadCurrency: 'Die Währung braucht 3 Buchstaben, z. B. USD oder CNY.',
+        balErrBadKey: 'Der Schlüssel darf keine Leerzeichen oder Zeilenumbrüche enthalten und höchstens 512 Zeichen lang sein.',
+        balErrTooMany: 'Es können höchstens {n} Konten hinzugefügt werden.',
+        balErrWrite: 'Speichern fehlgeschlagen. Prüfen Sie, ob der Datenordner beschreibbar ist.',
+        balFailed: 'Fehlgeschlagen: {error}',
+        sideBalance: 'Kontostände',
       }
 
       // French UI dictionary; keys and order mirror EN.
@@ -3325,6 +3637,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: 'Cela remplace le prix saisi à la main par celui du catalogue. Continuer ?',
         catFailed: 'Échec : {error}',
         sourceCatalog: 'Catalogue',
+        sectionBalance: 'Soldes des comptes',
+        balIntro: 'Ajoutez vos propres comptes chez les fournisseurs pour voir combien il vous reste. Les clés sont conservées dans un fichier de cette machine que seul votre utilisateur peut lire ; la page ne les voit jamais et elles ne sont envoyées qu\'à l\'adresse du fournisseur concerné. Rien ne passe par le réseau tant que vous ne cliquez pas sur « Actualiser » (ou n\'activez pas l\'actualisation automatique ci-dessous). Les quotas d\'abonnement comme les Coding Plans ne sont pas inclus.',
+        balEmpty: 'Aucun compte pour l\'instant.',
+        balAdd: 'Ajouter un compte',
+        balRefresh: 'Actualiser',
+        balRefreshAll: 'Tout actualiser',
+        balRefreshing: 'Interrogation…',
+        balEdit: 'Modifier',
+        balDelete: 'Supprimer',
+        balDeleteConfirm: 'Supprimer le compte « {label} » et sa clé enregistrée ?',
+        balCustom: 'Personnalisé',
+        balLabel: 'Nom',
+        balKey: 'Clé API',
+        balKeyPlaceholder: 'Collez la clé API',
+        balKeySaved: 'Enregistrée, laisser vide pour la conserver',
+        balKeyClear: 'Effacer la clé',
+        balKeyManagement: 'OpenRouter exige une Management Key pour lire les crédits (à créer sur la page des clés d\'OpenRouter) ; une clé ordinaire est refusée.',
+        balUrl: 'Point d\'accès',
+        balPath: 'Champ du solde',
+        balCurrency: 'Devise',
+        balCustomHint: 'Un compte personnalisé envoie une requête GET à cette adresse avec la clé en Authorization: Bearer, puis lit le nombre vers lequel pointe le champ du solde dans le JSON renvoyé : séparé par des points, tableaux par indice, par ex. data.balance ou data.items.0.amount. Seules les adresses https sont acceptées (http sur cette machine), sans paramètres ?, nom d\'utilisateur ni #. Si l\'adresse passe à un autre domaine, la clé enregistrée est effacée.',
+        balSave: 'Enregistrer',
+        balCancel: 'Annuler',
+        balKeyDropped: 'Le point d\'accès a changé de domaine : la clé enregistrée a été effacée. Saisissez-la de nouveau.',
+        balNoKey: 'Aucune clé saisie',
+        balNever: 'Pas encore interrogé',
+        balUpdated: 'Mis à jour {when}',
+        balGranted: 'Offert',
+        balToppedUp: 'Rechargé',
+        balUsed: 'Utilisé',
+        balLow: 'Solde insuffisant',
+        balAuto: 'Actualiser automatiquement',
+        balAutoHint: 'Interroge toutes les 10 minutes les comptes qui ont une clé. Désactivé, rien ne passe par le réseau sauf si vous cliquez sur « Actualiser ».',
+        balSide: 'Afficher dans la barre latérale droite',
+        balSideHint: 'Liste les soldes sur la page de la barre latérale droite (apparaît dès qu\'un compte est ajouté).',
+        balErrNetwork: 'Impossible de joindre le fournisseur. Vérifiez le réseau et réessayez.',
+        balErrTimeout: 'La requête a expiré. Réessayez plus tard.',
+        balErrUnauthorized: 'La clé a été refusée : vérifiez qu\'elle est correcte et autorisée à lire le solde.',
+        balErrHttp: 'Le fournisseur a renvoyé une erreur (HTTP {status}).',
+        balErrTooLarge: 'La réponse était trop volumineuse et a été abandonnée.',
+        balErrFormat: 'La réponse n\'a pas le format attendu ; le solde n\'a pas pu être lu.',
+        balErrNoValue: 'La réponse ne contient aucun nombre à l\'emplacement du champ du solde. Vérifiez le chemin du champ.',
+        balErrBusy: 'Une interrogation est déjà en cours.',
+        balErrChanged: 'Le compte a été modifié pendant la requête, le résultat a été abandonné. Actualisez de nouveau.',
+        balErrBadUrl: 'Le point d\'accès est inutilisable : il faut une adresse https (http sur cette machine) sans paramètres ?, nom d\'utilisateur ni #.',
+        balErrBadPath: 'Le champ du solde n\'est pas valide : lettres, chiffres, tirets bas et traits d\'union, séparés par des points.',
+        balErrBadCurrency: 'La devise demande 3 lettres, par ex. USD ou CNY.',
+        balErrBadKey: 'La clé ne doit contenir ni espace ni saut de ligne et faire au plus 512 caractères.',
+        balErrTooMany: 'Vous pouvez ajouter {n} comptes au maximum.',
+        balErrWrite: 'Échec de l\'enregistrement. Vérifiez que le dossier de données est accessible en écriture.',
+        balFailed: 'Échec : {error}',
+        sideBalance: 'Soldes des comptes',
       }
 
       // Spanish (es) UI dictionary; keys mirror EN exactly.
@@ -3783,6 +4147,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: 'Esto sustituye el precio que fijaste a mano por el del catálogo. ¿Continuar?',
         catFailed: 'Error: {error}',
         sourceCatalog: 'Catálogo',
+        sectionBalance: 'Saldos de cuentas',
+        balIntro: 'Añade tus propias cuentas de proveedores para ver cuánto saldo queda. Las claves se guardan en un archivo de este equipo que solo tu usuario puede leer; la página nunca las ve y solo se envían a la dirección del propio proveedor. No se conecta a internet hasta que pulses «Actualizar» (o actives la actualización automática de abajo). No se incluyen cuotas de suscripción como los Coding Plans.',
+        balEmpty: 'Aún no hay cuentas.',
+        balAdd: 'Añadir cuenta',
+        balRefresh: 'Actualizar',
+        balRefreshAll: 'Actualizar todo',
+        balRefreshing: 'Consultando…',
+        balEdit: 'Editar',
+        balDelete: 'Eliminar',
+        balDeleteConfirm: '¿Eliminar la cuenta «{label}» y su clave guardada?',
+        balCustom: 'Personalizada',
+        balLabel: 'Nombre',
+        balKey: 'Clave API',
+        balKeyPlaceholder: 'Pega la clave API',
+        balKeySaved: 'Guardada; déjalo vacío para conservarla',
+        balKeyClear: 'Borrar clave',
+        balKeyManagement: 'OpenRouter necesita una Management Key para leer los créditos (créala en la página de claves de OpenRouter); una clave normal se rechaza.',
+        balUrl: 'Endpoint',
+        balPath: 'Campo del saldo',
+        balCurrency: 'Moneda',
+        balCustomHint: 'Una cuenta personalizada envía una petición GET a esta dirección con la clave como Authorization: Bearer y lee el número al que apunta el campo del saldo en el JSON devuelto: separado por puntos, arrays por índice, p. ej. data.balance o data.items.0.amount. Solo se aceptan direcciones https (http en este equipo), sin parámetros ?, nombre de usuario ni #. Si la dirección pasa a otro dominio, se borra la clave guardada.',
+        balSave: 'Guardar',
+        balCancel: 'Cancelar',
+        balKeyDropped: 'El endpoint cambió de dominio, así que se borró la clave guardada. Vuelve a introducirla.',
+        balNoKey: 'Sin clave',
+        balNever: 'Aún sin consultar',
+        balUpdated: 'Actualizado {when}',
+        balGranted: 'Regalado',
+        balToppedUp: 'Recargado',
+        balUsed: 'Usado',
+        balLow: 'Saldo insuficiente',
+        balAuto: 'Actualizar automáticamente',
+        balAutoHint: 'Consulta cada 10 minutos las cuentas que tienen clave. Desactivado, nada sale a internet salvo que pulses «Actualizar».',
+        balSide: 'Mostrar en la barra lateral derecha',
+        balSideHint: 'Lista los saldos en la página de la barra lateral derecha (aparece al añadir una cuenta).',
+        balErrNetwork: 'No se puede conectar con el proveedor. Revisa la red e inténtalo de nuevo.',
+        balErrTimeout: 'La petición agotó el tiempo. Inténtalo más tarde.',
+        balErrUnauthorized: 'Se rechazó la clave: comprueba que es correcta y que puede leer el saldo.',
+        balErrHttp: 'El proveedor devolvió un error (HTTP {status}).',
+        balErrTooLarge: 'La respuesta era demasiado grande y se descartó.',
+        balErrFormat: 'La respuesta no tenía el formato esperado; no se pudo leer el saldo.',
+        balErrNoValue: 'La respuesta no tiene ningún número donde apunta el campo del saldo. Revisa la ruta del campo.',
+        balErrBusy: 'Ya hay una consulta en curso.',
+        balErrChanged: 'La cuenta se modificó durante la consulta y el resultado se descartó. Vuelve a actualizar.',
+        balErrBadUrl: 'El endpoint no es válido: necesita una dirección https (http en este equipo) sin parámetros ?, nombre de usuario ni #.',
+        balErrBadPath: 'El campo del saldo no es válido: letras, dígitos, guiones bajos y guiones, separados por puntos.',
+        balErrBadCurrency: 'La moneda necesita 3 letras, p. ej. USD o CNY.',
+        balErrBadKey: 'La clave no puede contener espacios ni saltos de línea y tiene un máximo de 512 caracteres.',
+        balErrTooMany: 'Se pueden añadir como máximo {n} cuentas.',
+        balErrWrite: 'No se pudo guardar. Comprueba que la carpeta de datos permite escribir.',
+        balFailed: 'Error: {error}',
+        sideBalance: 'Saldos de cuentas',
       }
 
       // Russian UI dictionary for the cost meter plugin (keys mirror EN).
@@ -4241,6 +4657,58 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         catReplaceConfirm: 'Цена, заданная вручную, будет заменена ценой из каталога. Продолжить?',
         catFailed: 'Не удалось: {error}',
         sourceCatalog: 'Каталог',
+        sectionBalance: 'Балансы аккаунтов',
+        balIntro: 'Добавьте свои аккаунты у провайдеров, чтобы видеть остаток средств. Ключи хранятся в файле на этом компьютере, который может читать только ваш пользователь; страница их не видит, а отправляются они только на собственный адрес провайдера. В сеть ничего не уходит, пока вы не нажмёте «Обновить» (или не включите автообновление ниже). Квоты по подписке, например Coding Plan, не учитываются.',
+        balEmpty: 'Аккаунтов пока нет.',
+        balAdd: 'Добавить аккаунт',
+        balRefresh: 'Обновить',
+        balRefreshAll: 'Обновить все',
+        balRefreshing: 'Запрос…',
+        balEdit: 'Изменить',
+        balDelete: 'Удалить',
+        balDeleteConfirm: 'Удалить аккаунт «{label}» и сохранённый ключ?',
+        balCustom: 'Свой',
+        balLabel: 'Название',
+        balKey: 'API-ключ',
+        balKeyPlaceholder: 'Вставьте API-ключ',
+        balKeySaved: 'Сохранён, оставьте пустым, чтобы не менять',
+        balKeyClear: 'Удалить ключ',
+        balKeyManagement: 'Для чтения кредитов OpenRouter нужен Management Key (создаётся на странице ключей OpenRouter); обычный ключ будет отклонён.',
+        balUrl: 'Адрес API',
+        balPath: 'Поле баланса',
+        balCurrency: 'Валюта',
+        balCustomHint: 'Свой аккаунт отправляет GET-запрос на этот адрес, передавая ключ как Authorization: Bearer, и читает число, на которое указывает поле баланса в полученном JSON: через точки, массивы по номеру, например data.balance или data.items.0.amount. Принимаются только адреса https (на этом компьютере и http), без параметров ?, имени пользователя и #. Если адрес переходит на другой домен, сохранённый ключ удаляется.',
+        balSave: 'Сохранить',
+        balCancel: 'Отмена',
+        balKeyDropped: 'Домен адреса изменился, поэтому сохранённый ключ удалён. Введите его снова.',
+        balNoKey: 'Ключ не введён',
+        balNever: 'Ещё не запрашивался',
+        balUpdated: 'Обновлено {when}',
+        balGranted: 'Подарено',
+        balToppedUp: 'Пополнено',
+        balUsed: 'Потрачено',
+        balLow: 'Недостаточно средств',
+        balAuto: 'Обновлять автоматически',
+        balAutoHint: 'Каждые 10 минут запрашивает аккаунты с ключом. Пока выключено, в сеть ничего не уходит, кроме нажатия «Обновить».',
+        balSide: 'Показывать в правой боковой панели',
+        balSideHint: 'Выводит балансы на странице правой боковой панели (появляется после добавления аккаунта).',
+        balErrNetwork: 'Не удаётся связаться с провайдером. Проверьте сеть и повторите.',
+        balErrTimeout: 'Время запроса истекло. Повторите позже.',
+        balErrUnauthorized: 'Ключ отклонён: проверьте, что он верный и разрешает читать баланс.',
+        balErrHttp: 'Провайдер вернул ошибку (HTTP {status}).',
+        balErrTooLarge: 'Ответ слишком большой и был отброшен.',
+        balErrFormat: 'Формат ответа не соответствует ожидаемому, баланс прочитать не удалось.',
+        balErrNoValue: 'В ответе нет числа по пути поля баланса. Проверьте путь к полю.',
+        balErrBusy: 'Запрос уже выполняется.',
+        balErrChanged: 'Аккаунт изменили во время запроса, результат отброшен. Обновите ещё раз.',
+        balErrBadUrl: 'Адрес не подходит: нужен адрес https (на этом компьютере и http) без параметров ?, имени пользователя и #.',
+        balErrBadPath: 'Поле баланса указано неверно: буквы, цифры, подчёркивания и дефисы, разделённые точками.',
+        balErrBadCurrency: 'Валюта — 3 буквы, например USD или CNY.',
+        balErrBadKey: 'Ключ не должен содержать пробелов и переносов строк и должен быть не длиннее 512 символов.',
+        balErrTooMany: 'Можно добавить не более {n} аккаунтов.',
+        balErrWrite: 'Не удалось сохранить. Проверьте, что в папку данных можно писать.',
+        balFailed: 'Не удалось: {error}',
+        sideBalance: 'Балансы аккаунтов',
       }
 
       // Dictionaries registered next to zh and en. The host ships only zh and en; these take effect when the active language
@@ -4368,6 +4836,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         statsCurrency: 'CNY',
         usdCny: 6.8,
         catalogAuto: false,
+        sideBalance: true,
+        balanceAuto: false,
       }
       const DOCK_STYLES = ['plain', 'soft', 'outline', 'bar']
       const DOCK_FONTS = ['system', 'mono']
@@ -5653,6 +6123,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('priceNote')),
           h(PriceList, { snap }),
 
+          h('div', { style: ui.section }, t('sectionBalance')),
+          h(BalanceSettings, { snap }),
+
           h('div', { style: Object.assign({}, ui.section, { display: 'flex', alignItems: 'center', gap: 8 }) }, t('sectionMedia'), h('span', { style: ui.badge }, t('mediaExperimental'))),
           h(MediaSettings),
 
@@ -5989,6 +6462,189 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             outcome ? historyLines(historyOutcome(outcome, money)) : historyLines(historyFacts(scan, money)),
             outcome ? null : historyModels(scan, money)) : null,
           h('div', { style: Object.assign({}, ui.desc, { padding: '12px 0 0' }) }, t('histNote')))
+      }
+
+      // Account balances (balance.js): the settings section where accounts are added and asked, and the block on the right-sidebar
+      // page. The Host keeps the keys and does the asking; this side only sends what was typed and shows what comes back. A key
+      // typed here lives in component state until it is saved and is never read back: the Host answers `hasKey`, nothing more.
+      // Answers carry a stable `code`; the texts below are chosen by it.
+
+      const BALANCE_ERROR_KEYS = {
+        network: 'balErrNetwork', timeout: 'balErrTimeout', unauthorized: 'balErrUnauthorized', 'too-large': 'balErrTooLarge', 'bad-format': 'balErrFormat',
+        'no-value': 'balErrNoValue', busy: 'balErrBusy', changed: 'balErrChanged', 'no-key': 'balNoKey', 'bad-url': 'balErrBadUrl', 'bad-path': 'balErrBadPath',
+        'bad-currency': 'balErrBadCurrency', 'bad-key': 'balErrBadKey', 'write-failed': 'balErrWrite',
+      }
+      const BALANCE_PART_KEYS = { granted: 'balGranted', toppedUp: 'balToppedUp', used: 'balUsed' }
+      const NO_BALANCE = { max: 0, providers: [], accounts: [] }
+
+      const balanceOf = (snap) => (snap && snap.balance) || NO_BALANCE
+
+      /** Amounts are shown in the currency the provider reports, never converted. */
+      const balanceMoney = (currency, amount) => (amount < 0 ? '-' : '') + formatMoney(currency, Math.abs(amount))
+
+      /** "¥110.00 (Granted ¥10.00 · Topped up ¥100.00)", one per currency the account holds. */
+      function balanceRowText(row) {
+        const parts = row.parts.map((p) => t(BALANCE_PART_KEYS[p.kind]) + ' ' + balanceMoney(row.currency, p.amount))
+        return balanceMoney(row.currency, row.total) + (parts.length > 0 ? ' (' + parts.join(' · ') + ')' : '')
+      }
+
+      /** Failure text of a Host answer or of an account's last error (`{ code, status }`; too-many also needs `max`). */
+      function balanceError(res, max) {
+        if (res.code === 'http') return t('balErrHttp', { status: res.status })
+        if (res.code === 'too-many') return t('balErrTooMany', { n: max })
+        if (BALANCE_ERROR_KEYS[res.code]) return t(BALANCE_ERROR_KEYS[res.code])
+        return t('balFailed', { error: res.error || res.code || 'unknown' })
+      }
+
+      /** One Host call; always resolves to an object with `ok`. */
+      const balanceCall = (body) => postAction(body)
+        .then((res) => res || { ok: false, code: 'empty' })
+        .catch((err) => ({ ok: false, code: 'network', error: (err && err.message) || String(err) }))
+
+      const providerName = (snap, account) => {
+        if (account.provider === 'custom') return t('balCustom')
+        const found = balanceOf(snap).providers.find((p) => p.id === account.provider)
+        return found ? found.name : account.provider
+      }
+
+      /** The last answer of an account as lines of text: money per currency, a low-balance notice, when, or why it failed. */
+      function BalanceStatus(props) {
+        const { account, max } = props
+        const { result, error } = account
+        const line = (text, color, key) => h('div', { key, style: { fontSize: 12, lineHeight: '18px', color } }, text)
+        const lines = []
+        if (result) {
+          result.rows.forEach((row, i) => lines.push(h('div', { key: 'r' + i, style: { fontSize: 14, lineHeight: '22px', color: PRIMARY, fontVariantNumeric: 'tabular-nums' } }, balanceRowText(row))))
+          if (result.available === false) lines.push(line(t('balLow'), LIGHT.red, 'low'))
+          lines.push(line(t('balUpdated', { when: historyWhen(result.at) }), TERTIARY, 'at'))
+        } else if (account.hasKey && !error) lines.push(line(t('balNever'), TERTIARY, 'never'))
+        if (!account.hasKey) lines.push(line(t('balNoKey'), SECONDARY, 'nokey'))
+        if (error) lines.push(line(balanceError(error, max), LIGHT.red, 'err'))
+        return h('div', { style: { display: 'flex', flexDirection: 'column', gap: 1, marginTop: 2 } }, lines)
+      }
+
+      /** Add an account (no `account`) or edit one: provider chips, name, key, and for a custom account where to look. */
+      function BalanceEditor(props) {
+        const { snap, account, onDone } = props
+        const info = balanceOf(snap)
+        const [provider, setProvider] = React.useState(account ? account.provider : info.providers.length > 0 ? info.providers[0].id : 'custom')
+        const [label, setLabel] = React.useState(account ? account.label : '')
+        const [key, setKey] = React.useState('')
+        const [clearKey, setClearKey] = React.useState(false)
+        const [url, setUrl] = React.useState(account && account.url ? account.url : '')
+        const [path, setPath] = React.useState(account && account.path ? account.path : '')
+        const [currency, setCurrency] = React.useState(account && account.currency ? account.currency : 'USD')
+        const [busy, setBusy] = React.useState(false)
+        const [error, setError] = React.useState(null)
+        const custom = provider === 'custom'
+        const chosen = info.providers.find((p) => p.id === provider)
+
+        const save = () => {
+          setBusy(true)
+          setError(null)
+          const body = { action: 'balance-save', provider, label }
+          if (account) body.id = account.id
+          if (key !== '') body.key = key.trim()
+          if (clearKey) body.clearKey = true
+          if (custom) Object.assign(body, { url, path, currency })
+          balanceCall(body).then((res) => {
+            setBusy(false)
+            if (!res.ok) { setError(balanceError(res, info.max)); return }
+            setKey('')
+            store.refresh().then(() => onDone(res.keyDropped ? t('balKeyDropped') : null))
+          })
+        }
+        const providerChips = account ? null : chips(
+          info.providers.map((p) => ({ key: p.id, label: p.name, on: provider === p.id })).concat({ key: 'custom', label: t('balCustom'), on: custom }),
+          (id) => setProvider(id))
+        const field = (name, text, value, onChange, attrs) => inputField(name, text, { value, onChange, attrs })
+
+        return h('div', { style: { padding: '14px 0 18px', borderBottom: BORDER, display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 } },
+          providerChips,
+          h('div', { style: ui.grid },
+            field('balLabel', t('balLabel'), label, setLabel, { maxLength: 40, placeholder: chosen ? chosen.name : '' }),
+            field('balKey', t('balKey'), key, (v) => { setKey(v); setClearKey(false) }, {
+              type: 'password', autoComplete: 'off', spellCheck: false, 'aria-label': t('balKey'),
+              placeholder: account && account.hasKey && !clearKey ? t('balKeySaved') : t('balKeyPlaceholder'),
+            })),
+          custom ? h('div', { style: ui.grid },
+            field('balUrl', t('balUrl'), url, setUrl, { placeholder: 'https://example.com/v1/balance', spellCheck: false }),
+            field('balPath', t('balPath'), path, setPath, { placeholder: 'data.balance', spellCheck: false }),
+            field('balCurrency', t('balCurrency'), currency, (v) => setCurrency(v.toUpperCase()), { maxLength: 3, placeholder: 'USD' })) : null,
+          custom ? h('div', { style: ui.desc }, t('balCustomHint')) : null,
+          chosen && chosen.keyKind === 'management' ? h('div', { style: ui.desc }, t('balKeyManagement')) : null,
+          error ? small(LIGHT.red, error) : null,
+          h('div', { style: { display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' } },
+            btn(t('balSave'), save, 'primary', busy),
+            btn(t('balCancel'), () => onDone(null), null, busy),
+            account && account.hasKey && !clearKey ? btn(t('balKeyClear'), () => { setClearKey(true); setKey('') }, null, busy) : null))
+      }
+
+      /** Settings → accounts (add, edit, ask, delete), the timer and the right-sidebar switch. */
+      function BalanceSettings(props) {
+        const { snap } = props
+        const info = balanceOf(snap)
+        const prefs = usePrefs()
+        // null = closed, 'new' = adding, an id = editing that account.
+        const [editing, setEditing] = React.useState(null)
+        const [busy, setBusy] = React.useState(null)
+        const [notice, setNotice] = React.useState(null)
+
+        const run = (body, id) => {
+          setBusy(id)
+          setNotice(null)
+          balanceCall(body).then((res) => {
+            if (!res.ok && body.action === 'balance-remove') setNotice(balanceError(res, info.max))
+            return store.refresh()
+          }).then(() => setBusy(null))
+        }
+        const remove = (account) => {
+          if (typeof window !== 'undefined' && window.confirm && !window.confirm(t('balDeleteConfirm', { label: account.label }))) return
+          run({ action: 'balance-remove', id: account.id }, account.id)
+        }
+        const asking = (account) => busy === account.id || busy === 'all' || account.busy
+        const withKey = info.accounts.filter((a) => a.hasKey).length
+
+        return h('div', null,
+          h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('balIntro')),
+          info.accounts.length === 0 && editing === null ? h('div', { style: Object.assign({}, ui.desc, { padding: '14px 0', borderBottom: BORDER }) }, t('balEmpty')) : null,
+          info.accounts.map((account) => (editing === account.id
+            ? h(BalanceEditor, { key: account.id, snap, account, onDone: (message) => { setEditing(null); setNotice(message) } })
+            : settingRow({ key: account.id }, h('span', null, account.label, account.label === providerName(snap, account) ? null : ' ', account.label === providerName(snap, account) ? null : h('span', { style: ui.badge }, providerName(snap, account))),
+              h(BalanceStatus, { account, max: info.max }),
+              btn(asking(account) ? t('balRefreshing') : t('balRefresh'), () => run({ action: 'balance-refresh', id: account.id }, account.id), null, !account.hasKey || asking(account)),
+              btn(t('balEdit'), () => { setNotice(null); setEditing(account.id) }),
+              btn(t('balDelete'), () => remove(account), null, asking(account))))),
+          editing === 'new' ? h(BalanceEditor, { key: 'new', snap, account: null, onDone: (message) => { setEditing(null); setNotice(message) } }) : null,
+          notice ? h('div', { style: { padding: '10px 0 0', fontSize: 12, lineHeight: '18px', color: SECONDARY } }, notice) : null,
+          h('div', { style: { display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', padding: '14px 0 0' } },
+            editing === null && info.accounts.length < info.max ? btn(t('balAdd'), () => { setNotice(null); setEditing('new') }) : null,
+            withKey > 1 ? btn(busy === 'all' ? t('balRefreshing') : t('balRefreshAll'), () => run({ action: 'balance-refresh' }, 'all'), null, busy !== null) : null),
+          settingRow({ key: 'balAuto' }, t('balAuto'), t('balAutoHint'), toggle(prefs.balanceAuto, (on) => store.setPrefs({ balanceAuto: on }), t('balAuto'))),
+          settingRow({ key: 'balSide' }, t('balSide'), t('balSideHint'), toggle(prefs.sideBalance, (on) => store.setPrefs({ sideBalance: on }), t('balSide'))))
+      }
+
+      /** Right-sidebar page: the accounts that have a key or an answer, with a refresh link. Nothing is drawn without accounts. */
+      function BalanceBlock(props) {
+        const { snap } = props
+        const info = balanceOf(snap)
+        const [busy, setBusy] = React.useState(false)
+        const shown = info.accounts.filter((a) => a.hasKey || a.result)
+        if (shown.length === 0) return null
+        const refreshAll = () => {
+          setBusy(true)
+          balanceCall({ action: 'balance-refresh' }).then(() => store.refresh()).then(() => setBusy(false))
+        }
+        return h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
+          h('div', { style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 } },
+            h('span', { style: sideLabel }, t('sideBalance')),
+            h('button', {
+              type: 'button', disabled: busy || shown.every((a) => !a.hasKey), onClick: refreshAll,
+              style: { border: 'none', background: 'transparent', padding: 0, fontFamily: 'inherit', fontSize: 11, color: SECONDARY, cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.5 : 1 },
+            }, busy ? t('balRefreshing') : t('balRefresh'))),
+          shown.map((account) => h('div', { key: account.id, style: { display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 } },
+            h('div', { title: account.label, style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 12, color: SECONDARY } }, account.label),
+            h(BalanceStatus, { account, max: info.max }))))
       }
 
       // OpenRouter price catalog in the settings: the section that fetches it and applies it in bulk, the hint next to a model that
@@ -8085,6 +8741,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           prefs.sidePeak && peaks.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
             h('div', { style: sideLabel }, t('peakTag')),
             peaks.map((schedule) => h(PeakBlock, { key: schedule.key, schedule, countdown: true, detail: prefs.sidePeakDetail }))) : null,
+
+          prefs.sideBalance ? h(BalanceBlock, { snap }) : null,
 
           b.rows.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
             h('div', { style: sideLabel }, t('sideModels')),

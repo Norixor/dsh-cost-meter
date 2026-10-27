@@ -47,8 +47,11 @@ export const DEFAULT_PREFS = Object.freeze({
   // Display currency (named for the statistics page it began on): CNY / USD convert every cost with `usdCny`; 'original' shows costs as billed.
   statsCurrency: 'CNY',
   usdCny: USD_CNY_DEFAULT,
-  // Opt-in daily refresh of the OpenRouter price catalog. The only thing that contacts the network without a click.
+  // Opt-in daily refresh of the OpenRouter price catalog. With balanceAuto below, the only things that contact the network without a click.
   catalogAuto: false,
+  // Account balances (balance.js): shown on the right-sidebar page when any account exists; the timer is opt-in and only asks providers you added.
+  sideBalance: true,
+  balanceAuto: false,
 })
 
 const ENUMS = {

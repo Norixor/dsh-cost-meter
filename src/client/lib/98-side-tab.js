@@ -109,6 +109,8 @@ function SideCostTab(props) {
       h('div', { style: sideLabel }, t('peakTag')),
       peaks.map((schedule) => h(PeakBlock, { key: schedule.key, schedule, countdown: true, detail: prefs.sidePeakDetail }))) : null,
 
+    prefs.sideBalance ? h(BalanceBlock, { snap }) : null,
+
     b.rows.length > 0 ? h('section', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
       h('div', { style: sideLabel }, t('sideModels')),
       b.rows.map((row) => h(SideModelRow, { key: row.model, row }))) : null,

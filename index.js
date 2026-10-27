@@ -33,6 +33,7 @@ import { appendCall, appendMessage, sanitizeCallLog } from './calllog.js'
 import { createHistoryService, freshHistory, legacyFirstLiveAt, migrateSessions, sanitizeHistory } from './history.js'
 import { createCatalogService } from './catalog.js'
 import { createCatalogActions } from './catalog-apply.js'
+import { createBalanceService } from './balance.js'
 import { MEDIA_TEMPLATES, argsOf, compileRules, matchRule, modelOf, observeTool, quantityOf, sanitizeObserved, sanitizeRules } from './media.js'
 
 export const name = 'dsh-cost-meter'
@@ -44,11 +45,15 @@ const DSH_HOME = process.env.DSH_HOME || join(homedir(), '.dsh')
 const STATE_FILE = join(DSH_HOME, 'cost-meter.json')
 const SESSIONS_ROOT = join(DSH_HOME, 'sessions')
 const CATALOG_FILE = join(DSH_HOME, 'cost-meter.catalog.json')
+// Provider API keys live here and nowhere else (owner-only file, see balance.js).
+const BALANCE_FILE = join(DSH_HOME, 'cost-meter.balance.json')
 const PERSIST_DELAY_MS = 1500
 const MAX_SESSIONS = 200
 const STARTUP_SCAN_DELAY_MS = 4000
 const CATALOG_FIRST_TICK_MS = 8000
 const CATALOG_TICK_MS = 3_600_000
+const BALANCE_FIRST_TICK_MS = 12_000
+const BALANCE_TICK_MS = 600_000
 
 function emptyState() {
   return { prices: {}, models: {}, sessions: {}, daily: {}, hourly: {}, slowest: [], callLog: {}, media: { rules: [], observed: {} }, budget: { currency: 'CNY', amount: 0 }, prefs: { ...DEFAULT_PREFS }, history: freshHistory() }
@@ -111,6 +116,7 @@ export function apply(ctx) {
   let persistTimer = null
   let scanTimer = null
   let catalogTimers = []
+  let balanceTimers = []
   // Bumped on every logged call so the browser half knows when to refetch a session's call log.
   // Seeded from the clock so a restarted Host never repeats a value the browser has already cached.
   let callSeq = Date.now()
@@ -395,6 +401,16 @@ export function apply(ctx) {
     catalogActions.auto().catch(() => {})
   }
 
+  // ---------- 账户余额（见 balance.js；密钥只在 balance 服务内部） ----------
+
+  const balance = createBalanceService({ file: BALANCE_FILE })
+
+  /** The opt-in timer: only runs while the preference is on, and skips accounts asked a few minutes ago. */
+  const balanceTick = () => {
+    if (disposed || !state.prefs.balanceAuto) return
+    balance.refreshAll(true).catch(() => {})
+  }
+
   // ---------- 快照与操作 ----------
 
   function snapshot() {
@@ -403,6 +419,7 @@ export function apply(ctx) {
       media: { rules: state.media.rules, templates: MEDIA_TEMPLATES, observed: observedList() },
       history: history.snapshot(),
       catalog: catalogActions.snapshot(),
+      balance: balance.snapshot(),
       callSeq, serverTime: Date.now(),
     }
   }
@@ -539,10 +556,11 @@ export function apply(ctx) {
         schedulePersist()
         // Switching an opt-in routine on starts it right away instead of waiting for the next check.
         if (!before.catalogAuto && state.prefs.catalogAuto) setTimeout(catalogTick, 0).unref?.()
+        if (!before.balanceAuto && state.prefs.balanceAuto) setTimeout(balanceTick, 0).unref?.()
         return { ok: true, prefs: state.prefs }
       }
       default: {
-        const out = catalogActions.handle(body)
+        const out = catalogActions.handle(body) || balance.handle(body)
         return out !== null ? out : { ok: false, error: 'unknown action: ' + String(action) }
       }
     }
@@ -576,6 +594,8 @@ export function apply(ctx) {
 
   catalogTimers = [setTimeout(catalogTick, CATALOG_FIRST_TICK_MS), setInterval(catalogTick, CATALOG_TICK_MS)]
   for (const timer of catalogTimers) timer.unref?.()
+  balanceTimers = [setTimeout(balanceTick, BALANCE_FIRST_TICK_MS), setInterval(balanceTick, BALANCE_TICK_MS)]
+  for (const timer of balanceTimers) timer.unref?.()
 
   // ---------- 钩子与路由 ----------
 
@@ -652,6 +672,7 @@ export function apply(ctx) {
     disposed = true
     if (scanTimer) clearTimeout(scanTimer)
     for (const timer of catalogTimers) { clearTimeout(timer); clearInterval(timer) }
+    for (const timer of balanceTimers) { clearTimeout(timer); clearInterval(timer) }
     if (persistTimer) {
       clearTimeout(persistTimer)
       persistTimer = null

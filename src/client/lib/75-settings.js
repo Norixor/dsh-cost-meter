@@ -68,6 +68,9 @@ function SettingsPage() {
     h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('priceNote')),
     h(PriceList, { snap }),
 
+    h('div', { style: ui.section }, t('sectionBalance')),
+    h(BalanceSettings, { snap }),
+
     h('div', { style: Object.assign({}, ui.section, { display: 'flex', alignItems: 'center', gap: 8 }) }, t('sectionMedia'), h('span', { style: ui.badge }, t('mediaExperimental'))),
     h(MediaSettings),
 
