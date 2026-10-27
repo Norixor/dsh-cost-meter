@@ -47,6 +47,8 @@ export const DEFAULT_PREFS = Object.freeze({
   // Display currency (named for the statistics page it began on): CNY / USD convert every cost with `usdCny`; 'original' shows costs as billed.
   statsCurrency: 'CNY',
   usdCny: USD_CNY_DEFAULT,
+  // Opt-in daily refresh of the OpenRouter price catalog. The only thing that contacts the network without a click.
+  catalogAuto: false,
 })
 
 const ENUMS = {

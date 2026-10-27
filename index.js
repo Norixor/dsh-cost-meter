@@ -31,6 +31,8 @@ import { DEFAULT_PREFS, sanitizePrefs } from './prefs.js'
 import { LATENCY_BOUNDS_MS, addTiming, pushSlowest, sanitizeSlowest } from './timing.js'
 import { appendCall, appendMessage, sanitizeCallLog } from './calllog.js'
 import { createHistoryService, freshHistory, legacyFirstLiveAt, migrateSessions, sanitizeHistory } from './history.js'
+import { createCatalogService } from './catalog.js'
+import { createCatalogActions } from './catalog-apply.js'
 import { MEDIA_TEMPLATES, argsOf, compileRules, matchRule, modelOf, observeTool, quantityOf, sanitizeObserved, sanitizeRules } from './media.js'
 
 export const name = 'dsh-cost-meter'
@@ -41,9 +43,12 @@ const API = '/__cost-meter'
 const DSH_HOME = process.env.DSH_HOME || join(homedir(), '.dsh')
 const STATE_FILE = join(DSH_HOME, 'cost-meter.json')
 const SESSIONS_ROOT = join(DSH_HOME, 'sessions')
+const CATALOG_FILE = join(DSH_HOME, 'cost-meter.catalog.json')
 const PERSIST_DELAY_MS = 1500
 const MAX_SESSIONS = 200
 const STARTUP_SCAN_DELAY_MS = 4000
+const CATALOG_FIRST_TICK_MS = 8000
+const CATALOG_TICK_MS = 3_600_000
 
 function emptyState() {
   return { prices: {}, models: {}, sessions: {}, daily: {}, hourly: {}, slowest: [], callLog: {}, media: { rules: [], observed: {} }, budget: { currency: 'CNY', amount: 0 }, prefs: { ...DEFAULT_PREFS }, history: freshHistory() }
@@ -105,6 +110,7 @@ export function apply(ctx) {
   const { prices, models, sessions, daily, hourly } = state
   let persistTimer = null
   let scanTimer = null
+  let catalogTimers = []
   // Bumped on every logged call so the browser half knows when to refetch a session's call log.
   // Seeded from the clock so a restarted Host never repeats a value the browser has already cached.
   let callSeq = Date.now()
@@ -372,6 +378,23 @@ export function apply(ctx) {
     stateFile: STATE_FILE,
   })
 
+  // ---------- OpenRouter 价格目录（见 catalog.js / catalog-apply.js） ----------
+
+  const catalogActions = createCatalogActions({
+    catalog: createCatalogService({ file: CATALOG_FILE }),
+    prices,
+    models,
+    effectivePrice,
+    backfill: backfillUnpriced,
+    persist: schedulePersist,
+  })
+
+  /** The opt-in routine: only runs while the preference is on; failures are visible in the snapshot's catalog.error. */
+  const catalogTick = () => {
+    if (disposed || !state.prefs.catalogAuto) return
+    catalogActions.auto().catch(() => {})
+  }
+
   // ---------- 快照与操作 ----------
 
   function snapshot() {
@@ -379,6 +402,7 @@ export function apply(ctx) {
       ok: true, prices, presets: PRESET_PRICES, models, sessions, budget: state.budget, prefs: state.prefs,
       media: { rules: state.media.rules, templates: MEDIA_TEMPLATES, observed: observedList() },
       history: history.snapshot(),
+      catalog: catalogActions.snapshot(),
       callSeq, serverTime: Date.now(),
     }
   }
@@ -510,12 +534,17 @@ export function apply(ctx) {
       }
       case 'set-prefs': {
         // Partial update: only the keys present in body.prefs change.
+        const before = state.prefs
         state.prefs = sanitizePrefs(body.prefs, state.prefs)
         schedulePersist()
+        // Switching an opt-in routine on starts it right away instead of waiting for the next check.
+        if (!before.catalogAuto && state.prefs.catalogAuto) setTimeout(catalogTick, 0).unref?.()
         return { ok: true, prefs: state.prefs }
       }
-      default:
-        return { ok: false, error: 'unknown action: ' + String(action) }
+      default: {
+        const out = catalogActions.handle(body)
+        return out !== null ? out : { ok: false, error: 'unknown action: ' + String(action) }
+      }
     }
   }
 
@@ -545,6 +574,8 @@ export function apply(ctx) {
     scanTimer.unref?.()
   }
 
+  catalogTimers = [setTimeout(catalogTick, CATALOG_FIRST_TICK_MS), setInterval(catalogTick, CATALOG_TICK_MS)]
+  for (const timer of catalogTimers) timer.unref?.()
 
   // ---------- 钩子与路由 ----------
 
@@ -620,6 +651,7 @@ export function apply(ctx) {
   ctx.on('dispose', () => {
     disposed = true
     if (scanTimer) clearTimeout(scanTimer)
+    for (const timer of catalogTimers) { clearTimeout(timer); clearInterval(timer) }
     if (persistTimer) {
       clearTimeout(persistTimer)
       persistTimer = null

@@ -102,6 +102,14 @@ function PriceList(props) {
     }).catch((err) => { setBusy(null); setError((err && err.message) || String(err)) })
   }
 
+  // A price taken from the catalog (hint or picker): drop the editor state and show what was backfilled.
+  function catalogApplied(model, res) {
+    clearDraft(model)
+    setExpanded((prev) => Object.assign({}, prev, { [model]: false }))
+    flash(model, t('saved') + (res.backfilled > 0 ? ' · ' + t('backfilled', { n: res.backfilled }) : ''))
+    refresh()
+  }
+
   function removePrice(model) {
     setBusy(model)
     postAction({ action: 'remove-price', model }).then(() => {
@@ -121,6 +129,7 @@ function PriceList(props) {
 
   const models = snap ? snap.models || {} : {}
   const prices = snap ? snap.prices || {} : {}
+  const catalog = catalogOf(snap)
   const presets = snap ? snap.presets || {} : {}
   const needle = filter.trim().toLowerCase()
   const allNames = Array.from(new Set([...Object.keys(presets), ...Object.keys(models), ...Object.keys(prices), ...Object.keys(drafts)]))
@@ -144,7 +153,8 @@ function PriceList(props) {
     draft.tiers.length < TIER_MAX ? h('div', { key: 'tier-add', style: { paddingLeft: 20 } }, btn('+ ' + t('tierAdd'), () => addTier(model))) : null)
 
   const renderEditor = (model, draft, dirty, custom, preset) => h('div', { style: { display: 'flex', flexDirection: 'column', paddingTop: 14 } },
-    h('div', { style: ui.label }, t('priceHeading')),
+    catalog.count > 0 ? h(CatalogPicker, { model, replacing: custom && !catalogSourceOf(prices[model]), onApplied: (res) => catalogApplied(model, res) }) : null,
+    h('div', { style: Object.assign({}, ui.label, { paddingTop: 14 }) }, t('priceHeading')),
     h('div', { style: ui.grid },
       inputField('currency', t('currency'), { value: draft.currency, onChange: (v) => patchDraft(model, 'currency', v.toUpperCase()), attrs: { maxLength: 3 } }),
       PRICE_FIELDS.map((field) => numField(field, labelOf(field), draft[field], (v) => patchDraft(model, field, v)))),
@@ -193,7 +203,7 @@ function PriceList(props) {
         h('div', { style: ui.text },
           h('div', { style: ui.title },
             model,
-            h('span', { style: ui.badge }, custom ? t('sourceCustom') : preset ? t('sourcePreset') : t('sourceNone')),
+            h('span', { style: ui.badge }, custom ? (catalogSourceOf(price) ? t('sourceCatalog') : t('sourceCustom')) : preset ? t('sourcePreset') : t('sourceNone')),
             price && price.peak && price.peak.enabled ? h('span', { style: ui.badge }, t('peakTag')) : null,
             tierCount > 0 ? h('span', { style: ui.badge }, t('tierTag', { n: tierCount })) : null,
             dirty ? small(LIGHT.yellow, t('dirty')) : note ? small(LIGHT.green, note) : null),
@@ -203,7 +213,9 @@ function PriceList(props) {
         h('div', { style: ui.controls }, btn(isOpen ? t('collapse') : t('edit'), () => toggleOpen(model), null, dirty))),
       isOpen ? renderEditor(model, draft, dirty, custom, preset)
         : price ? h('div', { style: { maxWidth: 560, marginTop: 12 } }, rateTable(price))
-          : h('div', { style: Object.assign({}, ui.desc, { marginTop: 8 }) }, t('notConfigured')))
+          : h('div', null,
+            h('div', { style: Object.assign({}, ui.desc, { marginTop: 8 }) }, t('notConfigured')),
+            h(CatalogHint, { model, match: catalog.matches[model], onApplied: (res) => catalogApplied(model, res) })))
   }
 
   // Folded groups open by themselves while searching or when one of their models has an unsaved draft (e.g. just added).

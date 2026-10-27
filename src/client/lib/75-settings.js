@@ -61,6 +61,9 @@ function SettingsPage() {
       }),
       btn(t('budgetSave'), saveBudget, budgetDraft ? 'primary' : null)),
 
+    h('div', { style: ui.section }, t('sectionCatalog')),
+    h(CatalogSettings, { snap }),
+
     h('div', { style: ui.section }, t('sectionPrices')),
     h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('priceNote')),
     h(PriceList, { snap }),

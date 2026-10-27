@@ -542,6 +542,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: '高峰时段 {local}（本地时间）',
         peakSideDetailShow: '侧边栏显示详情',
         peakSideDetailShowHint: '除状态和时段外，再显示适用日、价格倍率、适用模型和计费说明；默认关闭',
+        sectionCatalog: '价格目录',
+        catStatus: 'OpenRouter 价格目录',
+        catNever: '还没有获取。点右侧「更新目录」从 OpenRouter 取一份模型价格表，之后可以把价格直接填进下面的模型。',
+        catCached: '已保存 {n} 个模型的价格，更新于 {when}。',
+        catRefresh: '更新目录',
+        catRefreshing: '更新中…',
+        catRefreshed: '目录已更新，共 {n} 个模型。',
+        catErrNetwork: '连不上 OpenRouter，请检查网络后重试。',
+        catErrTimeout: '请求超时，请稍后重试。',
+        catErrHttp: 'OpenRouter 返回了错误（HTTP {status}）。',
+        catErrTooLarge: '返回的数据过大，已放弃。',
+        catErrFormat: '返回的数据格式不对，已放弃，原来的目录保持不变。',
+        catErrBusy: '正在更新，请稍候。',
+        catAuto: '每天自动更新',
+        catAutoHint: '开启后每天更新一次目录，同步已用目录价的模型，并给没有单价、名字能唯一对上的模型填入价格。关闭时不会主动联网。',
+        catFillTitle: '填入未配价的模型',
+        catFillHint: '给用过但没有单价的模型填入目录里的价格；只处理名字能唯一对上的，按去掉日期后缀猜出来的不会自动填。',
+        catFillBtn: '填入（{n}）',
+        catSyncTitle: '同步目录价',
+        catSyncHint: '把已经用目录价填入的模型更新到目录里的最新价格；手动改过的不动。',
+        catSyncBtn: '同步（{n}）',
+        catFilled: '已为 {n} 个模型填入目录价。',
+        catSynced: '已更新 {n} 个模型的目录价。',
+        catNothing: '没有需要处理的模型。',
+        catNote: '数据来自 OpenRouter 公开的模型列表，价格为美元；只请求这一个地址，不发送任何个人信息。这是 OpenRouter 的标价，可能和厂商官方定价不同，请自行核对。按时段计价的模型，只有能对上峰谷设置的才会带入时段价。',
+        catHint: '目录价：{id} · {rates}',
+        catDated: '按去掉日期后缀匹配，请核对',
+        catTimeBased: '目录里有按时段计价，未带入时段价',
+        catAmbiguous: '目录里有多个同名模型（{ids}），请在编辑里从目录选择。',
+        catFill: '填入目录价',
+        catPick: '从目录选择',
+        catSearchPlaceholder: '搜索目录里的模型，例如 sonnet',
+        catNoResults: '没有找到。',
+        catReplaceConfirm: '这会用目录价替换你手动设置的价格，继续吗？',
+        catFailed: '操作失败：{error}',
+        sourceCatalog: '目录价',
       }
 
       const EN = {
@@ -963,6 +999,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Peak hours {local} (local time)',
         peakSideDetailShow: 'Sidebar details',
         peakSideDetailShowHint: 'Besides the status and hours, also show the weekdays, price ratio, models and billing rule; off by default',
+        sectionCatalog: 'Price catalog',
+        catStatus: 'OpenRouter price catalog',
+        catNever: 'Not fetched yet. Use "Update catalog" to get a model price list from OpenRouter; its prices can then be filled straight into the models below.',
+        catCached: 'Prices of {n} models saved, updated {when}.',
+        catRefresh: 'Update catalog',
+        catRefreshing: 'Updating…',
+        catRefreshed: 'Catalog updated: {n} models.',
+        catErrNetwork: 'Cannot reach OpenRouter. Check the network and try again.',
+        catErrTimeout: 'The request timed out. Try again later.',
+        catErrHttp: 'OpenRouter returned an error (HTTP {status}).',
+        catErrTooLarge: 'The response was too large and was dropped.',
+        catErrFormat: 'The response was not in the expected format and was dropped; the previous catalog is kept.',
+        catErrBusy: 'An update is already running.',
+        catAuto: 'Update daily',
+        catAutoHint: 'Refresh the catalog once a day, bring models priced from it up to date and fill models without a price whose name matches exactly one entry. While off, nothing contacts the network on its own.',
+        catFillTitle: 'Fill models without a price',
+        catFillHint: 'Give models you have used but never priced the catalog price. Only names that match exactly one entry are filled; guesses made by dropping a date suffix are not filled automatically.',
+        catFillBtn: 'Fill ({n})',
+        catSyncTitle: 'Sync catalog prices',
+        catSyncHint: 'Bring models priced from the catalog up to the catalog\'s latest prices; prices you edited by hand are left alone.',
+        catSyncBtn: 'Sync ({n})',
+        catFilled: 'Filled catalog prices for {n} models.',
+        catSynced: 'Updated catalog prices for {n} models.',
+        catNothing: 'No models needed anything.',
+        catNote: 'Data comes from OpenRouter\'s public model list, priced in USD; only that one address is requested and nothing personal is sent. These are OpenRouter\'s listed prices, which can differ from the vendors\' own pricing, so check them. For models priced by time of day, the time-based prices are only taken over when they fit the peak settings.',
+        catHint: 'Catalog price: {id} · {rates}',
+        catDated: 'matched after dropping the date suffix, please check',
+        catTimeBased: 'priced by time of day in the catalog; time-based prices not taken over',
+        catAmbiguous: 'Several catalog models share this name ({ids}); pick one from the catalog in the editor.',
+        catFill: 'Use catalog price',
+        catPick: 'Pick from catalog',
+        catSearchPlaceholder: 'Search the catalog, e.g. sonnet',
+        catNoResults: 'Nothing found.',
+        catReplaceConfirm: 'This replaces the price you set by hand with the catalog price. Continue?',
+        catFailed: 'Failed: {error}',
+        sourceCatalog: 'Catalog',
       }
 
       // Traditional Chinese (Taiwan) UI dictionary; keys mirror EN exactly.
@@ -1385,6 +1457,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: '尖峰時段 {local}（本地時間）',
         peakSideDetailShow: '側邊欄顯示詳情',
         peakSideDetailShowHint: '除狀態與時段外，另顯示適用日、價格倍率、適用模型與計費說明；預設關閉',
+        sectionCatalog: '價格目錄',
+        catStatus: 'OpenRouter 價格目錄',
+        catNever: '尚未取得。按右側「更新目錄」從 OpenRouter 取得一份模型價格表，之後可直接把價格填入下方的模型。',
+        catCached: '已儲存 {n} 個模型的價格，更新於 {when}。',
+        catRefresh: '更新目錄',
+        catRefreshing: '更新中…',
+        catRefreshed: '目錄已更新，共 {n} 個模型。',
+        catErrNetwork: '連不上 OpenRouter，請檢查網路後重試。',
+        catErrTimeout: '請求逾時，請稍後重試。',
+        catErrHttp: 'OpenRouter 回傳錯誤（HTTP {status}）。',
+        catErrTooLarge: '回傳的資料過大，已放棄。',
+        catErrFormat: '回傳的資料格式不符，已放棄，原本的目錄維持不變。',
+        catErrBusy: '正在更新，請稍候。',
+        catAuto: '每天自動更新',
+        catAutoHint: '開啟後每天更新一次目錄，同步已套用目錄價的模型，並為沒有單價、名稱能唯一對上的模型填入價格。關閉時不會主動連網。',
+        catFillTitle: '填入未設定價格的模型',
+        catFillHint: '為用過但沒有單價的模型填入目錄中的價格；只處理名稱能唯一對上的，去掉日期後綴猜出來的不會自動填入。',
+        catFillBtn: '填入（{n}）',
+        catSyncTitle: '同步目錄價',
+        catSyncHint: '把已套用目錄價的模型更新為目錄中的最新價格；手動改過的不動。',
+        catSyncBtn: '同步（{n}）',
+        catFilled: '已為 {n} 個模型填入目錄價。',
+        catSynced: '已更新 {n} 個模型的目錄價。',
+        catNothing: '沒有需要處理的模型。',
+        catNote: '資料來自 OpenRouter 公開的模型清單，價格為美元；只請求這一個網址，不傳送任何個人資訊。這是 OpenRouter 的標價，可能與廠商官方定價不同，請自行核對。依時段計價的模型，只有能對上尖峰設定的才會帶入時段價。',
+        catHint: '目錄價：{id} · {rates}',
+        catDated: '去掉日期後綴後比對，請核對',
+        catTimeBased: '目錄中有依時段計價，未帶入時段價',
+        catAmbiguous: '目錄中有多個同名模型（{ids}），請在編輯中從目錄選擇。',
+        catFill: '填入目錄價',
+        catPick: '從目錄選擇',
+        catSearchPlaceholder: '搜尋目錄中的模型，例如 sonnet',
+        catNoResults: '找不到。',
+        catReplaceConfirm: '這會用目錄價取代你手動設定的價格，要繼續嗎？',
+        catFailed: '操作失敗：{error}',
+        sourceCatalog: '目錄價',
       }
 
       // Japanese UI dictionary; keys mirror EN in 21-locale-en.js.
@@ -1807,6 +1915,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'ピーク時間帯 {local}（現地時刻）',
         peakSideDetailShow: 'サイドバーに詳細を表示',
         peakSideDetailShowHint: '状態と時間帯に加えて、対象曜日・料金倍率・対象モデル・課金ルールも表示します。既定ではオフです',
+        sectionCatalog: '価格カタログ',
+        catStatus: 'OpenRouter 価格カタログ',
+        catNever: 'まだ取得していません。右の「カタログを更新」で OpenRouter からモデルの価格表を取得すると、下のモデルへ価格をそのまま入れられます。',
+        catCached: '{n} モデルの価格を保存済み（更新：{when}）。',
+        catRefresh: 'カタログを更新',
+        catRefreshing: '更新中…',
+        catRefreshed: 'カタログを更新しました（{n} モデル）。',
+        catErrNetwork: 'OpenRouter に接続できません。ネットワークを確認してもう一度お試しください。',
+        catErrTimeout: 'リクエストがタイムアウトしました。しばらくしてからお試しください。',
+        catErrHttp: 'OpenRouter からエラーが返りました（HTTP {status}）。',
+        catErrTooLarge: '応答が大きすぎるため破棄しました。',
+        catErrFormat: '応答の形式が想定と異なるため破棄しました。以前のカタログはそのままです。',
+        catErrBusy: '更新中です。しばらくお待ちください。',
+        catAuto: '毎日自動で更新',
+        catAutoHint: 'オンにすると 1 日 1 回カタログを更新し、カタログ価格を使っているモデルを最新にし、価格がなく名前が 1 件だけに一致するモデルへ価格を入れます。オフの間は自分からネットワークに接続しません。',
+        catFillTitle: '価格未設定のモデルに入力',
+        catFillHint: '使ったことがあるが価格がないモデルに、カタログの価格を入れます。名前が 1 件だけに一致するものが対象で、日付を外して推測した一致は自動では入れません。',
+        catFillBtn: '入力（{n}）',
+        catSyncTitle: 'カタログ価格を同期',
+        catSyncHint: 'カタログ価格を使っているモデルを最新のカタログ価格に更新します。手動で変更した価格は変わりません。',
+        catSyncBtn: '同期（{n}）',
+        catFilled: '{n} モデルにカタログ価格を入力しました。',
+        catSynced: '{n} モデルのカタログ価格を更新しました。',
+        catNothing: '対象のモデルはありません。',
+        catNote: 'データは OpenRouter が公開しているモデル一覧で、価格は USD です。接続先はこの 1 か所だけで、個人情報は送信しません。OpenRouter の表示価格であり、各社の公式価格と異なる場合があるため確認してください。時間帯で価格が変わるモデルは、ピーク設定に当てはまる場合だけ時間帯価格を取り込みます。',
+        catHint: 'カタログ価格：{id} · {rates}',
+        catDated: '日付の接尾辞を外して一致しました。確認してください',
+        catTimeBased: 'カタログでは時間帯別価格があり、時間帯価格は取り込んでいません',
+        catAmbiguous: 'カタログに同名のモデルが複数あります（{ids}）。編集画面でカタログから選んでください。',
+        catFill: 'カタログ価格を使う',
+        catPick: 'カタログから選ぶ',
+        catSearchPlaceholder: 'カタログのモデルを検索（例：sonnet）',
+        catNoResults: '見つかりません。',
+        catReplaceConfirm: '手動で設定した価格がカタログ価格に置き換わります。続けますか？',
+        catFailed: '失敗しました：{error}',
+        sourceCatalog: 'カタログ',
       }
 
       // Korean UI dictionary; keys mirror EN exactly.
@@ -2229,6 +2373,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: '피크 시간대 {local}(현지 시간)',
         peakSideDetailShow: '사이드바에 상세 표시',
         peakSideDetailShowHint: '상태와 시간대 외에 적용 요일, 요금 배율, 대상 모델, 과금 규칙도 표시해요. 기본값은 꺼짐이에요',
+        sectionCatalog: '가격 카탈로그',
+        catStatus: 'OpenRouter 가격 카탈로그',
+        catNever: '아직 가져오지 않았어요. 오른쪽 "카탈로그 업데이트"로 OpenRouter에서 모델 가격표를 가져오면 아래 모델에 가격을 바로 채울 수 있어요.',
+        catCached: '{n}개 모델의 가격을 저장했어요 (업데이트: {when}).',
+        catRefresh: '카탈로그 업데이트',
+        catRefreshing: '업데이트 중…',
+        catRefreshed: '카탈로그를 업데이트했어요 ({n}개 모델).',
+        catErrNetwork: 'OpenRouter에 연결할 수 없어요. 네트워크를 확인하고 다시 시도하세요.',
+        catErrTimeout: '요청 시간이 초과됐어요. 잠시 뒤에 다시 시도하세요.',
+        catErrHttp: 'OpenRouter가 오류를 반환했어요 (HTTP {status}).',
+        catErrTooLarge: '응답이 너무 커서 버렸어요.',
+        catErrFormat: '응답 형식이 맞지 않아 버렸어요. 기존 카탈로그는 그대로예요.',
+        catErrBusy: '업데이트 중이에요. 잠시만 기다려 주세요.',
+        catAuto: '매일 자동 업데이트',
+        catAutoHint: '켜면 하루에 한 번 카탈로그를 업데이트하고, 카탈로그 가격을 쓰는 모델을 최신으로 맞추고, 단가가 없으면서 이름이 하나에만 맞는 모델에 가격을 채워요. 꺼 두면 스스로 네트워크에 접속하지 않아요.',
+        catFillTitle: '가격 없는 모델 채우기',
+        catFillHint: '사용했지만 단가가 없는 모델에 카탈로그 가격을 채워요. 이름이 하나에만 맞는 경우만 처리하고, 날짜 접미사를 떼어 추측한 경우는 자동으로 채우지 않아요.',
+        catFillBtn: '채우기 ({n})',
+        catSyncTitle: '카탈로그 가격 동기화',
+        catSyncHint: '카탈로그 가격을 쓰는 모델을 카탈로그의 최신 가격으로 갱신해요. 직접 고친 가격은 건드리지 않아요.',
+        catSyncBtn: '동기화 ({n})',
+        catFilled: '{n}개 모델에 카탈로그 가격을 채웠어요.',
+        catSynced: '{n}개 모델의 카탈로그 가격을 갱신했어요.',
+        catNothing: '처리할 모델이 없어요.',
+        catNote: '데이터는 OpenRouter가 공개한 모델 목록에서 오며 가격은 USD예요. 이 주소 하나만 요청하고 개인 정보는 보내지 않아요. OpenRouter의 표시 가격이라 각 업체의 공식 가격과 다를 수 있으니 확인하세요. 시간대별로 가격이 다른 모델은 피크 설정에 맞는 경우에만 시간대 가격을 가져와요.',
+        catHint: '카탈로그 가격: {id} · {rates}',
+        catDated: '날짜 접미사를 떼고 맞췄어요. 확인하세요',
+        catTimeBased: '카탈로그에 시간대별 가격이 있어 시간대 가격은 가져오지 않았어요',
+        catAmbiguous: '카탈로그에 이름이 같은 모델이 여러 개 있어요 ({ids}). 편집에서 카탈로그로 골라 주세요.',
+        catFill: '카탈로그 가격 사용',
+        catPick: '카탈로그에서 선택',
+        catSearchPlaceholder: '카탈로그에서 모델 검색, 예: sonnet',
+        catNoResults: '찾지 못했어요.',
+        catReplaceConfirm: '직접 설정한 가격이 카탈로그 가격으로 바뀌어요. 계속할까요?',
+        catFailed: '실패했어요: {error}',
+        sourceCatalog: '카탈로그',
       }
 
       // German UI dictionary; keys and order mirror EN.
@@ -2651,6 +2831,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Spitzenzeiten {local} (Ortszeit)',
         peakSideDetailShow: 'Details in der Seitenleiste',
         peakSideDetailShowHint: 'Zeigt zusätzlich zu Status und Zeiten die Wochentage, das Preisverhältnis, die Modelle und die Abrechnungsregel; standardmäßig aus',
+        sectionCatalog: 'Preiskatalog',
+        catStatus: 'OpenRouter-Preiskatalog',
+        catNever: 'Noch nicht abgerufen. Mit „Katalog aktualisieren“ holst du eine Modellpreisliste von OpenRouter; ihre Preise lassen sich dann direkt in die Modelle unten übernehmen.',
+        catCached: 'Preise von {n} Modellen gespeichert, aktualisiert {when}.',
+        catRefresh: 'Katalog aktualisieren',
+        catRefreshing: 'Aktualisiere…',
+        catRefreshed: 'Katalog aktualisiert: {n} Modelle.',
+        catErrNetwork: 'OpenRouter ist nicht erreichbar. Prüfe das Netzwerk und versuche es erneut.',
+        catErrTimeout: 'Zeitüberschreitung bei der Anfrage. Versuche es später erneut.',
+        catErrHttp: 'OpenRouter hat einen Fehler gemeldet (HTTP {status}).',
+        catErrTooLarge: 'Die Antwort war zu groß und wurde verworfen.',
+        catErrFormat: 'Die Antwort hatte nicht das erwartete Format und wurde verworfen; der bisherige Katalog bleibt erhalten.',
+        catErrBusy: 'Es läuft bereits eine Aktualisierung.',
+        catAuto: 'Täglich aktualisieren',
+        catAutoHint: 'Aktualisiert den Katalog einmal täglich, bringt aus dem Katalog bepreiste Modelle auf den neuesten Stand und trägt Preise für Modelle ohne Preis ein, deren Name zu genau einem Eintrag passt. Solange es aus ist, greift nichts von allein auf das Netzwerk zu.',
+        catFillTitle: 'Modelle ohne Preis füllen',
+        catFillHint: 'Trägt für Modelle, die du genutzt, aber nie bepreist hast, den Katalogpreis ein. Es werden nur Namen berücksichtigt, die zu genau einem Eintrag passen; Vermutungen durch Weglassen eines Datumssuffixes werden nicht automatisch gefüllt.',
+        catFillBtn: 'Füllen ({n})',
+        catSyncTitle: 'Katalogpreise abgleichen',
+        catSyncHint: 'Bringt aus dem Katalog bepreiste Modelle auf die neuesten Katalogpreise; von Hand geänderte Preise bleiben unberührt.',
+        catSyncBtn: 'Abgleichen ({n})',
+        catFilled: 'Katalogpreise für {n} Modelle eingetragen.',
+        catSynced: 'Katalogpreise von {n} Modellen aktualisiert.',
+        catNothing: 'Kein Modell musste angepasst werden.',
+        catNote: 'Die Daten stammen aus der öffentlichen Modellliste von OpenRouter, Preise in USD; nur diese eine Adresse wird abgefragt und es werden keine persönlichen Daten gesendet. Es sind die Listenpreise von OpenRouter, die von den offiziellen Preisen der Anbieter abweichen können; bitte prüfe sie. Bei Modellen mit zeitabhängigen Preisen werden diese nur übernommen, wenn sie zu den Spitzeneinstellungen passen.',
+        catHint: 'Katalogpreis: {id} · {rates}',
+        catDated: 'nach Weglassen des Datumssuffixes zugeordnet, bitte prüfen',
+        catTimeBased: 'im Katalog zeitabhängig bepreist; zeitabhängige Preise nicht übernommen',
+        catAmbiguous: 'Im Katalog gibt es mehrere Modelle mit diesem Namen ({ids}); wähle im Editor eines aus dem Katalog.',
+        catFill: 'Katalogpreis übernehmen',
+        catPick: 'Aus Katalog wählen',
+        catSearchPlaceholder: 'Katalog durchsuchen, z. B. sonnet',
+        catNoResults: 'Nichts gefunden.',
+        catReplaceConfirm: 'Dadurch wird der von Hand gesetzte Preis durch den Katalogpreis ersetzt. Fortfahren?',
+        catFailed: 'Fehlgeschlagen: {error}',
+        sourceCatalog: 'Katalog',
       }
 
       // French UI dictionary; keys and order mirror EN.
@@ -3073,6 +3289,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Heures de pointe {local} (heure locale)',
         peakSideDetailShow: 'Détails dans la barre latérale',
         peakSideDetailShowHint: 'Affiche en plus de l\'état et des heures les jours concernés, le rapport de prix, les modèles et la règle de facturation ; désactivé par défaut',
+        sectionCatalog: 'Catalogue de tarifs',
+        catStatus: 'Catalogue de tarifs OpenRouter',
+        catNever: 'Pas encore récupéré. « Mettre à jour le catalogue » récupère une liste de tarifs de modèles auprès d\'OpenRouter ; ses prix peuvent ensuite être repris directement dans les modèles ci-dessous.',
+        catCached: 'Tarifs de {n} modèles enregistrés, mis à jour {when}.',
+        catRefresh: 'Mettre à jour le catalogue',
+        catRefreshing: 'Mise à jour…',
+        catRefreshed: 'Catalogue mis à jour : {n} modèles.',
+        catErrNetwork: 'Impossible de joindre OpenRouter. Vérifiez le réseau et réessayez.',
+        catErrTimeout: 'La requête a expiré. Réessayez plus tard.',
+        catErrHttp: 'OpenRouter a renvoyé une erreur (HTTP {status}).',
+        catErrTooLarge: 'La réponse était trop volumineuse et a été abandonnée.',
+        catErrFormat: 'La réponse n\'avait pas le format attendu et a été abandonnée ; le catalogue précédent est conservé.',
+        catErrBusy: 'Une mise à jour est déjà en cours.',
+        catAuto: 'Mise à jour quotidienne',
+        catAutoHint: 'Met à jour le catalogue une fois par jour, remet à jour les modèles tarifés d\'après lui et renseigne les modèles sans tarif dont le nom correspond à une seule entrée. Désactivé, rien ne se connecte au réseau de lui-même.',
+        catFillTitle: 'Renseigner les modèles sans tarif',
+        catFillHint: 'Donne le prix du catalogue aux modèles utilisés mais jamais tarifés. Seuls les noms correspondant à une seule entrée sont traités ; les rapprochements obtenus en retirant un suffixe de date ne sont pas remplis automatiquement.',
+        catFillBtn: 'Renseigner ({n})',
+        catSyncTitle: 'Synchroniser les prix du catalogue',
+        catSyncHint: 'Met les modèles tarifés d\'après le catalogue à ses derniers prix ; les prix modifiés à la main ne sont pas touchés.',
+        catSyncBtn: 'Synchroniser ({n})',
+        catFilled: 'Prix du catalogue renseignés pour {n} modèles.',
+        catSynced: 'Prix du catalogue mis à jour pour {n} modèles.',
+        catNothing: 'Aucun modèle à traiter.',
+        catNote: 'Les données viennent de la liste publique de modèles d\'OpenRouter, en USD ; seule cette adresse est interrogée et aucune donnée personnelle n\'est envoyée. Ce sont les prix affichés par OpenRouter, qui peuvent différer des tarifs officiels des éditeurs : vérifiez-les. Pour les modèles à tarif horaire, les prix horaires ne sont repris que s\'ils correspondent aux réglages de pointe.',
+        catHint: 'Prix du catalogue : {id} · {rates}',
+        catDated: 'rapproché après retrait du suffixe de date, à vérifier',
+        catTimeBased: 'tarifé selon l\'heure dans le catalogue ; prix horaires non repris',
+        catAmbiguous: 'Plusieurs modèles du catalogue portent ce nom ({ids}) ; choisissez-en un dans l\'éditeur.',
+        catFill: 'Utiliser le prix du catalogue',
+        catPick: 'Choisir dans le catalogue',
+        catSearchPlaceholder: 'Rechercher dans le catalogue, p. ex. sonnet',
+        catNoResults: 'Aucun résultat.',
+        catReplaceConfirm: 'Cela remplace le prix saisi à la main par celui du catalogue. Continuer ?',
+        catFailed: 'Échec : {error}',
+        sourceCatalog: 'Catalogue',
       }
 
       // Spanish (es) UI dictionary; keys mirror EN exactly.
@@ -3495,6 +3747,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Horas punta {local} (hora local)',
         peakSideDetailShow: 'Detalles en la barra lateral',
         peakSideDetailShowHint: 'Además del estado y las horas, muestra los días, la proporción de precio, los modelos y la regla de facturación; desactivado por defecto',
+        sectionCatalog: 'Catálogo de precios',
+        catStatus: 'Catálogo de precios de OpenRouter',
+        catNever: 'Aún no se ha obtenido. Con «Actualizar catálogo» se descarga una lista de precios de modelos de OpenRouter; sus precios se pueden aplicar directamente a los modelos de abajo.',
+        catCached: 'Precios de {n} modelos guardados, actualizados {when}.',
+        catRefresh: 'Actualizar catálogo',
+        catRefreshing: 'Actualizando…',
+        catRefreshed: 'Catálogo actualizado: {n} modelos.',
+        catErrNetwork: 'No se puede conectar con OpenRouter. Revisa la red e inténtalo de nuevo.',
+        catErrTimeout: 'La solicitud agotó el tiempo. Inténtalo más tarde.',
+        catErrHttp: 'OpenRouter devolvió un error (HTTP {status}).',
+        catErrTooLarge: 'La respuesta era demasiado grande y se descartó.',
+        catErrFormat: 'La respuesta no tenía el formato esperado y se descartó; se conserva el catálogo anterior.',
+        catErrBusy: 'Ya hay una actualización en curso.',
+        catAuto: 'Actualizar a diario',
+        catAutoHint: 'Actualiza el catálogo una vez al día, pone al día los modelos con precio del catálogo y rellena los modelos sin precio cuyo nombre coincide con una sola entrada. Mientras esté desactivado, nada se conecta a la red por sí solo.',
+        catFillTitle: 'Rellenar modelos sin precio',
+        catFillHint: 'Da el precio del catálogo a los modelos usados que nunca tuvieron precio. Solo se tratan los nombres que coinciden con una sola entrada; las coincidencias supuestas al quitar un sufijo de fecha no se rellenan automáticamente.',
+        catFillBtn: 'Rellenar ({n})',
+        catSyncTitle: 'Sincronizar precios del catálogo',
+        catSyncHint: 'Pone los modelos con precio del catálogo en sus últimos precios; los precios editados a mano no se tocan.',
+        catSyncBtn: 'Sincronizar ({n})',
+        catFilled: 'Precios del catálogo aplicados a {n} modelos.',
+        catSynced: 'Precios del catálogo actualizados en {n} modelos.',
+        catNothing: 'Ningún modelo necesitaba cambios.',
+        catNote: 'Los datos vienen de la lista pública de modelos de OpenRouter, en USD; solo se consulta esa dirección y no se envía ningún dato personal. Son los precios publicados por OpenRouter, que pueden diferir de los oficiales de cada proveedor: compruébalos. En los modelos con precio por horario, esos precios solo se importan si encajan con los ajustes de hora punta.',
+        catHint: 'Precio del catálogo: {id} · {rates}',
+        catDated: 'coincide al quitar el sufijo de fecha, revísalo',
+        catTimeBased: 'en el catálogo tiene precio por horario; no se importaron los precios horarios',
+        catAmbiguous: 'Hay varios modelos del catálogo con este nombre ({ids}); elige uno del catálogo en el editor.',
+        catFill: 'Usar precio del catálogo',
+        catPick: 'Elegir del catálogo',
+        catSearchPlaceholder: 'Buscar en el catálogo, p. ej. sonnet',
+        catNoResults: 'No se encontró nada.',
+        catReplaceConfirm: 'Esto sustituye el precio que fijaste a mano por el del catálogo. ¿Continuar?',
+        catFailed: 'Error: {error}',
+        sourceCatalog: 'Catálogo',
       }
 
       // Russian UI dictionary for the cost meter plugin (keys mirror EN).
@@ -3917,6 +4205,42 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Часы пика {local} (местное время)',
         peakSideDetailShow: 'Подробности в боковой панели',
         peakSideDetailShowHint: 'Помимо статуса и часов показывает дни, соотношение цен, модели и правило тарификации; по умолчанию выключено',
+        sectionCatalog: 'Каталог цен',
+        catStatus: 'Каталог цен OpenRouter',
+        catNever: 'Ещё не загружен. Кнопка «Обновить каталог» загрузит у OpenRouter список цен моделей; их цены затем можно подставить прямо в модели ниже.',
+        catCached: 'Сохранены цены {n} моделей, обновлено {when}.',
+        catRefresh: 'Обновить каталог',
+        catRefreshing: 'Обновление…',
+        catRefreshed: 'Каталог обновлён: моделей — {n}.',
+        catErrNetwork: 'Не удаётся связаться с OpenRouter. Проверьте сеть и повторите.',
+        catErrTimeout: 'Время запроса истекло. Повторите позже.',
+        catErrHttp: 'OpenRouter вернул ошибку (HTTP {status}).',
+        catErrTooLarge: 'Ответ слишком большой и был отброшен.',
+        catErrFormat: 'Ответ имеет неожиданный формат и был отброшен; прежний каталог сохранён.',
+        catErrBusy: 'Обновление уже выполняется.',
+        catAuto: 'Обновлять ежедневно',
+        catAutoHint: 'Раз в день обновляет каталог, актуализирует модели с ценой из каталога и подставляет цену моделям без цены, чьё имя совпадает ровно с одной записью. Пока выключено, ничего само не обращается к сети.',
+        catFillTitle: 'Заполнить модели без цены',
+        catFillHint: 'Подставляет цену из каталога моделям, которые использовались, но не имеют цены. Обрабатываются только имена, совпадающие ровно с одной записью; совпадения «после отбрасывания даты» автоматически не заполняются.',
+        catFillBtn: 'Заполнить ({n})',
+        catSyncTitle: 'Синхронизировать цены каталога',
+        catSyncHint: 'Обновляет модели с ценой из каталога до последних цен каталога; цены, изменённые вручную, не трогаются.',
+        catSyncBtn: 'Синхронизировать ({n})',
+        catFilled: 'Цены каталога подставлены для моделей: {n}.',
+        catSynced: 'Цены каталога обновлены для моделей: {n}.',
+        catNothing: 'Ни одной модели не требовалось обрабатывать.',
+        catNote: 'Данные берутся из публичного списка моделей OpenRouter, цены в USD; запрашивается только этот адрес, личные данные не отправляются. Это цены, указанные в OpenRouter, они могут отличаться от официальных цен производителей — проверяйте. Для моделей с ценой по времени суток эти цены переносятся, только если соответствуют настройкам пика.',
+        catHint: 'Цена из каталога: {id} · {rates}',
+        catDated: 'совпало после отбрасывания даты, проверьте',
+        catTimeBased: 'в каталоге цена зависит от времени суток; цены по времени не перенесены',
+        catAmbiguous: 'В каталоге несколько моделей с таким именем ({ids}); выберите одну из каталога в редакторе.',
+        catFill: 'Взять цену из каталога',
+        catPick: 'Выбрать из каталога',
+        catSearchPlaceholder: 'Поиск по каталогу, например sonnet',
+        catNoResults: 'Ничего не найдено.',
+        catReplaceConfirm: 'Цена, заданная вручную, будет заменена ценой из каталога. Продолжить?',
+        catFailed: 'Не удалось: {error}',
+        sourceCatalog: 'Каталог',
       }
 
       // Dictionaries registered next to zh and en. The host ships only zh and en; these take effect when the active language
@@ -4043,6 +4367,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         msgFont: 'system',
         statsCurrency: 'CNY',
         usdCny: 6.8,
+        catalogAuto: false,
       }
       const DOCK_STYLES = ['plain', 'soft', 'outline', 'bar']
       const DOCK_FONTS = ['system', 'mono']
@@ -5109,6 +5434,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           }).catch((err) => { setBusy(null); setError((err && err.message) || String(err)) })
         }
 
+        // A price taken from the catalog (hint or picker): drop the editor state and show what was backfilled.
+        function catalogApplied(model, res) {
+          clearDraft(model)
+          setExpanded((prev) => Object.assign({}, prev, { [model]: false }))
+          flash(model, t('saved') + (res.backfilled > 0 ? ' · ' + t('backfilled', { n: res.backfilled }) : ''))
+          refresh()
+        }
+
         function removePrice(model) {
           setBusy(model)
           postAction({ action: 'remove-price', model }).then(() => {
@@ -5128,6 +5461,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
         const models = snap ? snap.models || {} : {}
         const prices = snap ? snap.prices || {} : {}
+        const catalog = catalogOf(snap)
         const presets = snap ? snap.presets || {} : {}
         const needle = filter.trim().toLowerCase()
         const allNames = Array.from(new Set([...Object.keys(presets), ...Object.keys(models), ...Object.keys(prices), ...Object.keys(drafts)]))
@@ -5151,7 +5485,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           draft.tiers.length < TIER_MAX ? h('div', { key: 'tier-add', style: { paddingLeft: 20 } }, btn('+ ' + t('tierAdd'), () => addTier(model))) : null)
 
         const renderEditor = (model, draft, dirty, custom, preset) => h('div', { style: { display: 'flex', flexDirection: 'column', paddingTop: 14 } },
-          h('div', { style: ui.label }, t('priceHeading')),
+          catalog.count > 0 ? h(CatalogPicker, { model, replacing: custom && !catalogSourceOf(prices[model]), onApplied: (res) => catalogApplied(model, res) }) : null,
+          h('div', { style: Object.assign({}, ui.label, { paddingTop: 14 }) }, t('priceHeading')),
           h('div', { style: ui.grid },
             inputField('currency', t('currency'), { value: draft.currency, onChange: (v) => patchDraft(model, 'currency', v.toUpperCase()), attrs: { maxLength: 3 } }),
             PRICE_FIELDS.map((field) => numField(field, labelOf(field), draft[field], (v) => patchDraft(model, field, v)))),
@@ -5200,7 +5535,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('div', { style: ui.text },
                 h('div', { style: ui.title },
                   model,
-                  h('span', { style: ui.badge }, custom ? t('sourceCustom') : preset ? t('sourcePreset') : t('sourceNone')),
+                  h('span', { style: ui.badge }, custom ? (catalogSourceOf(price) ? t('sourceCatalog') : t('sourceCustom')) : preset ? t('sourcePreset') : t('sourceNone')),
                   price && price.peak && price.peak.enabled ? h('span', { style: ui.badge }, t('peakTag')) : null,
                   tierCount > 0 ? h('span', { style: ui.badge }, t('tierTag', { n: tierCount })) : null,
                   dirty ? small(LIGHT.yellow, t('dirty')) : note ? small(LIGHT.green, note) : null),
@@ -5210,7 +5545,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('div', { style: ui.controls }, btn(isOpen ? t('collapse') : t('edit'), () => toggleOpen(model), null, dirty))),
             isOpen ? renderEditor(model, draft, dirty, custom, preset)
               : price ? h('div', { style: { maxWidth: 560, marginTop: 12 } }, rateTable(price))
-                : h('div', { style: Object.assign({}, ui.desc, { marginTop: 8 }) }, t('notConfigured')))
+                : h('div', null,
+                  h('div', { style: Object.assign({}, ui.desc, { marginTop: 8 }) }, t('notConfigured')),
+                  h(CatalogHint, { model, match: catalog.matches[model], onApplied: (res) => catalogApplied(model, res) })))
         }
 
         // Folded groups open by themselves while searching or when one of their models has an unsaved draft (e.g. just added).
@@ -5308,6 +5645,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               onChange: (e) => setBudgetDraft(Object.assign({}, budgetView, { amount: e.target.value })),
             }),
             btn(t('budgetSave'), saveBudget, budgetDraft ? 'primary' : null)),
+
+          h('div', { style: ui.section }, t('sectionCatalog')),
+          h(CatalogSettings, { snap }),
 
           h('div', { style: ui.section }, t('sectionPrices')),
           h('div', { style: Object.assign({}, ui.desc, { marginTop: 6 }) }, t('priceNote')),
@@ -5649,6 +5989,138 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             outcome ? historyLines(historyOutcome(outcome, money)) : historyLines(historyFacts(scan, money)),
             outcome ? null : historyModels(scan, money)) : null,
           h('div', { style: Object.assign({}, ui.desc, { padding: '12px 0 0' }) }, t('histNote')))
+      }
+
+      // OpenRouter price catalog in the settings: the section that fetches it and applies it in bulk, the hint next to a model that
+      // has no price, and the picker inside a model's editor. The Host fetches and matches (catalog.js, catalog-apply.js); the browser
+      // only asks. Responses carry a stable `code`; the texts below are chosen by it.
+
+      const CATALOG_ERROR_KEYS = { network: 'catErrNetwork', timeout: 'catErrTimeout', 'too-large': 'catErrTooLarge', 'bad-format': 'catErrFormat', busy: 'catErrBusy' }
+      const CATALOG_SEARCH_DELAY_MS = 250
+      const NO_CATALOG = { fetchedAt: null, count: 0, refreshing: false, error: null, fillable: 0, stale: 0, matches: {} }
+
+      const catalogOf = (snap) => (snap && snap.catalog) || NO_CATALOG
+      const catalogSourceOf = (price) => (price && price.source && price.source.kind === 'catalog' ? price.source : null)
+
+      /** "Input $3 / Output $15": base rates per million tokens (the unit is stated once, above the price list). */
+      const catalogRates = (price) => t('rIn') + ' ' + formatRate('USD', price.input) + ' / ' + t('rOut') + ' ' + formatRate('USD', price.output)
+
+      /** Failure text of a Host answer or of the last refresh (`{ code, status }`). */
+      function catalogError(res) {
+        if (res.code === 'http') return t('catErrHttp', { status: res.status })
+        if (CATALOG_ERROR_KEYS[res.code]) return t(CATALOG_ERROR_KEYS[res.code])
+        return t('catFailed', { error: res.error || res.code || 'unknown' })
+      }
+
+      /** One Host call; always resolves to an object with `ok`. */
+      const catalogCall = (body) => postAction(body)
+        .then((res) => res || { ok: false, code: 'empty' })
+        .catch((err) => ({ ok: false, code: 'network', error: (err && err.message) || String(err) }))
+
+      /** Settings → fetch the catalog, fill the models that have no price, bring catalog prices up to date, opt in to the daily routine. */
+      function CatalogSettings(props) {
+        const cat = catalogOf(props.snap)
+        const prefs = usePrefs()
+        const [busy, setBusy] = React.useState(null)
+        const [outcome, setOutcome] = React.useState(null)
+        const working = busy !== null || cat.refreshing
+
+        const run = (body, describe) => {
+          setBusy(body.action + (body.mode || ''))
+          setOutcome(null)
+          catalogCall(body)
+            .then((res) => setOutcome({ text: res.ok ? describe(res) : catalogError(res), bad: !res.ok }))
+            .then(() => store.refresh())
+            .then(() => setBusy(null))
+        }
+        const refresh = () => run({ action: 'catalog-refresh' }, (res) => t('catRefreshed', { n: res.count }))
+        const bulk = (mode, key) => run({ action: 'catalog-apply-all', mode }, (res) => (res.applied > 0 ? t(key, { n: res.applied }) : t('catNothing')))
+
+        const status = cat.fetchedAt ? t('catCached', { n: cat.count, when: historyWhen(cat.fetchedAt) }) : t('catNever')
+        const line = (text, bad) => h('div', { style: { fontSize: 12, lineHeight: '18px', color: bad ? LIGHT.red : SECONDARY } }, text)
+
+        return h('div', null,
+          settingRow({ key: 'catStatus' }, t('catStatus'), status,
+            btn(busy === 'catalog-refresh' || cat.refreshing ? t('catRefreshing') : t('catRefresh'), refresh, null, working)),
+          cat.error ? h('div', { style: { padding: '10px 0 0' } }, line(catalogError(cat.error), true)) : null,
+          outcome ? h('div', { style: { padding: '10px 0 0' } }, line(outcome.text, outcome.bad)) : null,
+          settingRow({ key: 'catAuto' }, t('catAuto'), t('catAutoHint'), toggle(prefs.catalogAuto, (on) => store.setPrefs({ catalogAuto: on }), t('catAuto'))),
+          cat.count > 0 ? settingRow({ key: 'catFill' }, t('catFillTitle'), t('catFillHint'),
+            btn(t('catFillBtn', { n: cat.fillable }), () => bulk('unpriced', 'catFilled'), null, working || cat.fillable === 0)) : null,
+          cat.count > 0 ? settingRow({ key: 'catSync' }, t('catSyncTitle'), t('catSyncHint'),
+            btn(t('catSyncBtn', { n: cat.stale }), () => bulk('applied', 'catSynced'), null, working || cat.stale === 0)) : null,
+          h('div', { style: Object.assign({}, ui.desc, { padding: '12px 0 0' }) }, t('catNote')))
+      }
+
+      /**
+       * Under a model that has no price: the catalog entry its name matches (or why it did not), with a button to take its price.
+       * `match` is the Host's answer for this model in the snapshot (`snap.catalog.matches[model]`).
+       */
+      function CatalogHint(props) {
+        const { model, match, onApplied } = props
+        const [busy, setBusy] = React.useState(false)
+        const [error, setError] = React.useState(null)
+        if (!match) return null
+        const style = Object.assign({}, ui.desc, { marginTop: 6 })
+        if (match.ambiguous) return h('div', { style }, t('catAmbiguous', { ids: match.ambiguous.join(', ') }))
+        const notes = [t('catHint', { id: match.id, rates: catalogRates(match) })]
+        if (match.how === 'dated') notes.push(t('catDated'))
+        if (match.timeBased) notes.push(t('catTimeBased'))
+        const fill = () => {
+          setBusy(true)
+          setError(null)
+          catalogCall({ action: 'catalog-apply', model }).then((res) => {
+            setBusy(false)
+            if (res.ok) onApplied(res)
+            else setError(catalogError(res))
+          })
+        }
+        return h('div', { style: { display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginTop: 8 } },
+          h('span', { style: Object.assign({}, style, { marginTop: 0 }) }, notes.join(' · ')),
+          btn(t('catFill'), fill, null, busy),
+          error ? small(LIGHT.red, error) : null)
+      }
+
+      /** Inside a model's editor: search the whole catalog by name and take any entry's price for this model. */
+      function CatalogPicker(props) {
+        const { model, replacing, onApplied } = props
+        const [open, setOpen] = React.useState(false)
+        const [query, setQuery] = React.useState('')
+        const [results, setResults] = React.useState(null)
+        const [busy, setBusy] = React.useState(null)
+        const [error, setError] = React.useState(null)
+
+        React.useEffect(() => {
+          if (query.trim() === '') { setResults(null); return undefined }
+          let live = true
+          const id = setTimeout(() => {
+            catalogCall({ action: 'catalog-search', query }).then((res) => { if (live) setResults(res.ok ? res.results : []) })
+          }, CATALOG_SEARCH_DELAY_MS)
+          return () => { live = false; clearTimeout(id) }
+        }, [query])
+
+        const take = (entry) => {
+          if (replacing && typeof window !== 'undefined' && window.confirm && !window.confirm(t('catReplaceConfirm'))) return
+          setBusy(entry.id)
+          setError(null)
+          catalogCall({ action: 'catalog-apply', model, id: entry.id }).then((res) => {
+            setBusy(null)
+            if (res.ok) onApplied(res)
+            else setError(catalogError(res))
+          })
+        }
+
+        if (!open) return h('div', { style: { padding: '12px 0 0' } }, btn(t('catPick'), () => setOpen(true)))
+        return h('div', { style: { padding: '12px 0 0', display: 'flex', flexDirection: 'column', gap: 8 } },
+          h('input', { style: ui.input, value: query, placeholder: t('catSearchPlaceholder'), 'aria-label': t('catPick'), autoFocus: true, onChange: (e) => setQuery(e.target.value) }),
+          error ? small(LIGHT.red, error) : null,
+          results && results.length === 0 ? h('div', { style: ui.desc }, t('catNoResults')) : null,
+          (results || []).map((entry) => h('div', { key: entry.id, style: { display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 } },
+            h('div', { style: { flex: '1 1 auto', minWidth: 0 } },
+              h('div', { title: entry.id, style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 13, color: PRIMARY } }, entry.id),
+              h('div', { style: { fontSize: 11, color: TERTIARY, fontVariantNumeric: 'tabular-nums' } },
+                catalogRates(entry.price) + (entry.timeBased ? ' · ' + t('catTimeBased') : ''))),
+            btn(t('catFill'), () => take(entry), null, busy !== null))))
       }
 
       // Chart primitives for the statistics page (hand-drawn SVG / flex, no chart library).
