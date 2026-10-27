@@ -108,7 +108,16 @@ Rendered from sample data in a test page. Colors and fonts in the real client fo
   </tr>
 </table>
 
-<p align="center"><img src="docs/images/settings.en.jpg" width="520" alt="Settings: strip styles with live previews" /><br /><sub>Settings: four strip styles with live previews, font and size</sub></p>
+<table>
+  <tr>
+    <td align="center" valign="top" width="50%"><img src="docs/images/settings.en.jpg" alt="Settings: strip styles with live previews" /><br /><sub>Settings: four strip styles with live previews (including the peak badge), font and size</sub></td>
+    <td align="center" valign="top" width="50%"><img src="docs/images/settings-balance.en.jpg" alt="Settings: account balances" /><br /><sub>Settings: account balances for the providers you add; keys stay on your machine</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="50%"><img src="docs/images/settings-catalog.en.jpg" alt="Settings: OpenRouter price catalog" /><br /><sub>Settings: OpenRouter price catalog, filled on request or once a day if you switch it on</sub></td>
+    <td align="center" valign="top" width="50%"><img src="docs/images/import-prompt.en.jpg" alt="First-start question about importing past conversations" /><br /><sub>Past conversations found on first start: the import question, and a hint in the strip</sub></td>
+  </tr>
+</table>
 
 ## How costs are calculated
 

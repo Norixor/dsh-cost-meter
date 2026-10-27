@@ -108,7 +108,16 @@ dsh plugin --profile web add @norixor/dsh-cost-meter
   </tr>
 </table>
 
-<p align="center"><img src="docs/images/settings.zh-CN.jpg" width="520" alt="设置页：统计条样式与实时预览" /><br /><sub>设置页：四套统计条样式，带实时预览，可选字体与字号</sub></p>
+<table>
+  <tr>
+    <td align="center" valign="top" width="50%"><img src="docs/images/settings.zh-CN.jpg" alt="设置页：统计条样式与实时预览" /><br /><sub>设置页：四套统计条样式，带实时预览（含峰谷徽标），可选字体与字号</sub></td>
+    <td align="center" valign="top" width="50%"><img src="docs/images/settings-balance.zh-CN.jpg" alt="设置页：账户余额" /><br /><sub>设置页：添加你自己的服务商账号查看余额，密钥只存在本机</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="50%"><img src="docs/images/settings-catalog.zh-CN.jpg" alt="设置页：OpenRouter 价格目录" /><br /><sub>设置页：OpenRouter 价格目录，按需更新，也可打开每天自动更新</sub></td>
+    <td align="center" valign="top" width="50%"><img src="docs/images/import-prompt.zh-CN.jpg" alt="首次启动时询问是否导入历史对话" /><br /><sub>首次启动发现历史对话：导入询问，统计条里也有提示</sub></td>
+  </tr>
+</table>
 
 ## 计费口径
 
