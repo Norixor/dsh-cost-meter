@@ -1,6 +1,6 @@
 {
   "name": "@norixor/dsh-cost-meter",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Per-session and per-model cost meter for DeepSeek Harness: preset prices for 60+ models, peak pricing, context-length tiers, budget traffic light, display styles, a sidebar statistics page with charts, latency analysis and experimental image / speech metering.",
   "license": "MIT",
   "author": "Norixor",
