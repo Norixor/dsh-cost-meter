@@ -84,3 +84,17 @@ test('convertSummary maps the total and every model row into the display currenc
   assert.equal(shown.input, s.input)
   assert.equal(s.costs.USD, 1, 'the summary it was given is not touched')
 })
+
+test('summarizeCalls keeps each model row\'s own token counts, and media rows stay at zero', () => {
+  const s = summarizeCalls([
+    call(1000, { model: 'a', input: 10, output: 5, cacheRead: 100, cacheWrite: 20 }),
+    call(2000, { model: 'a', input: 1, output: 2, cacheRead: 3, cacheWrite: 4 }),
+    call(3000, { model: 'b', input: 7, output: 8, cacheRead: 0, cacheWrite: 0 }),
+    call(4000, { model: 'img', media: 'image', units: 2, input: 0, output: 0, cacheRead: 0, cacheWrite: 0 }),
+  ])
+  const row = (m) => s.models.find((r) => r.model === m)
+  assert.deepEqual([row('a').input, row('a').output, row('a').cacheRead, row('a').cacheWrite], [11, 7, 103, 24])
+  assert.deepEqual([row('b').input, row('b').output, row('b').cacheRead, row('b').cacheWrite], [7, 8, 0, 0])
+  assert.deepEqual([row('img').input, row('img').cacheRead], [0, 0])
+  assert.equal(s.cacheWrite, 24, 'the total is still the sum of the model rows')
+})

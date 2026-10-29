@@ -199,7 +199,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: '缓存读 tok',
         tokCacheWrite: '缓存写 tok',
         hitRate: '缓存命中率',
-        rateLegend: '模型下方是该模型的单价：货币 输入/输出 R缓存读 W缓存写（每百万 tokens）；「>100K」行是上下文超过该值时整次请求的单价',
+        rateLegend: '模型名下方是该模型的单价（每百万 tokens）：币种、输入、输出、缓存读、缓存写；「>100K」行是上下文超过该值时整次请求的单价',
         filterPlaceholder: '筛选模型…',
         addPlaceholder: '模型 id，例如 deepseek-chat',
         add: '添加',
@@ -543,10 +543,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: '侧边栏显示详情',
         peakSideDetailShowHint: '除状态和时段外，再显示适用日、价格倍率、适用模型和计费说明；默认关闭',
         sectionDetail: '缓存与单价明细',
-        cacheTokensShow: '缓存读写 token',
-        cacheTokensShowHint: '在右侧栏的模型行和每轮悬浮卡片里，另外显示缓存读、缓存写的 token 数；输入框下方的浮窗始终显示',
-        sideRatesShow: '模型单价',
-        sideRatesShowHint: '在右侧栏的模型行里，另外显示该模型的单价行：币种、输入/输出，R=缓存读，W=缓存写（每百万 token）',
+        cacheTokensShow: '各项 token 数',
+        cacheTokensShowHint: '在右侧栏的模型行和每轮悬浮卡片里，显示输入、输出、缓存读、缓存写各自用了多少 token；输入框下方的浮窗始终显示',
+        sideRatesShow: '各项单价',
+        sideRatesShowHint: '在右侧栏的模型行和每轮悬浮卡片里，显示输入、输出、缓存读、缓存写各自的单价（每百万 token）；输入框下方的浮窗始终显示',
+        usageInUncached: '输入（未命中缓存）',
+        usageColTokens: 'Token 数',
+        usageColPrice: '单价（{cur} / 百万）',
         sectionCatalog: '价格目录',
         catStatus: 'OpenRouter 价格目录',
         catNever: '还没有获取。点右侧「更新目录」从 OpenRouter 取一份模型价格表，之后可以把价格直接填进下面的模型。',
@@ -713,7 +716,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: 'Cache read',
         tokCacheWrite: 'Cache write',
         hitRate: 'Cache hit',
-        rateLegend: 'The line under each model is its rate: currency in/out R=cache read W=cache write (per million tokens); a ">100K" line is the rate for the whole request once its context exceeds that size',
+        rateLegend: 'The line under each model name is its price (per million tokens): currency, input, output, cache read, cache write; a ">100K" line is the rate for the whole request once its context exceeds that size',
         filterPlaceholder: 'Filter models…',
         addPlaceholder: 'Model id, e.g. deepseek-chat',
         add: 'Add',
@@ -1057,10 +1060,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: 'Sidebar details',
         peakSideDetailShowHint: 'Besides the status and hours, also show the weekdays, price ratio, models and billing rule; off by default',
         sectionDetail: 'Cache and price details',
-        cacheTokensShow: 'Cache read / write tokens',
-        cacheTokensShowHint: 'In the right-sidebar model rows and the turn hover card, also show the cache read and cache write token counts. The popover under the input box always shows them.',
-        sideRatesShow: 'Model prices',
-        sideRatesShowHint: 'In the right-sidebar model rows, also show each model\'s price line: currency, input/output, R = cache read, W = cache write (per million tokens).',
+        cacheTokensShow: 'Tokens per item',
+        cacheTokensShowHint: 'In the right-sidebar model rows and the turn hover card, show how many tokens went to input, output, cache read and cache write. The popover under the input box always shows them.',
+        sideRatesShow: 'Price per item',
+        sideRatesShowHint: 'In the right-sidebar model rows and the turn hover card, show the price of input, output, cache read and cache write (per million tokens). The popover under the input box always shows them.',
+        usageInUncached: 'Input (uncached)',
+        usageColTokens: 'Tokens',
+        usageColPrice: 'Price ({cur} / M)',
         sectionCatalog: 'Price catalog',
         catStatus: 'OpenRouter price catalog',
         catNever: 'Not fetched yet. Use "Update catalog" to get a model price list from OpenRouter; its prices can then be filled straight into the models below.',
@@ -1228,7 +1234,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: '快取讀取',
         tokCacheWrite: '快取寫入',
         hitRate: '快取命中率',
-        rateLegend: '各模型下方一行為其單價：幣別 輸入／輸出 R＝快取讀取 W＝快取寫入（每百萬 tokens）；「>100K」一行表示上下文超過該大小時整次請求的單價',
+        rateLegend: '各模型名稱下方為其單價（每百萬 tokens）：幣別、輸入、輸出、快取讀取、快取寫入；「>100K」一行表示上下文超過該大小時整次請求的單價',
         filterPlaceholder: '篩選模型…',
         addPlaceholder: '模型 id，例如 deepseek-chat',
         add: '新增',
@@ -1572,10 +1578,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: '側邊欄顯示詳情',
         peakSideDetailShowHint: '除狀態與時段外，另顯示適用日、價格倍率、適用模型與計費說明；預設關閉',
         sectionDetail: '快取與單價明細',
-        cacheTokensShow: '快取讀寫 token',
-        cacheTokensShowHint: '在右側欄的模型列與每輪懸浮卡片中，另外顯示快取讀取、快取寫入的 token 數；輸入框下方的浮窗一律顯示',
-        sideRatesShow: '模型單價',
-        sideRatesShowHint: '在右側欄的模型列中，另外顯示該模型的單價列：幣別、輸入/輸出，R=快取讀取，W=快取寫入（每百萬 token）',
+        cacheTokensShow: '各項 token 數',
+        cacheTokensShowHint: '在右側欄的模型列與每輪懸浮卡片中，顯示輸入、輸出、快取讀取、快取寫入各自用了多少 token；輸入框下方的浮窗一律顯示',
+        sideRatesShow: '各項單價',
+        sideRatesShowHint: '在右側欄的模型列與每輪懸浮卡片中，顯示輸入、輸出、快取讀取、快取寫入各自的單價（每百萬 token）；輸入框下方的浮窗一律顯示',
+        usageInUncached: '輸入（未命中快取）',
+        usageColTokens: 'Token 數',
+        usageColPrice: '單價（{cur} / 百萬）',
         sectionCatalog: '價格目錄',
         catStatus: 'OpenRouter 價格目錄',
         catNever: '尚未取得。按右側「更新目錄」從 OpenRouter 取得一份模型價格表，之後可直接把價格填入下方的模型。',
@@ -1743,7 +1752,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: 'キャッシュ読み取り',
         tokCacheWrite: 'キャッシュ書き込み',
         hitRate: 'キャッシュヒット率',
-        rateLegend: '各モデルの下の行は料金です。通貨 入力/出力 R=キャッシュ読み取り W=キャッシュ書き込み（100 万 tokens あたり）。「>100K」の行は、コンテキストがそのサイズを超えたときのリクエスト全体の料金です',
+        rateLegend: '各モデル名の下の行は料金です（100 万 tokens あたり）：通貨、入力、出力、キャッシュ読み取り、キャッシュ書き込み。「>100K」の行は、コンテキストがそのサイズを超えたときのリクエスト全体の料金です',
         filterPlaceholder: 'モデルを絞り込み…',
         addPlaceholder: 'モデル id（例: deepseek-chat）',
         add: '追加',
@@ -2087,10 +2096,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: 'サイドバーに詳細を表示',
         peakSideDetailShowHint: '状態と時間帯に加えて、対象曜日・料金倍率・対象モデル・課金ルールも表示します。既定ではオフです',
         sectionDetail: 'キャッシュと単価の詳細',
-        cacheTokensShow: 'キャッシュ読み取り / 書き込みの token',
-        cacheTokensShowHint: '右サイドバーのモデル行とターンのホバーカードに、キャッシュ読み取りと書き込みの token 数も表示します。入力欄の下のポップオーバーでは常に表示されます。',
-        sideRatesShow: 'モデルの単価',
-        sideRatesShowHint: '右サイドバーのモデル行に、そのモデルの単価行も表示します：通貨、入力/出力、R=キャッシュ読み取り、W=キャッシュ書き込み（100 万 token あたり）。',
+        cacheTokensShow: '項目ごとの token 数',
+        cacheTokensShowHint: '右サイドバーのモデル行とターンのホバーカードに、入力・出力・キャッシュ読み取り・キャッシュ書き込みそれぞれの token 数を表示します。入力欄の下のポップオーバーでは常に表示されます。',
+        sideRatesShow: '項目ごとの単価',
+        sideRatesShowHint: '右サイドバーのモデル行とターンのホバーカードに、入力・出力・キャッシュ読み取り・キャッシュ書き込みそれぞれの単価（100 万 token あたり）を表示します。入力欄の下のポップオーバーでは常に表示されます。',
+        usageInUncached: '入力（キャッシュ未使用）',
+        usageColTokens: 'Token 数',
+        usageColPrice: '単価（{cur} / 100 万）',
         sectionCatalog: '価格カタログ',
         catStatus: 'OpenRouter 価格カタログ',
         catNever: 'まだ取得していません。右の「カタログを更新」で OpenRouter からモデルの価格表を取得すると、下のモデルへ価格をそのまま入れられます。',
@@ -2258,7 +2270,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: '캐시 읽기',
         tokCacheWrite: '캐시 쓰기',
         hitRate: '캐시 적중',
-        rateLegend: '각 모델 아래 줄은 해당 모델의 단가예요. 통화 입력/출력 R=캐시 읽기 W=캐시 쓰기 (100만 Token당). 「>100K」 줄은 컨텍스트가 그 크기를 넘을 때 요청 전체에 적용되는 단가예요',
+        rateLegend: '각 모델 이름 아래 줄은 해당 모델의 단가예요 (100만 Token당): 통화, 입력, 출력, 캐시 읽기, 캐시 쓰기. 「>100K」 줄은 컨텍스트가 그 크기를 넘을 때 요청 전체에 적용되는 단가예요',
         filterPlaceholder: '모델 필터…',
         addPlaceholder: '모델 id, 예: deepseek-chat',
         add: '추가',
@@ -2602,10 +2614,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: '사이드바에 상세 표시',
         peakSideDetailShowHint: '상태와 시간대 외에 적용 요일, 요금 배율, 대상 모델, 과금 규칙도 표시해요. 기본값은 꺼짐이에요',
         sectionDetail: '캐시 및 단가 상세',
-        cacheTokensShow: '캐시 읽기 / 쓰기 token',
-        cacheTokensShowHint: '오른쪽 사이드바의 모델 행과 턴 호버 카드에 캐시 읽기·쓰기 token 수도 표시해요. 입력창 아래 팝오버에는 항상 표시돼요.',
-        sideRatesShow: '모델 단가',
-        sideRatesShowHint: '오른쪽 사이드바의 모델 행에 해당 모델의 단가 줄도 표시해요: 통화, 입력/출력, R=캐시 읽기, W=캐시 쓰기 (100만 token당).',
+        cacheTokensShow: '항목별 token 수',
+        cacheTokensShowHint: '오른쪽 사이드바의 모델 행과 턴 호버 카드에 입력, 출력, 캐시 읽기, 캐시 쓰기 각각의 token 수를 표시해요. 입력창 아래 팝오버에는 항상 표시돼요.',
+        sideRatesShow: '항목별 단가',
+        sideRatesShowHint: '오른쪽 사이드바의 모델 행과 턴 호버 카드에 입력, 출력, 캐시 읽기, 캐시 쓰기 각각의 단가 (100만 token당)를 표시해요. 입력창 아래 팝오버에는 항상 표시돼요.',
+        usageInUncached: '입력 (캐시 미사용)',
+        usageColTokens: 'Token 수',
+        usageColPrice: '단가 ({cur} / 100만)',
         sectionCatalog: '가격 카탈로그',
         catStatus: 'OpenRouter 가격 카탈로그',
         catNever: '아직 가져오지 않았어요. 오른쪽 "카탈로그 업데이트"로 OpenRouter에서 모델 가격표를 가져오면 아래 모델에 가격을 바로 채울 수 있어요.',
@@ -2773,7 +2788,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: 'Cache-Lesen',
         tokCacheWrite: 'Cache-Schreiben',
         hitRate: 'Cache-Treffer',
-        rateLegend: 'Die Zeile unter jedem Modell zeigt den Tarif: Währung Eingabe/Ausgabe, R = Cache-Lesen, W = Cache-Schreiben (pro Million Tokens); eine Zeile „>100K“ ist der Tarif für die gesamte Anfrage, sobald ihr Kontext diese Größe überschreitet',
+        rateLegend: 'Die Zeile unter jedem Modellnamen zeigt den Tarif (pro Million Tokens): Währung, Eingabe, Ausgabe, Cache-Lesen, Cache-Schreiben; eine Zeile „>100K“ ist der Tarif für die gesamte Anfrage, sobald ihr Kontext diese Größe überschreitet',
         filterPlaceholder: 'Modelle filtern…',
         addPlaceholder: 'Modell-ID, z. B. deepseek-chat',
         add: 'Hinzufügen',
@@ -3117,10 +3132,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: 'Details in der Seitenleiste',
         peakSideDetailShowHint: 'Zeigt zusätzlich zu Status und Zeiten die Wochentage, das Preisverhältnis, die Modelle und die Abrechnungsregel; standardmäßig aus',
         sectionDetail: 'Cache- und Preisdetails',
-        cacheTokensShow: 'Cache-Lese-/Schreib-Token',
-        cacheTokensShowHint: 'Zeigt in den Modellzeilen der rechten Seitenleiste und in der Hover-Karte des Durchgangs zusätzlich die Token für Cache-Lesen und Cache-Schreiben. Das Popover unter dem Eingabefeld zeigt sie immer.',
-        sideRatesShow: 'Modellpreise',
-        sideRatesShowHint: 'Zeigt in den Modellzeilen der rechten Seitenleiste zusätzlich die Preiszeile des Modells: Währung, Eingabe/Ausgabe, R = Cache-Lesen, W = Cache-Schreiben (pro Million Token).',
+        cacheTokensShow: 'Tokens je Posten',
+        cacheTokensShowHint: 'Zeigt in den Modellzeilen der rechten Seitenleiste und in der Hover-Karte des Durchgangs, wie viele Tokens auf Eingabe, Ausgabe, Cache-Lesen und Cache-Schreiben entfallen. Das Popover unter dem Eingabefeld zeigt sie immer.',
+        sideRatesShow: 'Preis je Posten',
+        sideRatesShowHint: 'Zeigt in den Modellzeilen der rechten Seitenleiste und in der Hover-Karte des Durchgangs den Preis für Eingabe, Ausgabe, Cache-Lesen und Cache-Schreiben (pro Million Tokens). Das Popover unter dem Eingabefeld zeigt ihn immer.',
+        usageInUncached: 'Eingabe (ohne Cache)',
+        usageColTokens: 'Tokens',
+        usageColPrice: 'Preis ({cur} / Mio.)',
         sectionCatalog: 'Preiskatalog',
         catStatus: 'OpenRouter-Preiskatalog',
         catNever: 'Noch nicht abgerufen. Mit „Katalog aktualisieren“ holst du eine Modellpreisliste von OpenRouter; ihre Preise lassen sich dann direkt in die Modelle unten übernehmen.',
@@ -3288,7 +3306,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: 'Lecture du cache',
         tokCacheWrite: 'Écriture du cache',
         hitRate: 'Succès du cache',
-        rateLegend: 'La ligne sous chaque modèle indique son tarif : devise entrée/sortie, R = lecture du cache, W = écriture du cache (par million de tokens) ; une ligne « >100K » correspond au tarif de toute la requête dès que son contexte dépasse cette taille',
+        rateLegend: 'La ligne sous le nom de chaque modèle indique son tarif (par million de tokens) : devise, entrée, sortie, lecture du cache, écriture du cache ; une ligne « >100K » correspond au tarif de toute la requête dès que son contexte dépasse cette taille',
         filterPlaceholder: 'Filtrer les modèles…',
         addPlaceholder: 'ID du modèle, p. ex. deepseek-chat',
         add: 'Ajouter',
@@ -3632,10 +3650,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: 'Détails dans la barre latérale',
         peakSideDetailShowHint: 'Affiche en plus de l\'état et des heures les jours concernés, le rapport de prix, les modèles et la règle de facturation ; désactivé par défaut',
         sectionDetail: 'Détails du cache et des prix',
-        cacheTokensShow: 'Jetons de lecture / écriture du cache',
-        cacheTokensShowHint: 'Affiche en plus, dans les lignes de modèles de la barre latérale droite et dans la carte du tour, le nombre de jetons lus et écrits dans le cache. La fenêtre sous le champ de saisie les affiche toujours.',
-        sideRatesShow: 'Prix des modèles',
-        sideRatesShowHint: 'Affiche en plus, dans les lignes de modèles de la barre latérale droite, la ligne de prix du modèle : devise, entrée/sortie, R = lecture du cache, W = écriture du cache (par million de jetons).',
+        cacheTokensShow: 'Jetons par poste',
+        cacheTokensShowHint: 'Affiche, dans les lignes de modèles de la barre latérale droite et dans la carte du tour, le nombre de jetons d\'entrée, de sortie, de lecture et d\'écriture du cache. La fenêtre sous le champ de saisie les affiche toujours.',
+        sideRatesShow: 'Prix par poste',
+        sideRatesShowHint: 'Affiche, dans les lignes de modèles de la barre latérale droite et dans la carte du tour, le prix de l\'entrée, de la sortie, de la lecture et de l\'écriture du cache (par million de jetons). La fenêtre sous le champ de saisie l\'affiche toujours.',
+        usageInUncached: 'Entrée (hors cache)',
+        usageColTokens: 'Jetons',
+        usageColPrice: 'Prix ({cur} / M)',
         sectionCatalog: 'Catalogue de tarifs',
         catStatus: 'Catalogue de tarifs OpenRouter',
         catNever: 'Pas encore récupéré. « Mettre à jour le catalogue » récupère une liste de tarifs de modèles auprès d\'OpenRouter ; ses prix peuvent ensuite être repris directement dans les modèles ci-dessous.',
@@ -3803,7 +3824,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: 'Lectura de caché',
         tokCacheWrite: 'Escritura de caché',
         hitRate: 'Aciertos de caché',
-        rateLegend: 'La línea bajo cada modelo es su tarifa: moneda entrada/salida R=lectura de caché W=escritura de caché (por millón de tokens); una línea ">100K" indica la tarifa de toda la solicitud cuando su contexto supera ese tamaño',
+        rateLegend: 'La línea bajo el nombre de cada modelo es su tarifa (por millón de tokens): moneda, entrada, salida, lectura de caché, escritura de caché; una línea ">100K" indica la tarifa de toda la solicitud cuando su contexto supera ese tamaño',
         filterPlaceholder: 'Filtrar modelos…',
         addPlaceholder: 'ID del modelo, p. ej. deepseek-chat',
         add: 'Añadir',
@@ -4147,10 +4168,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: 'Detalles en la barra lateral',
         peakSideDetailShowHint: 'Además del estado y las horas, muestra los días, la proporción de precio, los modelos y la regla de facturación; desactivado por defecto',
         sectionDetail: 'Detalles de caché y precios',
-        cacheTokensShow: 'Tokens de lectura / escritura de caché',
-        cacheTokensShowHint: 'Muestra además, en las filas de modelos de la barra lateral derecha y en la tarjeta del turno, los tokens de lectura y escritura de caché. La ventana bajo el cuadro de entrada siempre los muestra.',
-        sideRatesShow: 'Precios de modelos',
-        sideRatesShowHint: 'Muestra además, en las filas de modelos de la barra lateral derecha, la línea de precios del modelo: moneda, entrada/salida, R = lectura de caché, W = escritura de caché (por millón de tokens).',
+        cacheTokensShow: 'Tokens por concepto',
+        cacheTokensShowHint: 'Muestra, en las filas de modelos de la barra lateral derecha y en la tarjeta del turno, cuántos tokens corresponden a entrada, salida, lectura de caché y escritura de caché. La ventana bajo el cuadro de entrada siempre los muestra.',
+        sideRatesShow: 'Precio por concepto',
+        sideRatesShowHint: 'Muestra, en las filas de modelos de la barra lateral derecha y en la tarjeta del turno, el precio de entrada, salida, lectura de caché y escritura de caché (por millón de tokens). La ventana bajo el cuadro de entrada siempre lo muestra.',
+        usageInUncached: 'Entrada (sin caché)',
+        usageColTokens: 'Tokens',
+        usageColPrice: 'Precio ({cur} / M)',
         sectionCatalog: 'Catálogo de precios',
         catStatus: 'Catálogo de precios de OpenRouter',
         catNever: 'Aún no se ha obtenido. Con «Actualizar catálogo» se descarga una lista de precios de modelos de OpenRouter; sus precios se pueden aplicar directamente a los modelos de abajo.',
@@ -4318,7 +4342,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         tokCacheRead: 'Чтение кэша',
         tokCacheWrite: 'Запись в кэш',
         hitRate: 'Попадания в кэш',
-        rateLegend: 'Строка под моделью — её тариф: валюта, ввод/вывод, R = чтение кэша, W = запись в кэш (за миллион токенов); строка «>100K» — тариф на весь запрос, если его контекст превышает этот размер',
+        rateLegend: 'Строка под названием модели — её тариф (за миллион токенов): валюта, ввод, вывод, чтение кэша, запись в кэш; строка «>100K» — тариф на весь запрос, если его контекст превышает этот размер',
         filterPlaceholder: 'Фильтр моделей…',
         addPlaceholder: 'ID модели, напр. deepseek-chat',
         add: 'Добавить',
@@ -4662,10 +4686,13 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakSideDetailShow: 'Подробности в боковой панели',
         peakSideDetailShowHint: 'Помимо статуса и часов показывает дни, соотношение цен, модели и правило тарификации; по умолчанию выключено',
         sectionDetail: 'Подробности кэша и цен',
-        cacheTokensShow: 'Токены чтения / записи кэша',
-        cacheTokensShowHint: 'Показывает в строках моделей правой боковой панели и в карточке хода также число токенов чтения и записи кэша. Всплывающее окно под полем ввода показывает их всегда.',
-        sideRatesShow: 'Цены моделей',
-        sideRatesShowHint: 'Показывает в строках моделей правой боковой панели также строку цен модели: валюта, ввод/вывод, R = чтение кэша, W = запись кэша (за миллион токенов).',
+        cacheTokensShow: 'Токены по статьям',
+        cacheTokensShowHint: 'Показывает в строках моделей правой боковой панели и в карточке хода, сколько токенов ушло на ввод, вывод, чтение и запись кэша. Всплывающее окно под полем ввода показывает их всегда.',
+        sideRatesShow: 'Цена по статьям',
+        sideRatesShowHint: 'Показывает в строках моделей правой боковой панели и в карточке хода цену ввода, вывода, чтения и записи кэша (за миллион токенов). Всплывающее окно под полем ввода показывает её всегда.',
+        usageInUncached: 'Ввод (без кэша)',
+        usageColTokens: 'Токены',
+        usageColPrice: 'Цена ({cur} / млн)',
         sectionCatalog: 'Каталог цен',
         catStatus: 'Каталог цен OpenRouter',
         catNever: 'Ещё не загружен. Кнопка «Обновить каталог» загрузит у OpenRouter список цен моделей; их цены затем можно подставить прямо в модели ниже.',
@@ -4839,14 +4866,6 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return (rate * 100).toFixed(rate >= 0.995 ? 0 : 1) + '%'
       }
 
-      /** "Cache read 12K · Cache write 1.2K"; a zero side is left out. */
-      function cacheTokensText(cacheRead, cacheWrite) {
-        const parts = []
-        if (cacheRead > 0) parts.push(t('rCacheRead') + ' ' + formatTok(cacheRead))
-        if (cacheWrite > 0) parts.push(t('rCacheWrite') + ' ' + formatTok(cacheWrite))
-        return parts.join(' · ')
-      }
-
       /** 命中率高是好事：≥80% 绿、≥50% 常规、更低调灰。 */
       function hitRateColor(inputTokens, cacheReadTokens, cacheWriteTokens) {
         const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
@@ -4863,11 +4882,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return sum
       }
 
-      /** "USD 0.1/0.5 R0.01 W0.125"; an empty currency is skipped (used for tier lines). */
+      /** "USD · Input 0.1 · Output 0.5 · Cache read 0.01 · Cache write 0.125"; an empty currency is skipped (used for tier lines). */
       function rateLine(price) {
         if (!price) return t('sourceNone')
-        return [price.currency || '', (price.input ?? 0) + '/' + (price.output ?? 0),
-          'R' + (price.cacheRead ?? 0), 'W' + (price.cacheWrite ?? 0)].filter(Boolean).join(' ')
+        return [price.currency || '', t('rIn') + ' ' + (price.input ?? 0), t('rOut') + ' ' + (price.output ?? 0),
+          t('rCacheRead') + ' ' + (price.cacheRead ?? 0), t('rCacheWrite') + ' ' + (price.cacheWrite ?? 0)].filter(Boolean).join(' · ')
       }
 
       // Mirrors DEFAULT_PREFS / the enums in prefs.js; the Host validates, this only supplies defaults and renders.
@@ -5214,6 +5233,39 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         })
       }
 
+      // Four-row table of one model's usage: input / output / cache read / cache write, each with its token count and its
+      // price per million tokens. Used by the right-sidebar model rows and the turn hover card; each column has its own switch.
+
+      const usageCell = { fontSize: 11, lineHeight: '16px', color: TERTIARY, fontVariantNumeric: 'tabular-nums', textAlign: 'right', whiteSpace: 'nowrap' }
+
+      /**
+       * `tokens` = { input, output, cacheRead, cacheWrite } (input = uncached input); `price` = the model's base price or null.
+       * Renders nothing when both columns are off. With no price the price column is dropped even when it is switched on.
+       */
+      function UsageTable(props) {
+        const { tokens, price, showTokens, showRates } = props
+        const rates = showRates && price
+        if (!showTokens && !rates) return null
+        const rows = [
+          ['usageInUncached', tokens.input, price && price.input],
+          ['rOut', tokens.output, price && price.output],
+          ['rCacheRead', tokens.cacheRead, price && price.cacheRead],
+          ['rCacheWrite', tokens.cacheWrite, price && price.cacheWrite],
+        ]
+        const cols = '1fr' + (showTokens ? ' auto' : '') + (rates ? ' auto' : '')
+        const head = (text) => h('div', { style: Object.assign({}, usageCell, { fontSize: 10 }) }, text)
+        const cell = (text, key) => h('div', { key, style: usageCell }, text)
+        return h('div', { style: { display: 'grid', gridTemplateColumns: cols, columnGap: 14, rowGap: 1, alignItems: 'baseline' } },
+          h('div', null),
+          showTokens ? head(t('usageColTokens')) : null,
+          rates ? head(t('usageColPrice', { cur: price.currency || '' })) : null,
+          rows.map(([label, count, rate]) => [
+            h('div', { key: label, style: Object.assign({}, usageCell, { textAlign: 'left' }) }, t(label)),
+            showTokens ? cell(count > 0 ? formatTok(count) : '—', label + 't') : null,
+            rates ? cell(String(rate ?? 0), label + 'p') : null,
+          ]))
+      }
+
       // Presentation of one turn's cost under an assistant message: a chip in the action row (hover for details) and a
       // summary line above it. The numbers come from summarizeCalls() (88-turn-cost.js); this file only formats and draws.
       // The two slot adapters at the bottom resolve a message / turn to its calls and render nothing when anything is missing.
@@ -5259,19 +5311,20 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
       /** Hover card: per-model breakdown, token mix and the caveats of the attribution. `fx` is the currency footnote, if any. */
       function TurnDetail(props) {
-        const { summary: s, fx } = props
+        const { summary: s, fx, priceOf, showTokens, showRates } = props
         const row = { display: 'flex', alignItems: 'baseline', gap: 12, justifyContent: 'space-between' }
         const dim = { color: TERTIARY }
         const hit = hitOf(s)
         return h('div', { role: 'tooltip', style: { display: 'flex', flexDirection: 'column', gap: 4, fontSize: 12, lineHeight: '18px', color: SECONDARY } },
           h('div', { style: Object.assign({}, row, { color: PRIMARY }) }, h('span', null, t('msgTurn')), h('span', { style: dim }, t('msgCalls', { n: s.calls }))),
-          s.models.map((m) => h('div', { key: m.model, style: row },
-            h('span', { style: { minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, title: m.model }, m.model),
-            h('span', { style: { whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' } },
-              (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls })))),
+          s.models.map((m) => h('div', { key: m.model, style: { display: 'flex', flexDirection: 'column', gap: 2 } },
+            h('div', { style: row },
+              h('span', { style: { minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, title: m.model }, m.model),
+              h('span', { style: { whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' } },
+                (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls }))),
+            m.media ? null : h(UsageTable, { tokens: m, price: priceOf ? priceOf(m.model) : null, showTokens, showRates }))),
           h('div', { style: dim }, t('msgInOut', { i: formatTok(s.input + s.cacheRead + s.cacheWrite), o: formatTok(s.output) })
             + (hit !== null ? ' · ' + t('msgCacheHit', { pct: pctText(hit) }) : '')),
-          props.cacheTokens && s.cacheRead + s.cacheWrite > 0 ? h('div', { style: dim }, cacheTokensText(s.cacheRead, s.cacheWrite)) : null,
           s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
           s.unpriced > 0 ? h('div', null, '! ' + t('msgUnpriced', { n: s.unpriced })) : null,
           s.failed > 0 ? h('div', null, '! ' + t('msgFailed', { n: s.failed })) : null,
@@ -5281,7 +5334,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
       /** The chip in the message action row. Opens on hover or focus, closes on leave, blur or Esc. */
       function TurnChip(props) {
-        const { summary, prefs, fx } = props
+        const { summary, prefs, fx, priceOf } = props
         const theme = msgTheme(prefs)
         const [open, setOpen] = React.useState(false)
         const [shift, setShift] = React.useState(0)
@@ -5311,7 +5364,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
               boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
             },
-          }, h(TurnDetail, { summary, fx, cacheTokens: prefs.cacheTokens })) : null)
+          }, h(TurnDetail, { summary, fx, priceOf, showTokens: prefs.cacheTokens, showRates: prefs.sideRates })) : null)
       }
 
       /** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */
@@ -5333,11 +5386,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
       /** Slot `conversation.chat.assistant-actions`: the chip for the turn this assistant message belongs to. */
       function CostChip(props) {
         const prefs = usePrefs()
+        const snap = useStore().snap
         const log = useCalls(prefs.msgChip ? sessionKey(props.sessionId) : null)
         if (!prefs.msgChip) return null
         const turn = turnOfMessage(log.msgs, props.messageId)
         const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
-        return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs }))
+        // The configured price wins over the preset, as in the strip popover.
+        const priceOf = (model) => (snap && ((snap.prices && snap.prices[model]) || (snap.presets && snap.presets[model]))) || null
+        return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs, priceOf }))
       }
 
       /** Slot `conversation.chat.turnTail`: one summary line for the turn (the prop is the turn number or a view object). */
@@ -7937,7 +7993,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const out = { calls: calls.length, failed: 0, unpriced: 0, costs: {}, input: 0, output: 0, cacheRead: 0, cacheWrite: 0, wallMs: 0, models: [] }
         const by = {}
         for (const c of calls) {
-          const row = by[c.model] || (by[c.model] = { model: c.model, calls: 0, costs: {}, units: 0, media: null })
+          const row = by[c.model] || (by[c.model] = { model: c.model, calls: 0, costs: {}, units: 0, media: null, input: 0, output: 0, cacheRead: 0, cacheWrite: 0 })
           row.calls += 1
           if (!c.ok) out.failed += 1
           if (c.media) { row.media = c.media; row.units += c.units || 0 } else {
@@ -7945,6 +8001,10 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
             out.output += c.output || 0
             out.cacheRead += c.cacheRead || 0
             out.cacheWrite += c.cacheWrite || 0
+            row.input += c.input || 0
+            row.output += c.output || 0
+            row.cacheRead += c.cacheRead || 0
+            row.cacheWrite += c.cacheWrite || 0
             out.wallMs += Math.max(0, (c.end || 0) - (c.at || 0))
           }
           if (c.ok && c.cost !== null && c.cost !== undefined && c.currency) {
@@ -8750,10 +8810,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               formatCosts(row.costs) || (row.counter.unpriced > 0 ? t('msgNoCost') : t('noCost')))),
           h(ShareBar, { share: row.share }),
           h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, tokens),
-          prefs.cacheTokens && row.cacheRead + row.cacheWrite > 0
-            ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, cacheTokensText(row.cacheRead, row.cacheWrite)) : null,
           h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rest),
-          prefs.sideRates && row.price ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rateLine(row.price)) : null,
+          h(UsageTable, { tokens: { input: row.inTok, output: row.outTok, cacheRead: row.cacheRead, cacheWrite: row.cacheWrite }, price: row.price, showTokens: prefs.cacheTokens, showRates: prefs.sideRates }),
           row.counter.unpriced > 0 ? h('div', { style: Object.assign({}, sideNote, { color: LIGHT.red }) }, t('unpriced', { n: row.counter.unpriced })) : null)
       }
 

@@ -26,7 +26,7 @@ export function summarizeCalls(calls) {
   const out = { calls: calls.length, failed: 0, unpriced: 0, costs: {}, input: 0, output: 0, cacheRead: 0, cacheWrite: 0, wallMs: 0, models: [] }
   const by = {}
   for (const c of calls) {
-    const row = by[c.model] || (by[c.model] = { model: c.model, calls: 0, costs: {}, units: 0, media: null })
+    const row = by[c.model] || (by[c.model] = { model: c.model, calls: 0, costs: {}, units: 0, media: null, input: 0, output: 0, cacheRead: 0, cacheWrite: 0 })
     row.calls += 1
     if (!c.ok) out.failed += 1
     if (c.media) { row.media = c.media; row.units += c.units || 0 } else {
@@ -34,6 +34,10 @@ export function summarizeCalls(calls) {
       out.output += c.output || 0
       out.cacheRead += c.cacheRead || 0
       out.cacheWrite += c.cacheWrite || 0
+      row.input += c.input || 0
+      row.output += c.output || 0
+      row.cacheRead += c.cacheRead || 0
+      row.cacheWrite += c.cacheWrite || 0
       out.wallMs += Math.max(0, (c.end || 0) - (c.at || 0))
     }
     if (c.ok && c.cost !== null && c.cost !== undefined && c.currency) {

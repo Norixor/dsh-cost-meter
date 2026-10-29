@@ -68,14 +68,6 @@ function formatHitRate(inputTokens, cacheReadTokens, cacheWriteTokens) {
   return (rate * 100).toFixed(rate >= 0.995 ? 0 : 1) + '%'
 }
 
-/** "Cache read 12K · Cache write 1.2K"; a zero side is left out. */
-function cacheTokensText(cacheRead, cacheWrite) {
-  const parts = []
-  if (cacheRead > 0) parts.push(t('rCacheRead') + ' ' + formatTok(cacheRead))
-  if (cacheWrite > 0) parts.push(t('rCacheWrite') + ' ' + formatTok(cacheWrite))
-  return parts.join(' · ')
-}
-
 /** 命中率高是好事：≥80% 绿、≥50% 常规、更低调灰。 */
 function hitRateColor(inputTokens, cacheReadTokens, cacheWriteTokens) {
   const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
@@ -92,9 +84,9 @@ function costValue(costs) {
   return sum
 }
 
-/** "USD 0.1/0.5 R0.01 W0.125"; an empty currency is skipped (used for tier lines). */
+/** "USD · Input 0.1 · Output 0.5 · Cache read 0.01 · Cache write 0.125"; an empty currency is skipped (used for tier lines). */
 function rateLine(price) {
   if (!price) return t('sourceNone')
-  return [price.currency || '', (price.input ?? 0) + '/' + (price.output ?? 0),
-    'R' + (price.cacheRead ?? 0), 'W' + (price.cacheWrite ?? 0)].filter(Boolean).join(' ')
+  return [price.currency || '', t('rIn') + ' ' + (price.input ?? 0), t('rOut') + ' ' + (price.output ?? 0),
+    t('rCacheRead') + ' ' + (price.cacheRead ?? 0), t('rCacheWrite') + ' ' + (price.cacheWrite ?? 0)].filter(Boolean).join(' · ')
 }

@@ -42,10 +42,8 @@ function SideModelRow(props) {
         formatCosts(row.costs) || (row.counter.unpriced > 0 ? t('msgNoCost') : t('noCost')))),
     h(ShareBar, { share: row.share }),
     h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, tokens),
-    prefs.cacheTokens && row.cacheRead + row.cacheWrite > 0
-      ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, cacheTokensText(row.cacheRead, row.cacheWrite)) : null,
     h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rest),
-    prefs.sideRates && row.price ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rateLine(row.price)) : null,
+    h(UsageTable, { tokens: { input: row.inTok, output: row.outTok, cacheRead: row.cacheRead, cacheWrite: row.cacheWrite }, price: row.price, showTokens: prefs.cacheTokens, showRates: prefs.sideRates }),
     row.counter.unpriced > 0 ? h('div', { style: Object.assign({}, sideNote, { color: LIGHT.red }) }, t('unpriced', { n: row.counter.unpriced })) : null)
 }
 

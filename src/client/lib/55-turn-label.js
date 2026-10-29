@@ -43,19 +43,20 @@ function msgTheme(prefs) {
 
 /** Hover card: per-model breakdown, token mix and the caveats of the attribution. `fx` is the currency footnote, if any. */
 function TurnDetail(props) {
-  const { summary: s, fx } = props
+  const { summary: s, fx, priceOf, showTokens, showRates } = props
   const row = { display: 'flex', alignItems: 'baseline', gap: 12, justifyContent: 'space-between' }
   const dim = { color: TERTIARY }
   const hit = hitOf(s)
   return h('div', { role: 'tooltip', style: { display: 'flex', flexDirection: 'column', gap: 4, fontSize: 12, lineHeight: '18px', color: SECONDARY } },
     h('div', { style: Object.assign({}, row, { color: PRIMARY }) }, h('span', null, t('msgTurn')), h('span', { style: dim }, t('msgCalls', { n: s.calls }))),
-    s.models.map((m) => h('div', { key: m.model, style: row },
-      h('span', { style: { minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, title: m.model }, m.model),
-      h('span', { style: { whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' } },
-        (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls })))),
+    s.models.map((m) => h('div', { key: m.model, style: { display: 'flex', flexDirection: 'column', gap: 2 } },
+      h('div', { style: row },
+        h('span', { style: { minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, title: m.model }, m.model),
+        h('span', { style: { whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' } },
+          (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls }))),
+      m.media ? null : h(UsageTable, { tokens: m, price: priceOf ? priceOf(m.model) : null, showTokens, showRates }))),
     h('div', { style: dim }, t('msgInOut', { i: formatTok(s.input + s.cacheRead + s.cacheWrite), o: formatTok(s.output) })
       + (hit !== null ? ' · ' + t('msgCacheHit', { pct: pctText(hit) }) : '')),
-    props.cacheTokens && s.cacheRead + s.cacheWrite > 0 ? h('div', { style: dim }, cacheTokensText(s.cacheRead, s.cacheWrite)) : null,
     s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
     s.unpriced > 0 ? h('div', null, '! ' + t('msgUnpriced', { n: s.unpriced })) : null,
     s.failed > 0 ? h('div', null, '! ' + t('msgFailed', { n: s.failed })) : null,
@@ -65,7 +66,7 @@ function TurnDetail(props) {
 
 /** The chip in the message action row. Opens on hover or focus, closes on leave, blur or Esc. */
 function TurnChip(props) {
-  const { summary, prefs, fx } = props
+  const { summary, prefs, fx, priceOf } = props
   const theme = msgTheme(prefs)
   const [open, setOpen] = React.useState(false)
   const [shift, setShift] = React.useState(0)
@@ -95,7 +96,7 @@ function TurnChip(props) {
         position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
         boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
       },
-    }, h(TurnDetail, { summary, fx, cacheTokens: prefs.cacheTokens })) : null)
+    }, h(TurnDetail, { summary, fx, priceOf, showTokens: prefs.cacheTokens, showRates: prefs.sideRates })) : null)
 }
 
 /** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */
@@ -117,11 +118,14 @@ function shownSummary(calls, prefs) {
 /** Slot `conversation.chat.assistant-actions`: the chip for the turn this assistant message belongs to. */
 function CostChip(props) {
   const prefs = usePrefs()
+  const snap = useStore().snap
   const log = useCalls(prefs.msgChip ? sessionKey(props.sessionId) : null)
   if (!prefs.msgChip) return null
   const turn = turnOfMessage(log.msgs, props.messageId)
   const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
-  return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs }))
+  // The configured price wins over the preset, as in the strip popover.
+  const priceOf = (model) => (snap && ((snap.prices && snap.prices[model]) || (snap.presets && snap.presets[model]))) || null
+  return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs, priceOf }))
 }
 
 /** Slot `conversation.chat.turnTail`: one summary line for the turn (the prop is the turn number or a view object). */
