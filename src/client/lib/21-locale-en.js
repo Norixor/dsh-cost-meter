@@ -139,7 +139,7 @@ const EN = {
   chartTokens: 'Token mix',
   chartTokensSub: 'Per day · input / output / cache read / cache write',
   chartHit: 'Cache hit rate',
-  chartHitSub: 'Per day · cache read ÷ (input + cache read)',
+  chartHitSub: 'Per day · cache read ÷ (input + cache read + cache write)',
   other: 'Other',
   viewChart: 'Chart',
   viewTable: 'Table',

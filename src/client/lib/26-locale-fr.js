@@ -140,7 +140,7 @@ const FR = {
   chartTokens: 'Répartition des tokens',
   chartTokensSub: 'Par jour · entrée / sortie / lecture du cache / écriture du cache',
   chartHit: 'Taux de succès du cache',
-  chartHitSub: 'Par jour · lecture du cache ÷ (entrée + lecture du cache)',
+  chartHitSub: 'Par jour · lecture du cache ÷ (entrée + lecture du cache + écriture du cache)',
   other: 'Autres',
   viewChart: 'Graphique',
   viewTable: 'Tableau',

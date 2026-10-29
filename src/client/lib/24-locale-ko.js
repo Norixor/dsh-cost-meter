@@ -140,7 +140,7 @@ const KO = {
   chartTokens: 'Token 구성',
   chartTokensSub: '일별 · 입력 / 출력 / 캐시 읽기 / 캐시 쓰기',
   chartHit: '캐시 적중률',
-  chartHitSub: '일별 · 캐시 읽기 ÷ (입력 + 캐시 읽기)',
+  chartHitSub: '일별 · 캐시 읽기 ÷ (입력 + 캐시 읽기 + 캐시 쓰기)',
   other: '기타',
   viewChart: '차트',
   viewTable: '표',

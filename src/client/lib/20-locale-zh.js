@@ -139,7 +139,7 @@ const ZH = {
   chartTokens: 'Token 构成',
   chartTokensSub: '每日 · 输入 / 输出 / 缓存读 / 缓存写',
   chartHit: '缓存命中率',
-  chartHitSub: '每日 · 缓存读 ÷ (输入 + 缓存读)',
+  chartHitSub: '每日 · 缓存读 ÷ (输入 + 缓存读 + 缓存写)',
   other: '其他',
   viewChart: '图表',
   viewTable: '表格',

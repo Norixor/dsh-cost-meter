@@ -140,7 +140,7 @@ const JA = {
   chartTokens: 'Token の内訳',
   chartTokensSub: '日次 · 入力 / 出力 / キャッシュ読み取り / キャッシュ書き込み',
   chartHit: 'キャッシュヒット率',
-  chartHitSub: '日次 · キャッシュ読み取り ÷ (入力 + キャッシュ読み取り)',
+  chartHitSub: '日次 · キャッシュ読み取り ÷ (入力 + キャッシュ読み取り + キャッシュ書き込み)',
   other: 'その他',
   viewChart: 'グラフ',
   viewTable: '表',

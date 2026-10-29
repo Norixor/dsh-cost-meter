@@ -54,9 +54,9 @@ function addInto(target, counter) {
 
 export const tokensOf = (c) => (c.inputTokens || 0) + (c.outputTokens || 0) + (c.cacheReadTokens || 0) + (c.cacheWriteTokens || 0)
 
-/** Cache hit rate = cache read ÷ (input + cache read); null when there was no input-side traffic. */
+/** Cache hit rate = cache read ÷ (input + cache read + cache write); null when there was no input-side traffic. */
 export function hitRateOf(c) {
-  const denom = (c.inputTokens || 0) + (c.cacheReadTokens || 0)
+  const denom = (c.inputTokens || 0) + (c.cacheReadTokens || 0) + (c.cacheWriteTokens || 0)
   return denom > 0 ? (c.cacheReadTokens || 0) / denom : null
 }
 

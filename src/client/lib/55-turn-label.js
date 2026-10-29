@@ -2,7 +2,7 @@
 // summary line above it. The numbers come from summarizeCalls() (88-turn-cost.js); this file only formats and draws.
 // The two slot adapters at the bottom resolve a message / turn to its calls and render nothing when anything is missing.
 
-const hitOf = (s) => hitRateValue(s.input, s.cacheRead)
+const hitOf = (s) => hitRateValue(s.input, s.cacheRead, s.cacheWrite)
 
 /** Short label for the chip: the cost, else "unpriced" when something finished without a price, else the tokens. */
 function turnChipText(s) {

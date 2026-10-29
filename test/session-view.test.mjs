@@ -29,6 +29,7 @@ test('sessionBreakdown sums tokens and calls, sorts the most expensive model fir
   assert.equal(b.tokens, (100 + 50) * 3 + 1000 + 50 + 400)
   assert.equal(b.inTok, 100 * 3 + 1000)
   assert.equal(b.cacheRead, 400)
+  assert.equal(b.cacheWrite, 0)
   assert.equal(b.unpriced, 2)
   assert.deepEqual(b.unpricedModels, ['free'])
   assert.equal(b.updatedAt, 99)

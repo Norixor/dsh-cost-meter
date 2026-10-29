@@ -70,7 +70,7 @@ test('tokenMix, hit rate and model ranking', () => {
     d2: { a: counter({ inputTokens: 100, costs: { CNY: 1 } }), b: counter({ outputTokens: 50, costs: { CNY: 10 } }) },
   }, ['d1', 'd2'])
   assert.deepEqual(tokenMix(days)[0].values, [100, 20, 300, 5])
-  assert.equal(hitRateOf(days[0].total), 0.75)
+  assert.equal(hitRateOf(days[0].total), 300 / 405, 'cache writes count as prompt that was not served from cache')
   assert.equal(hitRateOf({}), null)
   const rank = rankModels(days, 'CNY')
   assert.deepEqual(rank.map((r) => r.model), ['b', 'a'])

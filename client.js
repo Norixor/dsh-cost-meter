@@ -264,7 +264,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Token 构成',
         chartTokensSub: '每日 · 输入 / 输出 / 缓存读 / 缓存写',
         chartHit: '缓存命中率',
-        chartHitSub: '每日 · 缓存读 ÷ (输入 + 缓存读)',
+        chartHitSub: '每日 · 缓存读 ÷ (输入 + 缓存读 + 缓存写)',
         other: '其他',
         viewChart: '图表',
         viewTable: '表格',
@@ -773,7 +773,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Token mix',
         chartTokensSub: 'Per day · input / output / cache read / cache write',
         chartHit: 'Cache hit rate',
-        chartHitSub: 'Per day · cache read ÷ (input + cache read)',
+        chartHitSub: 'Per day · cache read ÷ (input + cache read + cache write)',
         other: 'Other',
         viewChart: 'Chart',
         viewTable: 'Table',
@@ -1283,7 +1283,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Token 組成',
         chartTokensSub: '每日 · 輸入／輸出／快取讀取／快取寫入',
         chartHit: '快取命中率',
-        chartHitSub: '每日 · 快取讀取 ÷（輸入 + 快取讀取）',
+        chartHitSub: '每日 · 快取讀取 ÷（輸入 + 快取讀取 + 快取寫入）',
         other: '其他',
         viewChart: '圖表',
         viewTable: '表格',
@@ -1793,7 +1793,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Token の内訳',
         chartTokensSub: '日次 · 入力 / 出力 / キャッシュ読み取り / キャッシュ書き込み',
         chartHit: 'キャッシュヒット率',
-        chartHitSub: '日次 · キャッシュ読み取り ÷ (入力 + キャッシュ読み取り)',
+        chartHitSub: '日次 · キャッシュ読み取り ÷ (入力 + キャッシュ読み取り + キャッシュ書き込み)',
         other: 'その他',
         viewChart: 'グラフ',
         viewTable: '表',
@@ -2303,7 +2303,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Token 구성',
         chartTokensSub: '일별 · 입력 / 출력 / 캐시 읽기 / 캐시 쓰기',
         chartHit: '캐시 적중률',
-        chartHitSub: '일별 · 캐시 읽기 ÷ (입력 + 캐시 읽기)',
+        chartHitSub: '일별 · 캐시 읽기 ÷ (입력 + 캐시 읽기 + 캐시 쓰기)',
         other: '기타',
         viewChart: '차트',
         viewTable: '표',
@@ -2813,7 +2813,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Token-Verteilung',
         chartTokensSub: 'Pro Tag · Eingabe / Ausgabe / Cache-Lesen / Cache-Schreiben',
         chartHit: 'Cache-Trefferquote',
-        chartHitSub: 'Pro Tag · Cache-Lesen ÷ (Eingabe + Cache-Lesen)',
+        chartHitSub: 'Pro Tag · Cache-Lesen ÷ (Eingabe + Cache-Lesen + Cache-Schreiben)',
         other: 'Sonstige',
         viewChart: 'Diagramm',
         viewTable: 'Tabelle',
@@ -3323,7 +3323,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Répartition des tokens',
         chartTokensSub: 'Par jour · entrée / sortie / lecture du cache / écriture du cache',
         chartHit: 'Taux de succès du cache',
-        chartHitSub: 'Par jour · lecture du cache ÷ (entrée + lecture du cache)',
+        chartHitSub: 'Par jour · lecture du cache ÷ (entrée + lecture du cache + écriture du cache)',
         other: 'Autres',
         viewChart: 'Graphique',
         viewTable: 'Tableau',
@@ -3833,7 +3833,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Distribución de tokens',
         chartTokensSub: 'Por día · entrada / salida / lectura de caché / escritura de caché',
         chartHit: 'Tasa de aciertos de caché',
-        chartHitSub: 'Por día · lectura de caché ÷ (entrada + lectura de caché)',
+        chartHitSub: 'Por día · lectura de caché ÷ (entrada + lectura de caché + escritura de caché)',
         other: 'Otros',
         viewChart: 'Gráfico',
         viewTable: 'Tabla',
@@ -4343,7 +4343,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         chartTokens: 'Структура токенов',
         chartTokensSub: 'По дням · ввод / вывод / чтение кэша / запись в кэш',
         chartHit: 'Попадания в кэш',
-        chartHitSub: 'По дням · чтение кэша ÷ (ввод + чтение кэша)',
+        chartHitSub: 'По дням · чтение кэша ÷ (ввод + чтение кэша + запись кэша)',
         other: 'Другое',
         viewChart: 'График',
         viewTable: 'Таблица',
@@ -4777,21 +4777,26 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return { color, pct }
       }
 
-      function hitRateValue(inputTokens, cacheReadTokens) {
-        const denom = (Number(inputTokens) || 0) + (Number(cacheReadTokens) || 0)
+      /**
+       * Cache hit rate = cache read ÷ whole prompt (uncached input + cache read + cache write). Providers that bill cache
+       * writes separately (Anthropic) report the written part outside the uncached input, so leaving it out of the
+       * denominator would show ~100% for a conversation that mostly writes new cache.
+       */
+      function hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens) {
+        const denom = (Number(inputTokens) || 0) + (Number(cacheReadTokens) || 0) + (Number(cacheWriteTokens) || 0)
         if (denom <= 0) return null
         return (Number(cacheReadTokens) || 0) / denom
       }
 
-      function formatHitRate(inputTokens, cacheReadTokens) {
-        const rate = hitRateValue(inputTokens, cacheReadTokens)
+      function formatHitRate(inputTokens, cacheReadTokens, cacheWriteTokens) {
+        const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
         if (rate === null) return '—'
         return (rate * 100).toFixed(rate >= 0.995 ? 0 : 1) + '%'
       }
 
       /** 命中率高是好事：≥80% 绿、≥50% 常规、更低调灰。 */
-      function hitRateColor(inputTokens, cacheReadTokens) {
-        const rate = hitRateValue(inputTokens, cacheReadTokens)
+      function hitRateColor(inputTokens, cacheReadTokens, cacheWriteTokens) {
+        const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
         if (rate === null) return TERTIARY
         if (rate >= 0.8) return LIGHT.green
         if (rate >= 0.5) return SECONDARY
@@ -5047,6 +5052,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const sessionTokens = breakdown.tokens
         const sessionInTok = breakdown.inTok
         const sessionCacheRead = breakdown.cacheRead
+        const sessionCacheWrite = breakdown.cacheWrite
 
         // 预算只按预算货币统计本会话的费用（红绿灯用原始金额算）；显示时再折成所选币种。
         const spent = session && session.costs && budget ? (session.costs[budget.currency] || 0) : 0
@@ -5110,7 +5116,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           h('div', { style: { display: 'flex', justifyContent: 'space-between', gap: 16, fontSize: 12, padding: '0 6px 6px' } },
             h('strong', { style: { fontWeight: 600 } }, t('detailTitle')),
             h('span', { style: { color: TERTIARY } },
-              formatTok(sessionTokens) + ' · ' + t('hitRate') + ' ' + formatHitRate(sessionInTok, sessionCacheRead) + ' · ' + sessionCosts)),
+              formatTok(sessionTokens) + ' · ' + t('hitRate') + ' ' + formatHitRate(sessionInTok, sessionCacheRead, sessionCacheWrite) + ' · ' + sessionCosts)),
           canOpenSide() ? h('div', { style: { padding: '0 6px 6px' } },
             h('button', {
               type: 'button',
@@ -5136,7 +5142,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               h('td', { style: bodyCell }, formatTok(outTok)),
               h('td', { style: bodyCell }, cacheRead > 0 ? formatTok(cacheRead) : '—'),
               h('td', { style: bodyCell }, cacheWrite > 0 ? formatTok(cacheWrite) : '—'),
-              h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead) }) }, formatHitRate(inTok, cacheRead)),
+              h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead, cacheWrite) }) }, formatHitRate(inTok, cacheRead, cacheWrite)),
               h('td', { style: Object.assign({}, bodyCell, { color: PRIMARY }) },
                 h('div', null, formatCosts(costs) || t('noCost')),
                 counter.tierCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('tierCount', { n: counter.tierCalls })) : null,
@@ -5157,7 +5163,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
       // summary line above it. The numbers come from summarizeCalls() (88-turn-cost.js); this file only formats and draws.
       // The two slot adapters at the bottom resolve a message / turn to its calls and render nothing when anything is missing.
 
-      const hitOf = (s) => hitRateValue(s.input, s.cacheRead)
+      const hitOf = (s) => hitRateValue(s.input, s.cacheRead, s.cacheWrite)
 
       /** Short label for the chip: the cost, else "unpriced" when something finished without a price, else the tokens. */
       function turnChipText(s) {
@@ -7374,9 +7380,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
       const tokensOf = (c) => (c.inputTokens || 0) + (c.outputTokens || 0) + (c.cacheReadTokens || 0) + (c.cacheWriteTokens || 0)
 
-      /** Cache hit rate = cache read ÷ (input + cache read); null when there was no input-side traffic. */
+      /** Cache hit rate = cache read ÷ (input + cache read + cache write); null when there was no input-side traffic. */
       function hitRateOf(c) {
-        const denom = (c.inputTokens || 0) + (c.cacheReadTokens || 0)
+        const denom = (c.inputTokens || 0) + (c.cacheReadTokens || 0) + (c.cacheWriteTokens || 0)
         return denom > 0 ? (c.cacheReadTokens || 0) / denom : null
       }
 
@@ -7806,7 +7812,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
       /**
        * facts = {
        *   calls, failed, unpriced, peakCalls, tierCalls,       // call counts in view
-       *   hit, inputSide,                                      // cache hit rate (0–1 | null) and input + cache-read tokens
+       *   hit, inputSide,                                      // cache hit rate (0–1 | null) and input + cache-read + cache-write tokens
        *   models, topModel, topShare,                          // distinct models and the biggest one's share of cost (0–1)
        *   latency: { calls, p95Ms, ttftAvgMs, slowCalls },     // slowCalls = calls over 60 s; null when nothing was timed
        * }
@@ -7905,7 +7911,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
        * share = the row's part of the session's cost (0–1), or null when nothing was priced.
        */
       function sessionBreakdown(snap, sessionId, convert) {
-        const out = { session: null, rows: [], costs: {}, tokens: 0, inTok: 0, cacheRead: 0, calls: 0, failed: 0, unpriced: 0, unpricedModels: [], updatedAt: 0 }
+        const out = { session: null, rows: [], costs: {}, tokens: 0, inTok: 0, cacheRead: 0, cacheWrite: 0, calls: 0, failed: 0, unpriced: 0, unpricedModels: [], updatedAt: 0 }
         const session = snap && snap.sessions && sessionId ? snap.sessions[sessionId] : undefined
         if (!session) return out
         const map = typeof convert === 'function' ? convert : (costs) => costs || {}
@@ -7926,6 +7932,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           out.tokens += inTok + outTok + cacheRead + cacheWrite
           out.inTok += inTok
           out.cacheRead += cacheRead
+          out.cacheWrite += cacheWrite
           out.rows.push({ model, counter, price, costs: map(counter.costs), inTok, outTok, cacheRead, cacheWrite })
         }
         out.rows.sort((a, b) => weightOf(b.costs) - weightOf(a.costs) || a.model.localeCompare(b.model))
@@ -8427,7 +8434,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         const top = rank.find((r) => r.cost > 0)
         const insights = insightsOf({
           calls: total.calls, failed: total.failed, unpriced: total.unpriced, peakCalls: total.peakCalls, tierCalls: total.tierCalls,
-          hit, inputSide: total.inputTokens + total.cacheReadTokens,
+          hit, inputSide: total.inputTokens + total.cacheReadTokens + total.cacheWriteTokens,
           models: rank.length, topModel: top ? top.model : null, topShare: top && spent > 0 ? top.cost / spent : 0,
           latency: { calls: lat.calls, p95Ms: lat.p95, ttftAvgMs: lat.ttftAvgMs, slowCalls: countAbove(latMerged.durHist, bounds, 60000) },
         })
@@ -8664,7 +8671,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
       function SideModelRow(props) {
         const { row } = props
-        const hit = formatHitRate(row.inTok, row.cacheRead)
+        const hit = formatHitRate(row.inTok, row.cacheRead, row.cacheWrite)
         const tokens = t('msgInOut', { i: formatTok(row.inTok + row.cacheRead + row.cacheWrite), o: formatTok(row.outTok) })
         const rest = (row.cacheRead > 0 ? [t('hitRate') + ' ' + hit] : []).concat(t('tipCalls', { n: row.counter.calls || 0 })).join(' · ')
         return h('div', { style: { display: 'flex', flexDirection: 'column', gap: 5, minWidth: 0 } },
@@ -8729,7 +8736,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
                 dot(LIGHT.green, 6), t('sideLive', { s: POLL_MS / 1000 }))),
             h('div', { style: { fontSize: 26, lineHeight: '32px', fontWeight: 600, fontVariantNumeric: 'tabular-nums' } }, formatCosts(b.costs) || t('noCost')),
             hasData ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) },
-              [t('tipCalls', { n: b.calls }), formatTok(b.tokens), t('hitRate') + ' ' + formatHitRate(b.inTok, b.cacheRead)].join(' · ')) : null,
+              [t('tipCalls', { n: b.calls }), formatTok(b.tokens), t('hitRate') + ' ' + formatHitRate(b.inTok, b.cacheRead, b.cacheWrite)].join(' · ')) : null,
             fx ? h('div', { style: sideNote }, fx) : null,
             light.pct !== null ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: 4, marginTop: 4 } },
               h('div', { style: { height: 4, borderRadius: 2, background: FILL, overflow: 'hidden' } },

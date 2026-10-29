@@ -9,7 +9,7 @@ const weightOf = (costs) => Object.keys(costs || {}).reduce((sum, cur) => sum + 
  * share = the row's part of the session's cost (0–1), or null when nothing was priced.
  */
 export function sessionBreakdown(snap, sessionId, convert) {
-  const out = { session: null, rows: [], costs: {}, tokens: 0, inTok: 0, cacheRead: 0, calls: 0, failed: 0, unpriced: 0, unpricedModels: [], updatedAt: 0 }
+  const out = { session: null, rows: [], costs: {}, tokens: 0, inTok: 0, cacheRead: 0, cacheWrite: 0, calls: 0, failed: 0, unpriced: 0, unpricedModels: [], updatedAt: 0 }
   const session = snap && snap.sessions && sessionId ? snap.sessions[sessionId] : undefined
   if (!session) return out
   const map = typeof convert === 'function' ? convert : (costs) => costs || {}
@@ -30,6 +30,7 @@ export function sessionBreakdown(snap, sessionId, convert) {
     out.tokens += inTok + outTok + cacheRead + cacheWrite
     out.inTok += inTok
     out.cacheRead += cacheRead
+    out.cacheWrite += cacheWrite
     out.rows.push({ model, counter, price, costs: map(counter.costs), inTok, outTok, cacheRead, cacheWrite })
   }
   out.rows.sort((a, b) => weightOf(b.costs) - weightOf(a.costs) || a.model.localeCompare(b.model))

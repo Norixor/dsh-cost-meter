@@ -31,7 +31,7 @@ function ShareBar(props) {
 
 function SideModelRow(props) {
   const { row } = props
-  const hit = formatHitRate(row.inTok, row.cacheRead)
+  const hit = formatHitRate(row.inTok, row.cacheRead, row.cacheWrite)
   const tokens = t('msgInOut', { i: formatTok(row.inTok + row.cacheRead + row.cacheWrite), o: formatTok(row.outTok) })
   const rest = (row.cacheRead > 0 ? [t('hitRate') + ' ' + hit] : []).concat(t('tipCalls', { n: row.counter.calls || 0 })).join(' · ')
   return h('div', { style: { display: 'flex', flexDirection: 'column', gap: 5, minWidth: 0 } },
@@ -96,7 +96,7 @@ function SideCostTab(props) {
           dot(LIGHT.green, 6), t('sideLive', { s: POLL_MS / 1000 }))),
       h('div', { style: { fontSize: 26, lineHeight: '32px', fontWeight: 600, fontVariantNumeric: 'tabular-nums' } }, formatCosts(b.costs) || t('noCost')),
       hasData ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) },
-        [t('tipCalls', { n: b.calls }), formatTok(b.tokens), t('hitRate') + ' ' + formatHitRate(b.inTok, b.cacheRead)].join(' · ')) : null,
+        [t('tipCalls', { n: b.calls }), formatTok(b.tokens), t('hitRate') + ' ' + formatHitRate(b.inTok, b.cacheRead, b.cacheWrite)].join(' · ')) : null,
       fx ? h('div', { style: sideNote }, fx) : null,
       light.pct !== null ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: 4, marginTop: 4 } },
         h('div', { style: { height: 4, borderRadius: 2, background: FILL, overflow: 'hidden' } },

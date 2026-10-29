@@ -140,7 +140,7 @@ const ES = {
   chartTokens: 'Distribución de tokens',
   chartTokensSub: 'Por día · entrada / salida / lectura de caché / escritura de caché',
   chartHit: 'Tasa de aciertos de caché',
-  chartHitSub: 'Por día · lectura de caché ÷ (entrada + lectura de caché)',
+  chartHitSub: 'Por día · lectura de caché ÷ (entrada + lectura de caché + escritura de caché)',
   other: 'Otros',
   viewChart: 'Gráfico',
   viewTable: 'Tabla',

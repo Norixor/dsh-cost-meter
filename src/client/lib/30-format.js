@@ -51,21 +51,26 @@ function lightFor(spent, budget) {
   return { color, pct }
 }
 
-function hitRateValue(inputTokens, cacheReadTokens) {
-  const denom = (Number(inputTokens) || 0) + (Number(cacheReadTokens) || 0)
+/**
+ * Cache hit rate = cache read ÷ whole prompt (uncached input + cache read + cache write). Providers that bill cache
+ * writes separately (Anthropic) report the written part outside the uncached input, so leaving it out of the
+ * denominator would show ~100% for a conversation that mostly writes new cache.
+ */
+function hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens) {
+  const denom = (Number(inputTokens) || 0) + (Number(cacheReadTokens) || 0) + (Number(cacheWriteTokens) || 0)
   if (denom <= 0) return null
   return (Number(cacheReadTokens) || 0) / denom
 }
 
-function formatHitRate(inputTokens, cacheReadTokens) {
-  const rate = hitRateValue(inputTokens, cacheReadTokens)
+function formatHitRate(inputTokens, cacheReadTokens, cacheWriteTokens) {
+  const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
   if (rate === null) return '—'
   return (rate * 100).toFixed(rate >= 0.995 ? 0 : 1) + '%'
 }
 
 /** 命中率高是好事：≥80% 绿、≥50% 常规、更低调灰。 */
-function hitRateColor(inputTokens, cacheReadTokens) {
-  const rate = hitRateValue(inputTokens, cacheReadTokens)
+function hitRateColor(inputTokens, cacheReadTokens, cacheWriteTokens) {
+  const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
   if (rate === null) return TERTIARY
   if (rate >= 0.8) return LIGHT.green
   if (rate >= 0.5) return SECONDARY

@@ -6,7 +6,7 @@ const pct = (part, whole) => (whole > 0 ? part / whole : 0)
 /**
  * facts = {
  *   calls, failed, unpriced, peakCalls, tierCalls,       // call counts in view
- *   hit, inputSide,                                      // cache hit rate (0–1 | null) and input + cache-read tokens
+ *   hit, inputSide,                                      // cache hit rate (0–1 | null) and input + cache-read + cache-write tokens
  *   models, topModel, topShare,                          // distinct models and the biggest one's share of cost (0–1)
  *   latency: { calls, p95Ms, ttftAvgMs, slowCalls },     // slowCalls = calls over 60 s; null when nothing was timed
  * }

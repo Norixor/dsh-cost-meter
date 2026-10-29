@@ -140,7 +140,7 @@ const ZH_HANT = {
   chartTokens: 'Token 組成',
   chartTokensSub: '每日 · 輸入／輸出／快取讀取／快取寫入',
   chartHit: '快取命中率',
-  chartHitSub: '每日 · 快取讀取 ÷（輸入 + 快取讀取）',
+  chartHitSub: '每日 · 快取讀取 ÷（輸入 + 快取讀取 + 快取寫入）',
   other: '其他',
   viewChart: '圖表',
   viewTable: '表格',

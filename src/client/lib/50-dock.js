@@ -89,6 +89,7 @@ function CostPills(props) {
   const sessionTokens = breakdown.tokens
   const sessionInTok = breakdown.inTok
   const sessionCacheRead = breakdown.cacheRead
+  const sessionCacheWrite = breakdown.cacheWrite
 
   // 预算只按预算货币统计本会话的费用（红绿灯用原始金额算）；显示时再折成所选币种。
   const spent = session && session.costs && budget ? (session.costs[budget.currency] || 0) : 0
@@ -152,7 +153,7 @@ function CostPills(props) {
     h('div', { style: { display: 'flex', justifyContent: 'space-between', gap: 16, fontSize: 12, padding: '0 6px 6px' } },
       h('strong', { style: { fontWeight: 600 } }, t('detailTitle')),
       h('span', { style: { color: TERTIARY } },
-        formatTok(sessionTokens) + ' · ' + t('hitRate') + ' ' + formatHitRate(sessionInTok, sessionCacheRead) + ' · ' + sessionCosts)),
+        formatTok(sessionTokens) + ' · ' + t('hitRate') + ' ' + formatHitRate(sessionInTok, sessionCacheRead, sessionCacheWrite) + ' · ' + sessionCosts)),
     canOpenSide() ? h('div', { style: { padding: '0 6px 6px' } },
       h('button', {
         type: 'button',
@@ -178,7 +179,7 @@ function CostPills(props) {
         h('td', { style: bodyCell }, formatTok(outTok)),
         h('td', { style: bodyCell }, cacheRead > 0 ? formatTok(cacheRead) : '—'),
         h('td', { style: bodyCell }, cacheWrite > 0 ? formatTok(cacheWrite) : '—'),
-        h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead) }) }, formatHitRate(inTok, cacheRead)),
+        h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead, cacheWrite) }) }, formatHitRate(inTok, cacheRead, cacheWrite)),
         h('td', { style: Object.assign({}, bodyCell, { color: PRIMARY }) },
           h('div', null, formatCosts(costs) || t('noCost')),
           counter.tierCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('tierCount', { n: counter.tierCalls })) : null,

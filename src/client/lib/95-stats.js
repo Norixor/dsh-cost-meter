@@ -111,7 +111,7 @@ function StatsPage() {
   const top = rank.find((r) => r.cost > 0)
   const insights = insightsOf({
     calls: total.calls, failed: total.failed, unpriced: total.unpriced, peakCalls: total.peakCalls, tierCalls: total.tierCalls,
-    hit, inputSide: total.inputTokens + total.cacheReadTokens,
+    hit, inputSide: total.inputTokens + total.cacheReadTokens + total.cacheWriteTokens,
     models: rank.length, topModel: top ? top.model : null, topShare: top && spent > 0 ? top.cost / spent : 0,
     latency: { calls: lat.calls, p95Ms: lat.p95, ttftAvgMs: lat.ttftAvgMs, slowCalls: countAbove(latMerged.durHist, bounds, 60000) },
   })

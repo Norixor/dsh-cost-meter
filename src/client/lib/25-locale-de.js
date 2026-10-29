@@ -140,7 +140,7 @@ const DE = {
   chartTokens: 'Token-Verteilung',
   chartTokensSub: 'Pro Tag · Eingabe / Ausgabe / Cache-Lesen / Cache-Schreiben',
   chartHit: 'Cache-Trefferquote',
-  chartHitSub: 'Pro Tag · Cache-Lesen ÷ (Eingabe + Cache-Lesen)',
+  chartHitSub: 'Pro Tag · Cache-Lesen ÷ (Eingabe + Cache-Lesen + Cache-Schreiben)',
   other: 'Sonstige',
   viewChart: 'Diagramm',
   viewTable: 'Tabelle',
