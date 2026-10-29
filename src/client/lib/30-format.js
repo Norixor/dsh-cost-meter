@@ -84,9 +84,16 @@ function costValue(costs) {
   return sum
 }
 
-/** "USD · Input 0.1 · Output 0.5 · Cache read 0.01 · Cache write 0.125"; an empty currency is skipped (used for tier lines). */
+/** "Price (USD / M): W 0.1 · R 0.5 · CW 0.125 · CR 0.01"; without a currency (tier lines) only the items. */
+const RATE_ABBR = [['W', 'usageInUncached'], ['R', 'rOut'], ['CW', 'rCacheWrite'], ['CR', 'rCacheRead']]
+
+/** "W Input (uncached) · R Output · CW Cache write · CR Cache read": what the short names of the price line stand for. */
+function rateAbbrLegend() {
+  return RATE_ABBR.map(([abbr, label]) => abbr + ' ' + t(label)).join(' · ')
+}
+
 function rateLine(price) {
   if (!price) return t('sourceNone')
-  return [price.currency || '', t('rIn') + ' ' + (price.input ?? 0), t('rOut') + ' ' + (price.output ?? 0),
-    t('rCacheRead') + ' ' + (price.cacheRead ?? 0), t('rCacheWrite') + ' ' + (price.cacheWrite ?? 0)].filter(Boolean).join(' · ')
+  const items = ['W ' + (price.input ?? 0), 'R ' + (price.output ?? 0), 'CW ' + (price.cacheWrite ?? 0), 'CR ' + (price.cacheRead ?? 0)].join(' · ')
+  return price.currency ? t('usageColPrice', { cur: price.currency }) + ': ' + items : items
 }

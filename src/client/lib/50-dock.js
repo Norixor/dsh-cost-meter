@@ -124,6 +124,15 @@ function CostPills(props) {
   const headCell = { fontSize: 11, color: TERTIARY, padding: '4px 6px', textAlign: 'right', whiteSpace: 'nowrap', fontWeight: 400 }
   const bodyCell = { fontSize: 12, color: SECONDARY, padding: '5px 6px', textAlign: 'right', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums', verticalAlign: 'top' }
   const subLine = { fontSize: 10, color: TERTIARY, lineHeight: '14px' }
+  // Token count of each item with its cost underneath (switch: itemCosts); the cost is an estimate for calls booked before the split was recorded.
+  const tokenCells = (counter, price, tokens) => {
+    const ic = prefs.itemCosts ? itemCostsOf(counter.parts, counter.costs, tokens, price) : null
+    return [['input', 0], ['output', 1], ['cacheRead', 2], ['cacheWrite', 3]].map(([key, slot]) => ({
+      text: key === 'input' || key === 'output' || tokens[key] > 0 ? formatTok(tokens[key]) : '—',
+      cost: itemCostText(ic, slot, money.convert),
+      title: ic && ic.estimated ? t('usageEstimated') : undefined,
+    }))
+  }
 
   const popover = open ? h('div', {
     role: 'dialog',
@@ -175,17 +184,15 @@ function CostPills(props) {
           h('div', { style: subLine }, rateLine(price)),
           price && Array.isArray(price.tiers) ? price.tiers.map((tier) => h('div', { key: tier.above, style: subLine },
             '>' + formatK(tier.above) + ' ' + rateLine(Object.assign(tierRates(price, tier), { currency: '' })))) : null),
-        h('td', { style: bodyCell }, formatTok(inTok)),
-        h('td', { style: bodyCell }, formatTok(outTok)),
-        h('td', { style: bodyCell }, cacheRead > 0 ? formatTok(cacheRead) : '—'),
-        h('td', { style: bodyCell }, cacheWrite > 0 ? formatTok(cacheWrite) : '—'),
+        tokenCells(counter, price, { input: inTok, output: outTok, cacheRead, cacheWrite }).map((cell, i) => h('td', { key: i, style: bodyCell }, cell.text,
+          cell.cost ? h('div', { style: subLine, title: cell.title }, cell.cost) : null)),
         h('td', { style: Object.assign({}, bodyCell, { color: hitRateColor(inTok, cacheRead, cacheWrite) }) }, formatHitRate(inTok, cacheRead, cacheWrite)),
         h('td', { style: Object.assign({}, bodyCell, { color: PRIMARY }) },
           h('div', null, formatCosts(costs) || t('noCost')),
           counter.tierCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('tierCount', { n: counter.tierCalls })) : null,
           counter.peakCalls > 0 ? h('div', { style: Object.assign({}, subLine, { color: LIGHT.yellow }) }, t('peakCount', { n: counter.peakCalls })) : null))))),
     h('div', { style: { fontSize: 11, color: TERTIARY, padding: '6px 6px 0', lineHeight: '16px', maxWidth: 560, whiteSpace: 'normal' } },
-      t('rateLegend') + (unpriced > 0 ? ' · ' + t('unpriced', { n: unpriced }) : '') + (fx ? ' · ' + fx : ''))) : null
+      rateAbbrLegend() + ' · ' + t('rateLegend') + (unpriced > 0 ? ' · ' + t('unpriced', { n: unpriced }) : '') + (fx ? ' · ' + fx : ''))) : null
 
   return h(DockStrip, {
     prefs,

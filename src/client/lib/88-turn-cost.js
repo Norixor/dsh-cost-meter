@@ -43,6 +43,12 @@ export function summarizeCalls(calls) {
     if (c.ok && c.cost !== null && c.cost !== undefined && c.currency) {
       out.costs[c.currency] = (out.costs[c.currency] || 0) + c.cost
       row.costs[c.currency] = (row.costs[c.currency] || 0) + c.cost
+      // The exact split of this call's cost; item-costs.js checks that the rows' splits add up before trusting them.
+      if (Array.isArray(c.parts) && c.parts.length === 4) {
+        const split = row.parts || (row.parts = {})
+        const one = split[c.currency] || (split[c.currency] = [0, 0, 0, 0])
+        for (let i = 0; i < 4; i += 1) one[i] += Number(c.parts[i]) || 0
+      }
     } else if (c.ok) out.unpriced += 1
   }
   const weight = (row) => Object.values(row.costs).reduce((a, b) => a + b, 0)
@@ -54,7 +60,7 @@ export function summarizeCalls(calls) {
 export function convertSummary(summary, convert) {
   return Object.assign({}, summary, {
     costs: convert(summary.costs),
-    models: summary.models.map((m) => Object.assign({}, m, { costs: convert(m.costs) })),
+    models: summary.models.map((m) => Object.assign({}, m, { costs: convert(m.costs), rawCosts: m.costs })),
   })
 }
 

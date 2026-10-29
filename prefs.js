@@ -33,9 +33,10 @@ export const DEFAULT_PREFS = Object.freeze({
   // Strip: icon + Peak / Off-peak by default; the countdown is opt-in. Right-sidebar page: state and hours; the rest (weekdays, ratio, models, billing rule) is opt-in.
   peakCountdown: false,
   sidePeakDetail: false,
-  // Cache read / write token counts (right-sidebar model rows, turn hover card) and each model's price line (right-sidebar model rows).
+  // The token / price / cost columns of the input / output / cache read / cache write table (right-sidebar model rows, turn hover card; the cost also under the strip popover's token counts).
   cacheTokens: true,
   sideRates: true,
+  itemCosts: true,
   // Default time range of the statistics page, in days.
   statsRange: 30,
   // Statistics page refreshes itself while it is open; off = only the refresh button updates it.

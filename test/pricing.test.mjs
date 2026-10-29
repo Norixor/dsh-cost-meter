@@ -125,3 +125,16 @@ test('host: several usage chunks of one call are merged before the call is price
     host.dispose()
   }
 })
+
+test('priceCall splits the cost into input / output / cache read / cache write at the rates that applied', () => {
+  const price = { ...BASE, cacheWrite: 1.25, tiers: [{ ...TIER, cacheWrite: 2.5 }] }
+  const usage = { inputTokens: 40000, outputTokens: 1000, cacheReadTokens: 70000, cacheWriteTokens: 8000 }
+  const result = priceCall(price, usage, MON_OFF)
+  assert.equal(result.tier, true)
+  assert.equal(result.parts.length, 4)
+  close(result.parts[0], 40000 * 2 / 1e6)
+  close(result.parts[1], 1000 * 8 / 1e6)
+  close(result.parts[2], 70000 * 0.2 / 1e6)
+  close(result.parts[3], 8000 * 2.5 / 1e6)
+  close(result.parts.reduce((a, b) => a + b, 0), result.amount)
+})

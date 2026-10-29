@@ -14,6 +14,7 @@
  *   turn           turn number the call ran in, or null (e.g. a title request after the turn ended)
  *   model, ok      model id; ok=false for calls that ended without usage (error / aborted)
  *   cost, currency price locked at write time, or cost=null when the model had no price yet
+ *   parts          [input, output, cache read, cache write] share of `cost`, or null (unpriced, or logged before it existed)
  *   input, output, cacheRead, cacheWrite   token counts (input = uncached input)
  *   ttftMs         time to first content chunk, or null
  *   media, units   only for metered image / speech tool calls: the kind and the quantity
@@ -76,6 +77,7 @@ export function sanitizeCallLog(raw) {
           input: int(e.input), output: int(e.output), cacheRead: int(e.cacheRead), cacheWrite: int(e.cacheWrite),
           ttftMs: Number.isFinite(e.ttftMs) ? e.ttftMs : null,
         }
+        if (Array.isArray(e.parts) && e.parts.length === 4 && e.parts.every((v) => Number.isFinite(v) && v >= 0)) entry.parts = e.parts.slice()
         if (typeof e.media === 'string') { entry.media = e.media.slice(0, 12); entry.units = Number.isFinite(e.units) ? e.units : 0 }
         return entry
       })

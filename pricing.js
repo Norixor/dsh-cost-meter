@@ -83,8 +83,9 @@ export function pickTier(tiers, contextTokens) {
 
 /**
  * Cost of one call from the price config, the real usage and the call's start time.
- * Returns { currency, amount, peak, tier }; peak / tier tell whether the call hit a peak
- * window / a context tier.
+ * Returns { currency, amount, parts, peak, tier }; peak / tier tell whether the call hit a peak
+ * window / a context tier. `parts` = the cost of [input, output, cache read, cache write] at the rates
+ * that applied, in the same unit as `amount` (their sum is `amount` up to float rounding).
  */
 export function priceCall(price, usage, atMs) {
   const peak = isPeakAt(price.peak, atMs)
@@ -100,7 +101,13 @@ export function priceCall(price, usage, atMs) {
     + num(usage.cacheReadTokens) * rate('cacheRead')
     + num(usage.cacheWriteTokens) * rate('cacheWrite')
   ) / 1_000_000
-  return { currency: String(price.currency || 'USD'), amount, peak, tier: tier !== undefined }
+  const parts = [
+    num(usage.inputTokens) * rate('input'),
+    num(usage.outputTokens) * rate('output'),
+    num(usage.cacheReadTokens) * rate('cacheRead'),
+    num(usage.cacheWriteTokens) * rate('cacheWrite'),
+  ].map((micro) => micro / 1_000_000)
+  return { currency: String(price.currency || 'USD'), amount, parts, peak, tier: tier !== undefined }
 }
 
 /** Sanitize a peak config: invalid fields are dropped so the stored shape is always usable. */

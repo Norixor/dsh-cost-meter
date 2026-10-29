@@ -47,6 +47,8 @@ test('sanitizeCallLog drops malformed entries, sorts by end time and keeps turn 
   assert.equal(log.a.calls[1].cost, null, 'a non-numeric cost is treated as unpriced')
   assert.deepEqual(log.a.msgs, { m1: 2 })
   assert.deepEqual(sanitizeCallLog(undefined), {})
+  const parts = sanitizeCallLog({ p: { at: 1, msgs: {}, calls: [entry(1, { parts: [1, 2, 3, 4] }), entry(2, { parts: [1, 2, 3] }), entry(3, { parts: [1, 'x', 3, 4] }), entry(4, { parts: null }), entry(5)] } }).p.calls
+  assert.deepEqual(parts.map((e) => e.parts), [[1, 2, 3, 4], undefined, undefined, undefined, undefined], 'only a well-formed four-number split is kept')
 })
 
 test('host: calls are stamped with the turn open when they start; messages map to their turn; reset clears the log', async () => {
@@ -74,6 +76,8 @@ test('host: calls are stamped with the turn open when they start; messages map t
     assert.equal(calls[0].currency, 'USD')
     assert.ok(Math.abs(calls[0].cost - 0.002) < 1e-9, 'priced at write time: 1000 in × $1/M + 500 out × $2/M')
     assert.equal(calls[0].cacheRead, 200)
+    assert.equal(calls[0].parts.length, 4)
+    assert.ok(Math.abs(calls[0].parts[0] - 0.001) < 1e-9 && Math.abs(calls[0].parts[1] - 0.001) < 1e-9, 'input $0.001, output $0.001')
     assert.ok(calls[0].end >= calls[0].at)
     assert.equal(calls[1].ok, false)
     assert.equal(calls[1].cost, null)

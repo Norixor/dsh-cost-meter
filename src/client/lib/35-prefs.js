@@ -14,6 +14,7 @@ const DEFAULT_PREFS = {
   sidePeakDetail: false,
   cacheTokens: true,
   sideRates: true,
+  itemCosts: true,
   statsRange: 30,
   statsAuto: true,
   mediaMeter: false,

@@ -110,6 +110,16 @@ function addCost(bucket, currency, amount) {
   bucket.costs[currency] = (bucket.costs[currency] || 0) + amount
 }
 
+/**
+ * Per-currency [input, output, cache read, cache write] cost, accumulated next to `costs`. Counters booked before this
+ * field existed have none, so the browser only trusts it when its sum matches `costs` (see 51-item-costs.js).
+ */
+function addParts(bucket, currency, parts) {
+  const by = bucket.parts || (bucket.parts = {})
+  const row = by[currency] || (by[currency] = [0, 0, 0, 0])
+  for (let i = 0; i < 4; i += 1) row[i] += parts[i]
+}
+
 export function apply(ctx) {
   const state = loadState()
   const { prices, models, sessions, daily, hourly } = state
@@ -254,6 +264,7 @@ export function apply(ctx) {
       bucket.cacheWriteTokens += usage.cacheWriteTokens || 0
       if (priced) {
         addCost(bucket, priced.currency, priced.amount)
+        addParts(bucket, priced.currency, priced.parts)
         if (priced.peak) bucket.peakCalls += 1
         // 旧状态文件里的桶没有 tierCalls 字段，不能直接 += 1。
         if (priced.tier) bucket.tierCalls = (bucket.tierCalls || 0) + 1
@@ -276,7 +287,7 @@ export function apply(ctx) {
     const end = timing && Number.isFinite(timing.durationMs) ? startedAt + Math.round(timing.durationMs) : Date.now()
     appendCall(state.callLog, sessionId, Object.assign({
       at: startedAt, end, turn: turn === undefined ? null : turn, model, ok: Boolean(usage),
-      cost: priced ? priced.amount : null, currency: priced ? priced.currency : '',
+      cost: priced ? priced.amount : null, currency: priced ? priced.currency : '', parts: priced ? priced.parts : null,
       input: usage ? usage.inputTokens || 0 : 0, output: usage ? usage.outputTokens || 0 : 0,
       cacheRead: usage ? usage.cacheReadTokens || 0 : 0, cacheWrite: usage ? usage.cacheWriteTokens || 0 : 0,
       ttftMs: timing && timing.ttftMs !== null && timing.ttftMs !== undefined ? Math.round(timing.ttftMs) : null,

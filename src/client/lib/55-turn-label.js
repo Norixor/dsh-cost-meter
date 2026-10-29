@@ -43,7 +43,7 @@ function msgTheme(prefs) {
 
 /** Hover card: per-model breakdown, token mix and the caveats of the attribution. `fx` is the currency footnote, if any. */
 function TurnDetail(props) {
-  const { summary: s, fx, priceOf, showTokens, showRates } = props
+  const { summary: s, fx, priceOf, convert, showTokens, showRates, showCosts } = props
   const row = { display: 'flex', alignItems: 'baseline', gap: 12, justifyContent: 'space-between' }
   const dim = { color: TERTIARY }
   const hit = hitOf(s)
@@ -54,7 +54,10 @@ function TurnDetail(props) {
         h('span', { style: { minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, title: m.model }, m.model),
         h('span', { style: { whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' } },
           (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls }))),
-      m.media ? null : h(UsageTable, { tokens: m, price: priceOf ? priceOf(m.model) : null, showTokens, showRates }))),
+      m.media ? null : h(UsageTable, {
+        tokens: m, price: priceOf ? priceOf(m.model) : null, convert, showTokens, showRates, showCosts,
+        itemCosts: itemCostsOf(m.parts, m.rawCosts || m.costs, m, priceOf ? priceOf(m.model) : null),
+      }))),
     h('div', { style: dim }, t('msgInOut', { i: formatTok(s.input + s.cacheRead + s.cacheWrite), o: formatTok(s.output) })
       + (hit !== null ? ' · ' + t('msgCacheHit', { pct: pctText(hit) }) : '')),
     s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
@@ -66,7 +69,7 @@ function TurnDetail(props) {
 
 /** The chip in the message action row. Opens on hover or focus, closes on leave, blur or Esc. */
 function TurnChip(props) {
-  const { summary, prefs, fx, priceOf } = props
+  const { summary, prefs, fx, priceOf, convert } = props
   const theme = msgTheme(prefs)
   const [open, setOpen] = React.useState(false)
   const [shift, setShift] = React.useState(0)
@@ -96,7 +99,7 @@ function TurnChip(props) {
         position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
         boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
       },
-    }, h(TurnDetail, { summary, fx, priceOf, showTokens: prefs.cacheTokens, showRates: prefs.sideRates })) : null)
+    }, h(TurnDetail, { summary, fx, priceOf, convert, showTokens: prefs.cacheTokens, showRates: prefs.sideRates, showCosts: prefs.itemCosts })) : null)
 }
 
 /** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */
@@ -125,7 +128,7 @@ function CostChip(props) {
   const calls = turn === null ? [] : callsOfTurn(log.calls, turn)
   // The configured price wins over the preset, as in the strip popover.
   const priceOf = (model) => (snap && ((snap.prices && snap.prices[model]) || (snap.presets && snap.presets[model]))) || null
-  return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs, priceOf }))
+  return calls.length === 0 ? null : h(TurnChip, Object.assign(shownSummary(calls, prefs), { prefs, priceOf, convert: moneyView(prefs).convert }))
 }
 
 /** Slot `conversation.chat.turnTail`: one summary line for the turn (the prop is the turn number or a view object). */

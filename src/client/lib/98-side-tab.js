@@ -32,6 +32,7 @@ function ShareBar(props) {
 function SideModelRow(props) {
   const { row } = props
   const prefs = usePrefs()
+  const money = moneyView(prefs)
   const hit = formatHitRate(row.inTok, row.cacheRead, row.cacheWrite)
   const tokens = t('msgInOut', { i: formatTok(row.inTok + row.cacheRead + row.cacheWrite), o: formatTok(row.outTok) })
   const rest = (row.cacheRead > 0 ? [t('hitRate') + ' ' + hit] : []).concat(t('tipCalls', { n: row.counter.calls || 0 })).join(' · ')
@@ -43,7 +44,11 @@ function SideModelRow(props) {
     h(ShareBar, { share: row.share }),
     h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, tokens),
     h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rest),
-    h(UsageTable, { tokens: { input: row.inTok, output: row.outTok, cacheRead: row.cacheRead, cacheWrite: row.cacheWrite }, price: row.price, showTokens: prefs.cacheTokens, showRates: prefs.sideRates }),
+    h(UsageTable, {
+      tokens: { input: row.inTok, output: row.outTok, cacheRead: row.cacheRead, cacheWrite: row.cacheWrite }, price: row.price,
+      itemCosts: itemCostsOf(row.counter.parts, row.counter.costs, { input: row.inTok, output: row.outTok, cacheRead: row.cacheRead, cacheWrite: row.cacheWrite }, row.price),
+      convert: money.convert, showTokens: prefs.cacheTokens, showRates: prefs.sideRates, showCosts: prefs.itemCosts,
+    }),
     row.counter.unpriced > 0 ? h('div', { style: Object.assign({}, sideNote, { color: LIGHT.red }) }, t('unpriced', { n: row.counter.unpriced })) : null)
 }
 

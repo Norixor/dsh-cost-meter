@@ -101,13 +101,14 @@ function FxRateInput(props) {
     h('span', null, 'CNY'))
 }
 
-/** Settings → cache token counts and price lines in the right-sidebar page and the turn hover card. */
+/** Settings → the token / price / cost columns of the per-model table in the right-sidebar page and the turn hover card. */
 function DetailSettings() {
   const prefs = usePrefs()
   const set = (change) => store.setPrefs(change)
   return h('div', null,
     settingRow({ key: 'cacheTokens' }, t('cacheTokensShow'), t('cacheTokensShowHint'), toggle(prefs.cacheTokens, (on) => set({ cacheTokens: on }), t('cacheTokensShow'))),
-    settingRow({ key: 'sideRates' }, t('sideRatesShow'), t('sideRatesShowHint'), toggle(prefs.sideRates, (on) => set({ sideRates: on }), t('sideRatesShow'))))
+    settingRow({ key: 'sideRates' }, t('sideRatesShow'), t('sideRatesShowHint'), toggle(prefs.sideRates, (on) => set({ sideRates: on }), t('sideRatesShow'))),
+    settingRow({ key: 'itemCosts' }, t('itemCostsShow'), t('itemCostsShowHint'), toggle(prefs.itemCosts, (on) => set({ itemCosts: on }), t('itemCostsShow'))))
 }
 
 /** Settings → the sidebar entry and the statistics page. */
