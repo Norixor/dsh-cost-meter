@@ -55,6 +55,7 @@ function TurnDetail(props) {
         (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls })))),
     h('div', { style: dim }, t('msgInOut', { i: formatTok(s.input + s.cacheRead + s.cacheWrite), o: formatTok(s.output) })
       + (hit !== null ? ' · ' + t('msgCacheHit', { pct: pctText(hit) }) : '')),
+    props.cacheTokens && s.cacheRead + s.cacheWrite > 0 ? h('div', { style: dim }, cacheTokensText(s.cacheRead, s.cacheWrite)) : null,
     s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
     s.unpriced > 0 ? h('div', null, '! ' + t('msgUnpriced', { n: s.unpriced })) : null,
     s.failed > 0 ? h('div', null, '! ' + t('msgFailed', { n: s.failed })) : null,
@@ -94,7 +95,7 @@ function TurnChip(props) {
         position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
         boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
       },
-    }, h(TurnDetail, { summary, fx })) : null)
+    }, h(TurnDetail, { summary, fx, cacheTokens: prefs.cacheTokens })) : null)
 }
 
 /** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */

@@ -41,6 +41,9 @@ function SettingsPage() {
     h('div', { style: ui.section }, t('sectionMessages')),
     h(MessageSettings),
 
+    h('div', { style: ui.section }, t('sectionDetail')),
+    h(DetailSettings),
+
     h('div', { style: ui.section }, t('sectionPeak')),
     h(PeakSettings, { snap }),
 

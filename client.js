@@ -542,6 +542,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: '高峰时段 {local}（本地时间）',
         peakSideDetailShow: '侧边栏显示详情',
         peakSideDetailShowHint: '除状态和时段外，再显示适用日、价格倍率、适用模型和计费说明；默认关闭',
+        sectionDetail: '缓存与单价明细',
+        cacheTokensShow: '缓存读写 token',
+        cacheTokensShowHint: '在右侧栏的模型行和每轮悬浮卡片里，另外显示缓存读、缓存写的 token 数；输入框下方的浮窗始终显示',
+        sideRatesShow: '模型单价',
+        sideRatesShowHint: '在右侧栏的模型行里，另外显示该模型的单价行：币种、输入/输出，R=缓存读，W=缓存写（每百万 token）',
         sectionCatalog: '价格目录',
         catStatus: 'OpenRouter 价格目录',
         catNever: '还没有获取。点右侧「更新目录」从 OpenRouter 取一份模型价格表，之后可以把价格直接填进下面的模型。',
@@ -1051,6 +1056,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Peak hours {local} (local time)',
         peakSideDetailShow: 'Sidebar details',
         peakSideDetailShowHint: 'Besides the status and hours, also show the weekdays, price ratio, models and billing rule; off by default',
+        sectionDetail: 'Cache and price details',
+        cacheTokensShow: 'Cache read / write tokens',
+        cacheTokensShowHint: 'In the right-sidebar model rows and the turn hover card, also show the cache read and cache write token counts. The popover under the input box always shows them.',
+        sideRatesShow: 'Model prices',
+        sideRatesShowHint: 'In the right-sidebar model rows, also show each model\'s price line: currency, input/output, R = cache read, W = cache write (per million tokens).',
         sectionCatalog: 'Price catalog',
         catStatus: 'OpenRouter price catalog',
         catNever: 'Not fetched yet. Use "Update catalog" to get a model price list from OpenRouter; its prices can then be filled straight into the models below.',
@@ -1561,6 +1571,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: '尖峰時段 {local}（本地時間）',
         peakSideDetailShow: '側邊欄顯示詳情',
         peakSideDetailShowHint: '除狀態與時段外，另顯示適用日、價格倍率、適用模型與計費說明；預設關閉',
+        sectionDetail: '快取與單價明細',
+        cacheTokensShow: '快取讀寫 token',
+        cacheTokensShowHint: '在右側欄的模型列與每輪懸浮卡片中，另外顯示快取讀取、快取寫入的 token 數；輸入框下方的浮窗一律顯示',
+        sideRatesShow: '模型單價',
+        sideRatesShowHint: '在右側欄的模型列中，另外顯示該模型的單價列：幣別、輸入/輸出，R=快取讀取，W=快取寫入（每百萬 token）',
         sectionCatalog: '價格目錄',
         catStatus: 'OpenRouter 價格目錄',
         catNever: '尚未取得。按右側「更新目錄」從 OpenRouter 取得一份模型價格表，之後可直接把價格填入下方的模型。',
@@ -2071,6 +2086,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'ピーク時間帯 {local}（現地時刻）',
         peakSideDetailShow: 'サイドバーに詳細を表示',
         peakSideDetailShowHint: '状態と時間帯に加えて、対象曜日・料金倍率・対象モデル・課金ルールも表示します。既定ではオフです',
+        sectionDetail: 'キャッシュと単価の詳細',
+        cacheTokensShow: 'キャッシュ読み取り / 書き込みの token',
+        cacheTokensShowHint: '右サイドバーのモデル行とターンのホバーカードに、キャッシュ読み取りと書き込みの token 数も表示します。入力欄の下のポップオーバーでは常に表示されます。',
+        sideRatesShow: 'モデルの単価',
+        sideRatesShowHint: '右サイドバーのモデル行に、そのモデルの単価行も表示します：通貨、入力/出力、R=キャッシュ読み取り、W=キャッシュ書き込み（100 万 token あたり）。',
         sectionCatalog: '価格カタログ',
         catStatus: 'OpenRouter 価格カタログ',
         catNever: 'まだ取得していません。右の「カタログを更新」で OpenRouter からモデルの価格表を取得すると、下のモデルへ価格をそのまま入れられます。',
@@ -2581,6 +2601,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: '피크 시간대 {local}(현지 시간)',
         peakSideDetailShow: '사이드바에 상세 표시',
         peakSideDetailShowHint: '상태와 시간대 외에 적용 요일, 요금 배율, 대상 모델, 과금 규칙도 표시해요. 기본값은 꺼짐이에요',
+        sectionDetail: '캐시 및 단가 상세',
+        cacheTokensShow: '캐시 읽기 / 쓰기 token',
+        cacheTokensShowHint: '오른쪽 사이드바의 모델 행과 턴 호버 카드에 캐시 읽기·쓰기 token 수도 표시해요. 입력창 아래 팝오버에는 항상 표시돼요.',
+        sideRatesShow: '모델 단가',
+        sideRatesShowHint: '오른쪽 사이드바의 모델 행에 해당 모델의 단가 줄도 표시해요: 통화, 입력/출력, R=캐시 읽기, W=캐시 쓰기 (100만 token당).',
         sectionCatalog: '가격 카탈로그',
         catStatus: 'OpenRouter 가격 카탈로그',
         catNever: '아직 가져오지 않았어요. 오른쪽 "카탈로그 업데이트"로 OpenRouter에서 모델 가격표를 가져오면 아래 모델에 가격을 바로 채울 수 있어요.',
@@ -3091,6 +3116,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Spitzenzeiten {local} (Ortszeit)',
         peakSideDetailShow: 'Details in der Seitenleiste',
         peakSideDetailShowHint: 'Zeigt zusätzlich zu Status und Zeiten die Wochentage, das Preisverhältnis, die Modelle und die Abrechnungsregel; standardmäßig aus',
+        sectionDetail: 'Cache- und Preisdetails',
+        cacheTokensShow: 'Cache-Lese-/Schreib-Token',
+        cacheTokensShowHint: 'Zeigt in den Modellzeilen der rechten Seitenleiste und in der Hover-Karte des Durchgangs zusätzlich die Token für Cache-Lesen und Cache-Schreiben. Das Popover unter dem Eingabefeld zeigt sie immer.',
+        sideRatesShow: 'Modellpreise',
+        sideRatesShowHint: 'Zeigt in den Modellzeilen der rechten Seitenleiste zusätzlich die Preiszeile des Modells: Währung, Eingabe/Ausgabe, R = Cache-Lesen, W = Cache-Schreiben (pro Million Token).',
         sectionCatalog: 'Preiskatalog',
         catStatus: 'OpenRouter-Preiskatalog',
         catNever: 'Noch nicht abgerufen. Mit „Katalog aktualisieren“ holst du eine Modellpreisliste von OpenRouter; ihre Preise lassen sich dann direkt in die Modelle unten übernehmen.',
@@ -3601,6 +3631,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Heures de pointe {local} (heure locale)',
         peakSideDetailShow: 'Détails dans la barre latérale',
         peakSideDetailShowHint: 'Affiche en plus de l\'état et des heures les jours concernés, le rapport de prix, les modèles et la règle de facturation ; désactivé par défaut',
+        sectionDetail: 'Détails du cache et des prix',
+        cacheTokensShow: 'Jetons de lecture / écriture du cache',
+        cacheTokensShowHint: 'Affiche en plus, dans les lignes de modèles de la barre latérale droite et dans la carte du tour, le nombre de jetons lus et écrits dans le cache. La fenêtre sous le champ de saisie les affiche toujours.',
+        sideRatesShow: 'Prix des modèles',
+        sideRatesShowHint: 'Affiche en plus, dans les lignes de modèles de la barre latérale droite, la ligne de prix du modèle : devise, entrée/sortie, R = lecture du cache, W = écriture du cache (par million de jetons).',
         sectionCatalog: 'Catalogue de tarifs',
         catStatus: 'Catalogue de tarifs OpenRouter',
         catNever: 'Pas encore récupéré. « Mettre à jour le catalogue » récupère une liste de tarifs de modèles auprès d\'OpenRouter ; ses prix peuvent ensuite être repris directement dans les modèles ci-dessous.',
@@ -4111,6 +4146,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Horas punta {local} (hora local)',
         peakSideDetailShow: 'Detalles en la barra lateral',
         peakSideDetailShowHint: 'Además del estado y las horas, muestra los días, la proporción de precio, los modelos y la regla de facturación; desactivado por defecto',
+        sectionDetail: 'Detalles de caché y precios',
+        cacheTokensShow: 'Tokens de lectura / escritura de caché',
+        cacheTokensShowHint: 'Muestra además, en las filas de modelos de la barra lateral derecha y en la tarjeta del turno, los tokens de lectura y escritura de caché. La ventana bajo el cuadro de entrada siempre los muestra.',
+        sideRatesShow: 'Precios de modelos',
+        sideRatesShowHint: 'Muestra además, en las filas de modelos de la barra lateral derecha, la línea de precios del modelo: moneda, entrada/salida, R = lectura de caché, W = escritura de caché (por millón de tokens).',
         sectionCatalog: 'Catálogo de precios',
         catStatus: 'Catálogo de precios de OpenRouter',
         catNever: 'Aún no se ha obtenido. Con «Actualizar catálogo» se descarga una lista de precios de modelos de OpenRouter; sus precios se pueden aplicar directamente a los modelos de abajo.',
@@ -4621,6 +4661,11 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         peakWindowsShort: 'Часы пика {local} (местное время)',
         peakSideDetailShow: 'Подробности в боковой панели',
         peakSideDetailShowHint: 'Помимо статуса и часов показывает дни, соотношение цен, модели и правило тарификации; по умолчанию выключено',
+        sectionDetail: 'Подробности кэша и цен',
+        cacheTokensShow: 'Токены чтения / записи кэша',
+        cacheTokensShowHint: 'Показывает в строках моделей правой боковой панели и в карточке хода также число токенов чтения и записи кэша. Всплывающее окно под полем ввода показывает их всегда.',
+        sideRatesShow: 'Цены моделей',
+        sideRatesShowHint: 'Показывает в строках моделей правой боковой панели также строку цен модели: валюта, ввод/вывод, R = чтение кэша, W = запись кэша (за миллион токенов).',
         sectionCatalog: 'Каталог цен',
         catStatus: 'Каталог цен OpenRouter',
         catNever: 'Ещё не загружен. Кнопка «Обновить каталог» загрузит у OpenRouter список цен моделей; их цены затем можно подставить прямо в модели ниже.',
@@ -4794,6 +4839,14 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         return (rate * 100).toFixed(rate >= 0.995 ? 0 : 1) + '%'
       }
 
+      /** "Cache read 12K · Cache write 1.2K"; a zero side is left out. */
+      function cacheTokensText(cacheRead, cacheWrite) {
+        const parts = []
+        if (cacheRead > 0) parts.push(t('rCacheRead') + ' ' + formatTok(cacheRead))
+        if (cacheWrite > 0) parts.push(t('rCacheWrite') + ' ' + formatTok(cacheWrite))
+        return parts.join(' · ')
+      }
+
       /** 命中率高是好事：≥80% 绿、≥50% 常规、更低调灰。 */
       function hitRateColor(inputTokens, cacheReadTokens, cacheWriteTokens) {
         const rate = hitRateValue(inputTokens, cacheReadTokens, cacheWriteTokens)
@@ -4831,6 +4884,8 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
         sidePeak: true,
         peakCountdown: false,
         sidePeakDetail: false,
+        cacheTokens: true,
+        sideRates: true,
         statsRange: 30,
         statsAuto: true,
         mediaMeter: false,
@@ -5216,6 +5271,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               (unitsText(m) ? unitsText(m) + ' · ' : '') + (formatCosts(m.costs) || '—') + ' · ' + t('tipCalls', { n: m.calls })))),
           h('div', { style: dim }, t('msgInOut', { i: formatTok(s.input + s.cacheRead + s.cacheWrite), o: formatTok(s.output) })
             + (hit !== null ? ' · ' + t('msgCacheHit', { pct: pctText(hit) }) : '')),
+          props.cacheTokens && s.cacheRead + s.cacheWrite > 0 ? h('div', { style: dim }, cacheTokensText(s.cacheRead, s.cacheWrite)) : null,
           s.wallMs > 0 ? h('div', { style: dim }, t('msgModelTime', { time: formatDuration(s.wallMs) })) : null,
           s.unpriced > 0 ? h('div', null, '! ' + t('msgUnpriced', { n: s.unpriced })) : null,
           s.failed > 0 ? h('div', null, '! ' + t('msgFailed', { n: s.failed })) : null,
@@ -5255,7 +5311,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               position: 'absolute', left: shift, bottom: 'calc(100% + 4px)', zIndex: 30, width: 'max-content', maxWidth: 'min(320px, 80vw)',
               boxSizing: 'border-box', padding: '10px 12px', borderRadius: 12, border: BORDER, background: PLATFORM, boxShadow: '0 4px 16px rgba(0,0,0,.12)',
             },
-          }, h(TurnDetail, { summary, fx })) : null)
+          }, h(TurnDetail, { summary, fx, cacheTokens: prefs.cacheTokens })) : null)
       }
 
       /** The summary line above the action row. `fx` (the currency footnote) rides in the tooltip. */
@@ -5720,6 +5776,15 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
           h('span', null, 'CNY'))
       }
 
+      /** Settings → cache token counts and price lines in the right-sidebar page and the turn hover card. */
+      function DetailSettings() {
+        const prefs = usePrefs()
+        const set = (change) => store.setPrefs(change)
+        return h('div', null,
+          settingRow({ key: 'cacheTokens' }, t('cacheTokensShow'), t('cacheTokensShowHint'), toggle(prefs.cacheTokens, (on) => set({ cacheTokens: on }), t('cacheTokensShow'))),
+          settingRow({ key: 'sideRates' }, t('sideRatesShow'), t('sideRatesShowHint'), toggle(prefs.sideRates, (on) => set({ sideRates: on }), t('sideRatesShow'))))
+      }
+
       /** Settings → the sidebar entry and the statistics page. */
       function SidebarSettings() {
         const prefs = usePrefs()
@@ -6101,6 +6166,9 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
           h('div', { style: ui.section }, t('sectionMessages')),
           h(MessageSettings),
+
+          h('div', { style: ui.section }, t('sectionDetail')),
+          h(DetailSettings),
 
           h('div', { style: ui.section }, t('sectionPeak')),
           h(PeakSettings, { snap }),
@@ -8671,6 +8739,7 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
 
       function SideModelRow(props) {
         const { row } = props
+        const prefs = usePrefs()
         const hit = formatHitRate(row.inTok, row.cacheRead, row.cacheWrite)
         const tokens = t('msgInOut', { i: formatTok(row.inTok + row.cacheRead + row.cacheWrite), o: formatTok(row.outTok) })
         const rest = (row.cacheRead > 0 ? [t('hitRate') + ' ' + hit] : []).concat(t('tipCalls', { n: row.counter.calls || 0 })).join(' · ')
@@ -8681,7 +8750,10 @@ if (typeof window !== 'undefined' && typeof window.__ModuleLoader__ !== 'undefin
               formatCosts(row.costs) || (row.counter.unpriced > 0 ? t('msgNoCost') : t('noCost')))),
           h(ShareBar, { share: row.share }),
           h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, tokens),
+          prefs.cacheTokens && row.cacheRead + row.cacheWrite > 0
+            ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, cacheTokensText(row.cacheRead, row.cacheWrite)) : null,
           h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rest),
+          prefs.sideRates && row.price ? h('div', { style: Object.assign({}, sideNote, { fontVariantNumeric: 'tabular-nums' }) }, rateLine(row.price)) : null,
           row.counter.unpriced > 0 ? h('div', { style: Object.assign({}, sideNote, { color: LIGHT.red }) }, t('unpriced', { n: row.counter.unpriced })) : null)
       }
 

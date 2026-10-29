@@ -12,6 +12,8 @@ const DEFAULT_PREFS = {
   sidePeak: true,
   peakCountdown: false,
   sidePeakDetail: false,
+  cacheTokens: true,
+  sideRates: true,
   statsRange: 30,
   statsAuto: true,
   mediaMeter: false,
